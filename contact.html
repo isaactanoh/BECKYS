@@ -114,11 +114,12 @@
                     </div>
                     <div class="contact-form reveal" data-delay="200">
                         <h3>Send Us a Message</h3>
-                        <form id="contactForm" action="https://formsubmit.co/thebeckscleaningservices@gmail.com" method="POST">
+                        <!-- ✅ UPDATED: Using Formspree with your ID -->
+                        <form id="contactForm" action="https://formspree.io/f/xeeyabky" method="POST">
                             <input type="hidden" name="_subject" value="New Contact Message - Becks Cleaning">
-                            <input type="hidden" name="_template" value="table">
-                            <input type="hidden" name="_captcha" value="false">
                             <input type="hidden" name="_next" value="thankyou.html">
+                            <!-- This ensures you get the email properly -->
+                            <input type="hidden" name="_cc" value="thebeckscleaningservices@gmail.com">
                             <div class="form-group">
                                 <label for="name">Your Name <span class="required">*</span></label>
                                 <input type="text" id="name" name="name" class="form-control" placeholder="Enter your full name" required>
@@ -166,11 +167,11 @@
                     <p class="section-subtitle">Schedule your cleaning service online</p>
                 </div>
                 <div class="contact-form" style="max-width: 800px; margin: 0 auto;">
-                    <form id="bookingForm" action="https://formsubmit.co/thebeckscleaningservices@gmail.com" method="POST">
+                    <!-- ✅ UPDATED: Using Formspree with your ID -->
+                    <form id="bookingForm" action="https://formspree.io/f/xeeyabky" method="POST">
                         <input type="hidden" name="_subject" value="New Booking Request - Becks Cleaning">
-                        <input type="hidden" name="_template" value="table">
                         <input type="hidden" name="_next" value="thankyou.html">
-                        <input type="hidden" name="_captcha" value="false">
+                        <input type="hidden" name="_cc" value="thebeckscleaningservices@gmail.com">
                         <div class="form-group">
                             <label for="booking-name">Your Name <span class="required">*</span></label>
                             <input type="text" id="booking-name" name="name" class="form-control" placeholder="Enter your full name" required>
