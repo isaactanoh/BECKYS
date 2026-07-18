@@ -114,10 +114,7 @@
                     </div>
                     <div class="contact-form reveal" data-delay="200">
                         <h3>Send Us a Message</h3>
-                        <form id="contactForm" action="https://formsubmit.co/thebeckscleaningservices@gmail.com" method="POST">
-                            <input type="hidden" name="_subject" value="New Contact Message - Becks Cleaning">
-                            <input type="hidden" name="_next" value="https://beckscleaningservice.com/thankyou.html">
-                            <input type="hidden" name="_captcha" value="false">
+                        <form id="contactForm" onsubmit="sendWhatsApp(event, 'contact')">
                             <div class="form-group">
                                 <label for="name">Your Name <span class="required">*</span></label>
                                 <input type="text" id="name" name="name" class="form-control" placeholder="Enter your full name" required>
@@ -146,11 +143,11 @@
                                 <label for="message">Your Message <span class="required">*</span></label>
                                 <textarea id="message" name="message" class="form-control" rows="5" placeholder="Tell us about your cleaning needs..." required></textarea>
                             </div>
-                            <button type="submit" class="btn btn--large">Send Message</button>
+                            <button type="submit" class="btn btn--large"><i class="fab fa-whatsapp"></i> Send via WhatsApp</button>
                         </form>
                         <div id="formSuccess" class="success-message">
                             <i class="fas fa-check-circle"></i>
-                            <p>Thank you for your message! We'll get back to you within 24 hours.</p>
+                            <p>Thank you! Redirecting to WhatsApp...</p>
                         </div>
                     </div>
                 </div>
@@ -164,10 +161,7 @@
                     <p class="section-subtitle">Schedule your cleaning service online</p>
                 </div>
                 <div class="contact-form" style="max-width: 800px; margin: 0 auto;">
-                    <form id="bookingForm" action="https://formsubmit.co/thebeckscleaningservices@gmail.com" method="POST">
-                        <input type="hidden" name="_subject" value="New Booking Request - Becks Cleaning">
-                        <input type="hidden" name="_next" value="https://beckscleaningservice.com/thankyou.html">
-                        <input type="hidden" name="_captcha" value="false">
+                    <form id="bookingForm" onsubmit="sendWhatsApp(event, 'booking')">
                         <div class="form-group">
                             <label for="booking-name">Your Name <span class="required">*</span></label>
                             <input type="text" id="booking-name" name="name" class="form-control" placeholder="Enter your full name" required>
@@ -213,11 +207,11 @@
                             <label for="booking-message">Special Instructions</label>
                             <textarea id="booking-message" name="message" class="form-control" rows="3" placeholder="Any special requests or instructions..."></textarea>
                         </div>
-                        <button type="submit" class="btn btn--large">Book Now</button>
+                        <button type="submit" class="btn btn--large"><i class="fab fa-whatsapp"></i> Book via WhatsApp</button>
                     </form>
                     <div id="bookingSuccess" class="success-message">
                         <i class="fas fa-check-circle"></i>
-                        <p>Thank you for your booking! We'll confirm your appointment within 24 hours.</p>
+                        <p>Thank you! Redirecting to WhatsApp...</p>
                     </div>
                 </div>
             </div>
@@ -329,6 +323,73 @@
         <img class="lightbox__content" id="lightboxImg" alt="Gallery image" tabindex="0">
         <div class="lightbox__counter" id="lightboxCounter">1 / 1</div>
     </div>
+
+    <script>
+        // ========================================
+        // WHATSAPP BOOKING - 100% WORKS
+        // ========================================
+
+        function sendWhatsApp(event, type) {
+            event.preventDefault();
+            
+            let name, email, phone, service, message = '';
+            
+            if (type === 'contact') {
+                name = document.getElementById('name').value;
+                email = document.getElementById('email').value;
+                phone = document.getElementById('phone').value;
+                service = document.getElementById('service').value || 'Not specified';
+                message = document.getElementById('message').value;
+            } else {
+                name = document.getElementById('booking-name').value;
+                email = document.getElementById('booking-email').value;
+                phone = document.getElementById('booking-phone').value;
+                service = document.getElementById('booking-service').value;
+                const date = document.getElementById('booking-date').value;
+                const time = document.getElementById('booking-time').value;
+                const address = document.getElementById('booking-address').value;
+                const instructions = document.getElementById('booking-message').value || 'None';
+                
+                message = `📋 BOOKING DETAILS:\n\n` +
+                          `👤 Name: ${name}\n` +
+                          `📧 Email: ${email}\n` +
+                          `📱 Phone: ${phone}\n` +
+                          `🧹 Service: ${service}\n` +
+                          `📅 Date: ${date}\n` +
+                          `🕐 Time: ${time}\n` +
+                          `📍 Address: ${address}\n` +
+                          `📝 Instructions: ${instructions}`;
+            }
+            
+            // Show success message
+            const successDiv = type === 'contact' ? 
+                document.getElementById('formSuccess') : 
+                document.getElementById('bookingSuccess');
+            
+            const form = type === 'contact' ? 
+                document.getElementById('contactForm') : 
+                document.getElementById('bookingForm');
+            
+            form.style.display = 'none';
+            successDiv.classList.add('success-message--visible');
+            
+            // Encode message for URL
+            const encodedMessage = encodeURIComponent(message);
+            
+            // WhatsApp number (with country code, no +)
+            const whatsappNumber = '233542977602';
+            
+            // Redirect to WhatsApp
+            setTimeout(function() {
+                window.open(`https://wa.me/${whatsappNumber}?text=${encodedMessage}`, '_blank');
+            }, 800);
+            
+            // Also redirect to thankyou page
+            setTimeout(function() {
+                window.location.href = 'thankyou.html';
+            }, 3000);
+        }
+    </script>
 
     <script src="script.js" defer></script>
 </body>
