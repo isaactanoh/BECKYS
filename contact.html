@@ -20,6 +20,290 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <style>
+        /* ========================================
+           MOBILE FIXES FOR CONTACT PAGE
+           ======================================== */
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 40px;
+            align-items: start;
+        }
+        
+        .contact-info {
+            background: var(--white);
+            padding: 35px;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--light-gray);
+        }
+        
+        .contact-info h3 {
+            color: var(--primary-sea);
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--light-gray);
+        }
+        
+        .contact-method {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .contact-method__icon {
+            width: 45px;
+            height: 45px;
+            min-width: 45px;
+            border-radius: 50%;
+            background: var(--primary-gradient);
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+        }
+        
+        .contact-method__content h4 {
+            font-size: 1rem;
+            margin-bottom: 2px;
+        }
+        
+        .contact-method__content p,
+        .contact-method__content a {
+            color: var(--gray);
+            font-size: 0.95rem;
+            word-break: break-word;
+        }
+        
+        .contact-method__content a:hover {
+            color: var(--primary-sea);
+        }
+        
+        .contact-form {
+            background: var(--white);
+            padding: 35px;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--light-gray);
+        }
+        
+        .contact-form h3 {
+            color: var(--primary-sea);
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--light-gray);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--secondary);
+            margin-bottom: 6px;
+        }
+        
+        .form-group label .required {
+            color: var(--error);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid var(--light-gray);
+            border-radius: var(--radius-sm);
+            font-family: var(--font-primary);
+            font-size: 1rem;
+            transition: var(--transition-normal);
+            background: var(--white);
+            color: var(--black);
+            -webkit-appearance: none;
+            appearance: none;
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary-sea);
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(0, 180, 216, 0.1);
+        }
+        
+        select.form-control {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 15px center;
+            background-size: 16px;
+            padding-right: 40px;
+        }
+        
+        textarea.form-control {
+            min-height: 130px;
+            resize: vertical;
+        }
+        
+        .success-message {
+            display: none;
+            align-items: center;
+            gap: 12px;
+            padding: 18px 22px;
+            background: #d4edda;
+            color: #155724;
+            border-radius: var(--radius-sm);
+            margin-top: 20px;
+            animation: fadeIn 0.4s ease;
+        }
+        
+        .success-message--visible {
+            display: flex;
+        }
+        
+        .success-message i {
+            font-size: 1.5rem;
+            color: var(--success);
+        }
+        
+        .faq-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .faq-card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--light-gray);
+            transition: var(--transition-normal);
+        }
+        
+        .faq-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--primary-sea);
+        }
+        
+        .faq-card h3 {
+            color: var(--primary-sea);
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+        
+        .faq-card p {
+            color: var(--gray);
+            font-size: 0.95rem;
+            margin-bottom: 0;
+        }
+        
+        .faq-card p a {
+            color: var(--primary-sea);
+            text-decoration: none;
+        }
+        
+        .faq-card p a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 1024px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            .contact-info {
+                order: 2;
+            }
+            .contact-form {
+                order: 1;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .contact-info,
+            .contact-form {
+                padding: 25px 20px;
+            }
+            .contact-method {
+                gap: 12px;
+            }
+            .contact-method__icon {
+                width: 40px;
+                height: 40px;
+                min-width: 40px;
+                font-size: 0.9rem;
+            }
+            .contact-method__content h4 {
+                font-size: 0.95rem;
+            }
+            .contact-method__content p,
+            .contact-method__content a {
+                font-size: 0.9rem;
+            }
+            .form-control {
+                padding: 10px 14px;
+                font-size: 0.95rem;
+            }
+            .faq-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            .faq-card {
+                padding: 20px;
+            }
+            .faq-card h3 {
+                font-size: 1rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .contact-info,
+            .contact-form {
+                padding: 18px 14px;
+            }
+            .contact-method {
+                gap: 10px;
+                margin-bottom: 15px;
+            }
+            .contact-method__icon {
+                width: 35px;
+                height: 35px;
+                min-width: 35px;
+                font-size: 0.8rem;
+            }
+            .contact-method__content h4 {
+                font-size: 0.85rem;
+            }
+            .contact-method__content p,
+            .contact-method__content a {
+                font-size: 0.8rem;
+            }
+            .form-group {
+                margin-bottom: 14px;
+            }
+            .form-group label {
+                font-size: 0.8rem;
+            }
+            .form-control {
+                padding: 8px 12px;
+                font-size: 0.9rem;
+            }
+            .btn {
+                padding: 12px 20px;
+                font-size: 0.85rem;
+                width: 100%;
+            }
+            .contact-form h3,
+            .contact-info h3 {
+                font-size: 1.2rem;
+                margin-bottom: 18px;
+            }
+        }
+    </style>
 </head>
 <body>
     <a href="#main" class="skip-link">Skip to main content</a>
@@ -104,17 +388,18 @@
                         </div>
                         <div style="margin-top: 30px;">
                             <h4>Follow Us</h4>
-                            <div class="footer__social" style="margin-top: 10px;">
-                                <a href="https://wa.me/233542977602" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-                                <a href="https://www.instagram.com/becks_cleaningservices" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                                <a href="https://www.tiktok.com/@beckscleaning_services" target="_blank" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
-                                <a href="https://facebook.com" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <div class="footer__social" style="margin-top: 10px; display: flex; gap: 12px;">
+                                <a href="https://wa.me/233542977602" target="_blank" aria-label="WhatsApp" style="display: flex; align-items: center; justify-content: center; width: 42px; height: 42px; background: rgba(8, 99, 201, 0.1); border-radius: 50%; color: var(--primary-sea); font-size: 1.1rem; transition: var(--transition-normal);"><i class="fab fa-whatsapp"></i></a>
+                                <a href="https://www.instagram.com/becks_cleaningservices" target="_blank" aria-label="Instagram" style="display: flex; align-items: center; justify-content: center; width: 42px; height: 42px; background: rgba(8, 99, 201, 0.1); border-radius: 50%; color: var(--primary-sea); font-size: 1.1rem; transition: var(--transition-normal);"><i class="fab fa-instagram"></i></a>
+                                <a href="https://www.tiktok.com/@beckscleaning_services" target="_blank" aria-label="TikTok" style="display: flex; align-items: center; justify-content: center; width: 42px; height: 42px; background: rgba(8, 99, 201, 0.1); border-radius: 50%; color: var(--primary-sea); font-size: 1.1rem; transition: var(--transition-normal);"><i class="fab fa-tiktok"></i></a>
+                                <a href="https://facebook.com" target="_blank" aria-label="Facebook" style="display: flex; align-items: center; justify-content: center; width: 42px; height: 42px; background: rgba(8, 99, 201, 0.1); border-radius: 50%; color: var(--primary-sea); font-size: 1.1rem; transition: var(--transition-normal);"><i class="fab fa-facebook-f"></i></a>
                             </div>
                         </div>
                     </div>
+                    
                     <div class="contact-form reveal" data-delay="200">
                         <h3>Send Us a Message</h3>
-                        <form id="contactForm" onsubmit="sendWhatsApp(event, 'contact')">
+                        <form id="contactForm">
                             <div class="form-group">
                                 <label for="name">Your Name <span class="required">*</span></label>
                                 <input type="text" id="name" name="name" class="form-control" placeholder="Enter your full name" required>
@@ -187,20 +472,20 @@
                                 <label for="service">Service Interested In</label>
                                 <select id="service" name="service" class="form-control">
                                     <option value="">Select a service</option>
-                                    <option value="residential">Residential Cleaning</option>
-                                    <option value="commercial">Commercial Cleaning</option>
-                                    <option value="deep">Deep Cleaning</option>
-                                    <option value="sofa">Sofa Cleaning</option>
-                                    <option value="move">Move In/Out Cleaning</option>
-                                    <option value="special">Specialty Cleaning</option>
-                                    <option value="notsure">Not Sure</option>
+                                    <option value="Residential Cleaning">Residential Cleaning</option>
+                                    <option value="Commercial Cleaning">Commercial Cleaning</option>
+                                    <option value="Deep Cleaning">Deep Cleaning</option>
+                                    <option value="Sofa Cleaning">Sofa Cleaning</option>
+                                    <option value="Move In/Out Cleaning">Move In/Out Cleaning</option>
+                                    <option value="Specialty Cleaning">Specialty Cleaning</option>
+                                    <option value="Not Sure">Not Sure</option>
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label for="message">Your Message <span class="required">*</span></label>
                                 <textarea id="message" name="message" class="form-control" rows="5" placeholder="Tell us about your cleaning needs..." required></textarea>
                             </div>
-                            <button type="submit" class="btn btn--large"><i class="fab fa-whatsapp"></i> Send via WhatsApp</button>
+                            <button type="button" class="btn btn--large" style="width: 100%;" onclick="sendContactWhatsApp()"><i class="fab fa-whatsapp"></i> Send via WhatsApp</button>
                         </form>
                         <div id="formSuccess" class="success-message">
                             <i class="fas fa-check-circle"></i>
@@ -218,7 +503,7 @@
                     <p class="section-subtitle">Schedule your cleaning service online</p>
                 </div>
                 <div class="contact-form" style="max-width: 800px; margin: 0 auto;">
-                    <form id="bookingForm" onsubmit="sendWhatsApp(event, 'booking')">
+                    <form id="bookingForm">
                         <div class="form-group">
                             <label for="booking-name">Your Name <span class="required">*</span></label>
                             <input type="text" id="booking-name" name="name" class="form-control" placeholder="Enter your full name" required>
@@ -320,7 +605,7 @@
                             <label for="booking-message">Special Instructions</label>
                             <textarea id="booking-message" name="message" class="form-control" rows="3" placeholder="Any special requests or instructions..."></textarea>
                         </div>
-                        <button type="submit" class="btn btn--large"><i class="fab fa-whatsapp"></i> Book via WhatsApp</button>
+                        <button type="button" class="btn btn--large" style="width: 100%;" onclick="sendBookingWhatsApp()"><i class="fab fa-whatsapp"></i> Book via WhatsApp</button>
                     </form>
                     <div id="bookingSuccess" class="success-message">
                         <i class="fas fa-check-circle"></i>
@@ -336,17 +621,17 @@
                     <h2>Frequently Asked <span>Questions</span></h2>
                     <p class="section-subtitle">Quick answers to common questions</p>
                 </div>
-                <div class="faq-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
-                    <div class="faq-card reveal" style="background: var(--white); padding: 30px; border-radius: var(--radius-md); box-shadow: var(--shadow-sm); border: 1px solid var(--light-gray); transition: var(--transition-normal);">
-                        <h3 style="color: var(--primary-sea);">How do I schedule a cleaning?</h3>
+                <div class="faq-grid">
+                    <div class="faq-card reveal">
+                        <h3>How do I schedule a cleaning?</h3>
                         <p>Call us at <a href="tel:0542977602">054 297 7602</a> or use our <a href="contact.html">contact form</a>.</p>
                     </div>
-                    <div class="faq-card reveal" data-delay="150" style="background: var(--white); padding: 30px; border-radius: var(--radius-md); box-shadow: var(--shadow-sm); border: 1px solid var(--light-gray); transition: var(--transition-normal);">
-                        <h3 style="color: var(--primary-sea);">What payment methods do you accept?</h3>
+                    <div class="faq-card reveal" data-delay="150">
+                        <h3>What payment methods do you accept?</h3>
                         <p>Mobile money (MTN, Vodafone, AirtelTigo), bank transfers, and cash.</p>
                     </div>
-                    <div class="faq-card reveal" data-delay="300" style="background: var(--white); padding: 30px; border-radius: var(--radius-md); box-shadow: var(--shadow-sm); border: 1px solid var(--light-gray); transition: var(--transition-normal);">
-                        <h3 style="color: var(--primary-sea);">Do I need to provide cleaning supplies?</h3>
+                    <div class="faq-card reveal" data-delay="300">
+                        <h3>Do I need to provide cleaning supplies?</h3>
                         <p>No, we bring all necessary supplies and equipment.</p>
                     </div>
                 </div>
@@ -439,60 +724,69 @@
 
     <script>
         // ========================================
-        // WHATSAPP BOOKING - WITH ROOM COUNT (1-50)
+        // CONTACT FORM - Send WhatsApp
         // ========================================
+        function sendContactWhatsApp() {
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const rooms = document.getElementById('rooms').value;
+            const service = document.getElementById('service').value || 'Not specified';
+            const message = document.getElementById('message').value;
 
-        function sendWhatsApp(event, type) {
-            event.preventDefault();
-            
-            let name, email, phone, service, rooms, message = '';
-            
-            if (type === 'contact') {
-                name = document.getElementById('name').value;
-                email = document.getElementById('email').value;
-                phone = document.getElementById('phone').value;
-                service = document.getElementById('service').value || 'Not specified';
-                rooms = document.getElementById('rooms').value;
-                message = document.getElementById('message').value;
-                
-                const fullMessage = `📩 NEW MESSAGE FROM WEBSITE:\n\n` +
-                    `👤 Name: ${name}\n` +
-                    `📧 Email: ${email}\n` +
-                    `📱 Phone: ${phone}\n` +
-                    `🛏️ Rooms: ${rooms}\n` +
-                    `🧹 Service: ${service}\n` +
-                    `📝 Message: ${message}`;
-                
-                sendToWhatsApp(fullMessage, 'contact');
-                
-            } else {
-                name = document.getElementById('booking-name').value;
-                email = document.getElementById('booking-email').value;
-                phone = document.getElementById('booking-phone').value;
-                service = document.getElementById('booking-service').value;
-                rooms = document.getElementById('booking-rooms').value;
-                const date = document.getElementById('booking-date').value;
-                const time = document.getElementById('booking-time').value;
-                const address = document.getElementById('booking-address').value;
-                const instructions = document.getElementById('booking-message').value || 'None';
-                
-                const fullMessage = `📋 NEW BOOKING REQUEST:\n\n` +
-                    `👤 Name: ${name}\n` +
-                    `📧 Email: ${email}\n` +
-                    `📱 Phone: ${phone}\n` +
-                    `🛏️ Rooms: ${rooms}\n` +
-                    `🧹 Service: ${service}\n` +
-                    `📅 Date: ${date}\n` +
-                    `🕐 Time: ${time}\n` +
-                    `📍 Address: ${address}\n` +
-                    `📝 Instructions: ${instructions}`;
-                
-                sendToWhatsApp(fullMessage, 'booking');
+            if (!name || !email || !phone || !rooms || !message) {
+                alert('Please fill in all required fields.');
+                return;
             }
+
+            const fullMessage = `📩 NEW MESSAGE FROM WEBSITE:\n\n` +
+                `👤 Name: ${name}\n` +
+                `📧 Email: ${email}\n` +
+                `📱 Phone: ${phone}\n` +
+                `🛏️ Rooms: ${rooms}\n` +
+                `🧹 Service: ${service}\n` +
+                `📝 Message: ${message}`;
+
+            sendToWhatsApp(fullMessage, 'contact');
         }
 
+        // ========================================
+        // BOOKING FORM - Send WhatsApp
+        // ========================================
+        function sendBookingWhatsApp() {
+            const name = document.getElementById('booking-name').value;
+            const email = document.getElementById('booking-email').value;
+            const phone = document.getElementById('booking-phone').value;
+            const service = document.getElementById('booking-service').value;
+            const rooms = document.getElementById('booking-rooms').value;
+            const date = document.getElementById('booking-date').value;
+            const time = document.getElementById('booking-time').value;
+            const address = document.getElementById('booking-address').value;
+            const message = document.getElementById('booking-message').value || 'None';
+
+            if (!name || !email || !phone || !service || !rooms || !date || !time || !address) {
+                alert('Please fill in all required fields.');
+                return;
+            }
+
+            const fullMessage = `📋 NEW BOOKING REQUEST:\n\n` +
+                `👤 Name: ${name}\n` +
+                `📧 Email: ${email}\n` +
+                `📱 Phone: ${phone}\n` +
+                `🛏️ Rooms: ${rooms}\n` +
+                `🧹 Service: ${service}\n` +
+                `📅 Date: ${date}\n` +
+                `🕐 Time: ${time}\n` +
+                `📍 Address: ${address}\n` +
+                `📝 Instructions: ${message}`;
+
+            sendToWhatsApp(fullMessage, 'booking');
+        }
+
+        // ========================================
+        // SEND TO WHATSAPP
+        // ========================================
         function sendToWhatsApp(message, type) {
-            // Show success message
             const successDiv = type === 'contact' ? 
                 document.getElementById('formSuccess') : 
                 document.getElementById('bookingSuccess');
@@ -504,18 +798,13 @@
             form.style.display = 'none';
             successDiv.classList.add('success-message--visible');
             
-            // Encode message for URL
             const encodedMessage = encodeURIComponent(message);
-            
-            // WhatsApp number (with country code, no +)
             const whatsappNumber = '233542977602';
             
-            // Redirect to WhatsApp
             setTimeout(function() {
                 window.open(`https://wa.me/${whatsappNumber}?text=${encodedMessage}`, '_blank');
             }, 800);
             
-            // Also redirect to thankyou page
             setTimeout(function() {
                 window.location.href = 'thankyou.html';
             }, 3000);
