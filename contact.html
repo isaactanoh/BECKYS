@@ -328,12 +328,12 @@
 
     <script>
         // ========================================
-        // EMAILJS FORM HANDLING
+        // EMAILJS FORM HANDLING - FIXED
         // ========================================
 
         // YOUR EMAILJS CONFIGURATION
         const EMAILJS_CONFIG = {
-            publicKey: 'FvHT7Kz7M8L75JvTI',
+            publicKey: 'FvHT7Kz7M8L75jvTI',
             serviceID: 'service_i6ix4fo',
             templateID: 'template_oioh3n9'
         };
@@ -368,7 +368,8 @@
                 EMAILJS_CONFIG.templateID,
                 formData
             )
-            .then(function() {
+            .then(function(response) {
+                console.log('SUCCESS!', response);
                 document.getElementById('contactForm').style.display = 'none';
                 document.getElementById('formSuccess').classList.add('success-message--visible');
                 submitBtn.textContent = originalText;
@@ -379,8 +380,8 @@
                 }, 2000);
             })
             .catch(function(error) {
-                alert('Something went wrong. Please try again or call us directly at 054 297 7602.');
                 console.error('EmailJS Error:', error);
+                alert('Something went wrong. Please try again or call us directly at 054 297 7602.');
                 submitBtn.textContent = originalText;
                 submitBtn.disabled = false;
             });
@@ -412,7 +413,8 @@
                 EMAILJS_CONFIG.templateID,
                 formData
             )
-            .then(function() {
+            .then(function(response) {
+                console.log('SUCCESS!', response);
                 document.getElementById('bookingForm').style.display = 'none';
                 document.getElementById('bookingSuccess').classList.add('success-message--visible');
                 submitBtn.textContent = originalText;
@@ -423,8 +425,8 @@
                 }, 2000);
             })
             .catch(function(error) {
-                alert('Something went wrong. Please try again or call us directly at 054 297 7602.');
                 console.error('EmailJS Error:', error);
+                alert('Something went wrong. Please try again or call us directly at 054 297 7602.');
                 submitBtn.textContent = originalText;
                 submitBtn.disabled = false;
             });
