@@ -20,8 +20,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" href="images/favicon.ico" type="image/x-icon">
-    <!-- EmailJS SDK -->
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 </head>
 <body>
     <a href="#main" class="skip-link">Skip to main content</a>
@@ -116,7 +114,10 @@
                     </div>
                     <div class="contact-form reveal" data-delay="200">
                         <h3>Send Us a Message</h3>
-                        <form id="contactForm">
+                        <form id="contactForm" action="https://formsubmit.co/thebeckscleaningservices@gmail.com" method="POST">
+                            <input type="hidden" name="_subject" value="New Contact Message - Becks Cleaning">
+                            <input type="hidden" name="_next" value="https://beckscleaningservice.com/thankyou.html">
+                            <input type="hidden" name="_captcha" value="false">
                             <div class="form-group">
                                 <label for="name">Your Name <span class="required">*</span></label>
                                 <input type="text" id="name" name="name" class="form-control" placeholder="Enter your full name" required>
@@ -163,7 +164,10 @@
                     <p class="section-subtitle">Schedule your cleaning service online</p>
                 </div>
                 <div class="contact-form" style="max-width: 800px; margin: 0 auto;">
-                    <form id="bookingForm">
+                    <form id="bookingForm" action="https://formsubmit.co/thebeckscleaningservices@gmail.com" method="POST">
+                        <input type="hidden" name="_subject" value="New Booking Request - Becks Cleaning">
+                        <input type="hidden" name="_next" value="https://beckscleaningservice.com/thankyou.html">
+                        <input type="hidden" name="_captcha" value="false">
                         <div class="form-group">
                             <label for="booking-name">Your Name <span class="required">*</span></label>
                             <input type="text" id="booking-name" name="name" class="form-control" placeholder="Enter your full name" required>
@@ -325,113 +329,6 @@
         <img class="lightbox__content" id="lightboxImg" alt="Gallery image" tabindex="0">
         <div class="lightbox__counter" id="lightboxCounter">1 / 1</div>
     </div>
-
-    <script>
-        // ========================================
-        // EMAILJS FORM HANDLING - FIXED
-        // ========================================
-
-        // YOUR EMAILJS CONFIGURATION
-        const EMAILJS_CONFIG = {
-            publicKey: 'FvHT7Kz7M8L75jvTI',
-            serviceID: 'service_i6ix4fo',
-            templateID: 'template_oioh3n9'
-        };
-
-        // Initialize EmailJS
-        (function() {
-            emailjs.init({
-                publicKey: EMAILJS_CONFIG.publicKey,
-            });
-        })();
-
-        // Handle Contact Form
-        document.getElementById('contactForm')?.addEventListener('submit', function(e) {
-            e.preventDefault();
-
-            const formData = {
-                name: document.getElementById('name').value,
-                email: document.getElementById('email').value,
-                phone: document.getElementById('phone').value,
-                service: document.getElementById('service').value || 'Not specified',
-                message: document.getElementById('message').value,
-                to_email: 'thebeckscleaningservices@gmail.com'
-            };
-
-            const submitBtn = this.querySelector('button[type="submit"]');
-            const originalText = submitBtn.textContent;
-            submitBtn.textContent = 'Sending...';
-            submitBtn.disabled = true;
-
-            emailjs.send(
-                EMAILJS_CONFIG.serviceID,
-                EMAILJS_CONFIG.templateID,
-                formData
-            )
-            .then(function(response) {
-                console.log('SUCCESS!', response);
-                document.getElementById('contactForm').style.display = 'none';
-                document.getElementById('formSuccess').classList.add('success-message--visible');
-                submitBtn.textContent = originalText;
-                submitBtn.disabled = false;
-                
-                setTimeout(function() {
-                    window.location.href = 'thankyou.html';
-                }, 2000);
-            })
-            .catch(function(error) {
-                console.error('EmailJS Error:', error);
-                alert('Something went wrong. Please try again or call us directly at 054 297 7602.');
-                submitBtn.textContent = originalText;
-                submitBtn.disabled = false;
-            });
-        });
-
-        // Handle Booking Form
-        document.getElementById('bookingForm')?.addEventListener('submit', function(e) {
-            e.preventDefault();
-
-            const formData = {
-                name: document.getElementById('booking-name').value,
-                email: document.getElementById('booking-email').value,
-                phone: document.getElementById('booking-phone').value,
-                service: document.getElementById('booking-service').value,
-                date: document.getElementById('booking-date').value,
-                time: document.getElementById('booking-time').value,
-                address: document.getElementById('booking-address').value,
-                message: document.getElementById('booking-message').value || 'No special instructions',
-                to_email: 'thebeckscleaningservices@gmail.com'
-            };
-
-            const submitBtn = this.querySelector('button[type="submit"]');
-            const originalText = submitBtn.textContent;
-            submitBtn.textContent = 'Booking...';
-            submitBtn.disabled = true;
-
-            emailjs.send(
-                EMAILJS_CONFIG.serviceID,
-                EMAILJS_CONFIG.templateID,
-                formData
-            )
-            .then(function(response) {
-                console.log('SUCCESS!', response);
-                document.getElementById('bookingForm').style.display = 'none';
-                document.getElementById('bookingSuccess').classList.add('success-message--visible');
-                submitBtn.textContent = originalText;
-                submitBtn.disabled = false;
-                
-                setTimeout(function() {
-                    window.location.href = 'thankyou.html';
-                }, 2000);
-            })
-            .catch(function(error) {
-                console.error('EmailJS Error:', error);
-                alert('Something went wrong. Please try again or call us directly at 054 297 7602.');
-                submitBtn.textContent = originalText;
-                submitBtn.disabled = false;
-            });
-        });
-    </script>
 
     <script src="script.js" defer></script>
 </body>
