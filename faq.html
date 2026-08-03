@@ -20,10 +20,300 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    
+    <!-- ===== STRUCTURED DATA ===== -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "How do I schedule a cleaning service?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "You can schedule a cleaning by calling us at 054 297 7602, using our contact form, or messaging us on WhatsApp."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What areas do you serve?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "We serve the Greater Accra Region and surrounding areas."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Are your cleaners trustworthy?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Absolutely! All our cleaners undergo thorough background checks and receive extensive training. We're fully insured."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What's included in a standard cleaning?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Dusting, vacuuming, mopping, bathroom cleaning, kitchen cleaning, bed making, and trash removal."
+                }
+            }
+        ]
+    }
+    </script>
+
+    <style>
+        /* ========================================
+           FAQ PAGE ENHANCEMENTS
+           ======================================== */
+        
+        .faq-hero {
+            min-height: 50vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 120px 20px 80px;
+            position: relative;
+            overflow: hidden;
+            color: var(--white);
+        }
+        
+        .faq-hero__video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            transform: translateX(-50%) translateY(-50%);
+            object-fit: cover;
+            z-index: 0;
+        }
+        
+        .faq-hero__overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(4, 42, 74, 0.65);
+            z-index: 1;
+        }
+        
+        .faq-hero--fallback {
+            background: linear-gradient(135deg, rgba(4, 73, 158, 0.85) 0%, rgba(0, 180, 216, 0.75) 100%), url('images/2.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .faq-hero__content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            animation: fadeInUp 1s ease;
+        }
+        
+        .faq-hero__title {
+            font-size: clamp(2.8rem, 5vw, 4rem);
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 20px;
+            text-shadow: 0 2px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .faq-hero__title span {
+            color: var(--accent-light);
+        }
+        
+        .faq-hero__subtitle {
+            font-size: clamp(1.1rem, 1.5vw, 1.3rem);
+            color: rgba(255, 255, 255, 0.92);
+            max-width: 650px;
+            margin: 0 auto;
+            text-shadow: 0 1px 15px rgba(0, 0, 0, 0.15);
+        }
+        
+        .faq-hero .hero-particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+        }
+        
+        .faq-hero .hero-particles span {
+            position: absolute;
+            display: block;
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 50%;
+            animation: floatParticles 15s linear infinite;
+            bottom: -150px;
+        }
+        
+        .faq-hero .hero-particles span:nth-child(1) { left: 10%; width: 25px; height: 25px; animation-delay: 0s; animation-duration: 18s; }
+        .faq-hero .hero-particles span:nth-child(2) { left: 20%; width: 15px; height: 15px; animation-delay: 2s; animation-duration: 22s; background: rgba(255, 215, 0, 0.08); }
+        .faq-hero .hero-particles span:nth-child(3) { left: 30%; width: 35px; height: 35px; animation-delay: 4s; animation-duration: 20s; }
+        .faq-hero .hero-particles span:nth-child(4) { left: 40%; width: 18px; height: 18px; animation-delay: 1s; animation-duration: 16s; background: rgba(255, 215, 0, 0.06); }
+        .faq-hero .hero-particles span:nth-child(5) { left: 50%; width: 28px; height: 28px; animation-delay: 3s; animation-duration: 19s; }
+        .faq-hero .hero-particles span:nth-child(6) { left: 60%; width: 12px; height: 12px; animation-delay: 5s; animation-duration: 24s; background: rgba(255, 215, 0, 0.07); }
+        .faq-hero .hero-particles span:nth-child(7) { left: 70%; width: 30px; height: 30px; animation-delay: 2s; animation-duration: 17s; }
+        .faq-hero .hero-particles span:nth-child(8) { left: 80%; width: 16px; height: 16px; animation-delay: 4s; animation-duration: 21s; background: rgba(255, 215, 0, 0.05); }
+        .faq-hero .hero-particles span:nth-child(9) { left: 90%; width: 22px; height: 22px; animation-delay: 1s; animation-duration: 23s; }
+        .faq-hero .hero-particles span:nth-child(10) { left: 95%; width: 10px; height: 10px; animation-delay: 3s; animation-duration: 20s; background: rgba(255, 215, 0, 0.08); }
+        
+        @keyframes floatParticles {
+            0% { transform: translateY(0) rotate(0deg) scale(1); opacity: 1; }
+            100% { transform: translateY(-110vh) rotate(720deg) scale(0); opacity: 0; }
+        }
+        
+        /* FAQ Container */
+        .faq-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .faq-category {
+            margin-bottom: 40px;
+        }
+        
+        .faq-category h2 {
+            font-size: 1.6rem;
+            color: var(--primary-sea);
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--light-gray);
+        }
+        
+        .faq-item {
+            margin-bottom: 12px;
+            border: 1px solid var(--light-gray);
+            border-radius: var(--radius-sm);
+            overflow: hidden;
+            background: var(--white);
+            transition: var(--transition-normal);
+        }
+        
+        .faq-item:hover {
+            border-color: var(--primary-sea);
+        }
+        
+        .faq-item__question {
+            width: 100%;
+            padding: 18px 22px;
+            text-align: left;
+            background: var(--white);
+            border: none;
+            font-family: var(--font-secondary);
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--secondary);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: var(--transition-normal);
+        }
+        
+        .faq-item__question:hover {
+            background: rgba(0, 180, 216, 0.05);
+        }
+        
+        .faq-item__question i {
+            transition: var(--transition-normal);
+            font-size: 0.9rem;
+            color: var(--primary-sea);
+        }
+        
+        .faq-item__question.active i {
+            transform: rotate(180deg);
+        }
+        
+        .faq-item__answer {
+            padding: 0 22px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+        }
+        
+        .faq-item__answer p {
+            padding: 0 0 20px;
+            margin-bottom: 0;
+        }
+        
+        .faq-item__answer a {
+            color: var(--primary-sea);
+            font-weight: 500;
+        }
+        
+        .faq-item__answer a:hover {
+            text-decoration: underline;
+        }
+        
+        .faq-cta {
+            text-align: center;
+            margin-top: 50px;
+            padding: 40px;
+            background: linear-gradient(135deg, rgba(8, 99, 201, 0.05), rgba(0, 180, 216, 0.08));
+            border-radius: var(--radius-md);
+            border: 1px solid rgba(0, 180, 216, 0.1);
+        }
+        
+        .faq-cta h3 {
+            color: var(--primary-sea);
+            font-size: 1.6rem;
+            margin-bottom: 10px;
+        }
+        
+        /* ========================================
+           RESPONSIVE
+           ======================================== */
+        @media (max-width: 768px) {
+            .faq-hero {
+                min-height: 40vh;
+                padding: 100px 20px 60px;
+            }
+            .faq-hero__title {
+                font-size: 2.2rem;
+            }
+            .faq-item__question {
+                font-size: 0.95rem;
+                padding: 14px 16px;
+            }
+            .faq-item__answer {
+                padding: 0 16px;
+            }
+            .faq-cta {
+                padding: 30px 20px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .faq-hero__title {
+                font-size: 1.8rem;
+            }
+            .faq-hero__subtitle {
+                font-size: 1rem;
+            }
+            .faq-category h2 {
+                font-size: 1.3rem;
+            }
+            .faq-cta h3 {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
 </head>
 <body>
     <a href="#main" class="skip-link">Skip to main content</a>
 
+    <!-- ===== HEADER ===== -->
     <header class="header" id="header" role="banner">
         <div class="container">
             <div class="header__inner">
@@ -50,23 +340,58 @@
         </div>
     </header>
 
+    <!-- ===== MAIN CONTENT ===== -->
     <main id="main">
-        <section class="page-hero">
-            <div class="container">
-                <h1>Frequently Asked Questions</h1>
-                <p>Find answers to common questions about our services</p>
+        <!-- ===== FAQ HERO WITH VIDEO ===== -->
+        <section class="faq-hero" id="faqHero">
+            <!-- Background Video - Professional cleaning tools -->
+            <video 
+                class="faq-hero__video" 
+                autoplay 
+                muted 
+                loop 
+                playsinline 
+                preload="metadata"
+                poster="images/2.jpg"
+                id="faqHeroVideo"
+                aria-hidden="true">
+                <!-- Primary: Professional cleaning tools -->
+                <source src="https://videos.pexels.com/video-files/3764552/3764552-uhd_2560_1440_30fps.mp4" type="video/mp4">
+                <!-- Fallback 1 -->
+                <source src="https://videos.pexels.com/video-files/3255071/3255071-uhd_2560_1440_30fps.mp4" type="video/mp4">
+                <!-- Fallback 2 -->
+                <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4">
+            </video>
+            
+            <!-- Dark Overlay -->
+            <div class="faq-hero__overlay"></div>
+            
+            <!-- Floating Particles -->
+            <div class="hero-particles">
+                <span></span><span></span><span></span><span></span><span></span>
+                <span></span><span></span><span></span><span></span><span></span>
+            </div>
+            
+            <!-- Hero Content -->
+            <div class="faq-hero__content">
+                <h1 class="faq-hero__title">Frequently Asked <span>Questions</span></h1>
+                <p class="faq-hero__subtitle">Find answers to common questions about our services</p>
             </div>
         </section>
 
+        <!-- ===== FAQ SECTION ===== -->
         <section class="section">
             <div class="container">
                 <div class="section-title">
                     <h2>Got <span>Questions?</span></h2>
                     <p class="section-subtitle">We've got answers. Here are the most common questions our clients ask.</p>
                 </div>
+                
                 <div class="faq-container">
+                    <!-- Category 1: General Questions -->
                     <div class="faq-category">
                         <h2>General Questions</h2>
+                        
                         <div class="faq-item reveal">
                             <button class="faq-item__question" aria-expanded="false">
                                 How do I schedule a cleaning service?
@@ -76,6 +401,7 @@
                                 <p>You can schedule a cleaning by calling us at <a href="tel:0542977602">054 297 7602</a>, using our <a href="contact.html">contact form</a>, or messaging us on <a href="https://wa.me/233542977602" target="_blank">WhatsApp</a>.</p>
                             </div>
                         </div>
+                        
                         <div class="faq-item reveal" data-delay="150">
                             <button class="faq-item__question" aria-expanded="false">
                                 What areas do you serve?
@@ -85,6 +411,7 @@
                                 <p>We serve the Greater Accra Region and surrounding areas.</p>
                             </div>
                         </div>
+                        
                         <div class="faq-item reveal" data-delay="300">
                             <button class="faq-item__question" aria-expanded="false">
                                 Are your cleaners trustworthy?
@@ -94,6 +421,7 @@
                                 <p>Absolutely! All our cleaners undergo thorough background checks and receive extensive training. We're fully insured.</p>
                             </div>
                         </div>
+                        
                         <div class="faq-item reveal" data-delay="450">
                             <button class="faq-item__question" aria-expanded="false">
                                 Do I need to be home during the cleaning?
@@ -105,8 +433,10 @@
                         </div>
                     </div>
 
+                    <!-- Category 2: Service Details -->
                     <div class="faq-category">
                         <h2>Service Details</h2>
+                        
                         <div class="faq-item reveal">
                             <button class="faq-item__question" aria-expanded="false">
                                 What's included in a standard cleaning?
@@ -116,6 +446,7 @@
                                 <p>Dusting, vacuuming, mopping, bathroom cleaning, kitchen cleaning, bed making, and trash removal. See our <a href="services.html">services page</a> for details.</p>
                             </div>
                         </div>
+                        
                         <div class="faq-item reveal" data-delay="150">
                             <button class="faq-item__question" aria-expanded="false">
                                 What's the difference between standard and deep cleaning?
@@ -125,6 +456,7 @@
                                 <p>Deep cleaning is more thorough and includes inside appliances, detailed scrubbing, window tracks, baseboards, and more.</p>
                             </div>
                         </div>
+                        
                         <div class="faq-item reveal" data-delay="300">
                             <button class="faq-item__question" aria-expanded="false">
                                 Do I need to provide cleaning supplies?
@@ -136,8 +468,10 @@
                         </div>
                     </div>
 
+                    <!-- Category 3: Pricing & Payments -->
                     <div class="faq-category">
                         <h2>Pricing & Payments</h2>
+                        
                         <div class="faq-item reveal">
                             <button class="faq-item__question" aria-expanded="false">
                                 How much does cleaning cost?
@@ -147,6 +481,7 @@
                                 <p>Pricing depends on the size of your space, type of cleaning, and frequency. <a href="contact.html">Contact us</a> for a free quote.</p>
                             </div>
                         </div>
+                        
                         <div class="faq-item reveal" data-delay="150">
                             <button class="faq-item__question" aria-expanded="false">
                                 What payment methods do you accept?
@@ -156,6 +491,7 @@
                                 <p>We accept mobile money (MTN, Vodafone, AirtelTigo), bank transfers, and cash.</p>
                             </div>
                         </div>
+                        
                         <div class="faq-item reveal" data-delay="300">
                             <button class="faq-item__question" aria-expanded="false">
                                 Do you offer discounts for regular service?
@@ -167,8 +503,10 @@
                         </div>
                     </div>
 
+                    <!-- Category 4: Safety & Special Requests -->
                     <div class="faq-category">
                         <h2>Safety & Special Requests</h2>
+                        
                         <div class="faq-item reveal">
                             <button class="faq-item__question" aria-expanded="false">
                                 Are your cleaning products safe for pets and children?
@@ -178,6 +516,7 @@
                                 <p>Yes, we use eco-friendly, non-toxic cleaning products safe for families with children and pets.</p>
                             </div>
                         </div>
+                        
                         <div class="faq-item reveal" data-delay="150">
                             <button class="faq-item__question" aria-expanded="false">
                                 What if I'm not satisfied with the cleaning?
@@ -190,6 +529,7 @@
                     </div>
                 </div>
 
+                <!-- FAQ CTA -->
                 <div class="faq-cta reveal">
                     <h3>Still have questions?</h3>
                     <p>We're happy to answer any other questions you may have about our services.</p>
@@ -198,6 +538,7 @@
             </div>
         </section>
 
+        <!-- ===== CTA SECTION ===== -->
         <section class="cta">
             <div class="container">
                 <h2>Ready to Experience the <span style="color: var(--accent-light);">Becks</span> Difference?</h2>
@@ -210,6 +551,7 @@
         </section>
     </main>
 
+    <!-- ===== FOOTER ===== -->
     <footer class="footer" role="contentinfo">
         <div class="container">
             <div class="footer__grid">
@@ -251,6 +593,20 @@
         </div>
     </footer>
 
+    <!-- ===== FLOATING BUTTONS ===== -->
+    <div class="floating-buttons">
+        <a href="https://wa.me/233542977602" target="_blank" class="floating-btn floating-btn--whatsapp" aria-label="Chat on WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+        <a href="contact.html#booking" class="floating-btn floating-btn--book" aria-label="Book Now">
+            <i class="fas fa-calendar-plus"></i>
+        </a>
+        <button class="floating-btn floating-btn--top" id="backToTop" aria-label="Back to top">
+            <i class="fas fa-arrow-up"></i>
+        </button>
+    </div>
+
+    <!-- ===== CHAT BOT ===== -->
     <div class="chat-bot" role="complementary" aria-label="Chat assistant">
         <button class="chat-bot__toggle" id="chatToggle" aria-label="Open chat">
             <i class="fas fa-comment-dots"></i>
@@ -270,7 +626,7 @@
         </div>
     </div>
 
-    <!-- Lightbox -->
+    <!-- ===== LIGHTBOX ===== -->
     <div class="lightbox" id="lightbox" role="dialog" aria-label="Image viewer">
         <button class="lightbox__close" id="lightboxClose" aria-label="Close lightbox">&times;</button>
         <button class="lightbox__nav lightbox__nav--prev" id="lightboxPrev" aria-label="Previous image">&#10094;</button>

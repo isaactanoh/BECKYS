@@ -20,10 +20,323 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    
+    <!-- ===== STRUCTURED DATA ===== -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "Testimonials | Becks Cleaning Service",
+        "description": "Read what our satisfied clients say about our cleaning services.",
+        "url": "https://beckscleaningservice.com/testimonials.html",
+        "mainEntity": {
+            "@type": "ItemList",
+            "itemListElement": [
+                {
+                    "@type": "Review",
+                    "reviewBody": "Becks team transformed my home! It's never been so clean and fresh.",
+                    "author": {
+                        "@type": "Person",
+                        "name": "Sarah K."
+                    },
+                    "reviewRating": {
+                        "@type": "Rating",
+                        "ratingValue": "5"
+                    }
+                },
+                {
+                    "@type": "Review",
+                    "reviewBody": "Our office has never looked better. Professional, efficient, and spotless.",
+                    "author": {
+                        "@type": "Person",
+                        "name": "Michael T."
+                    },
+                    "reviewRating": {
+                        "@type": "Rating",
+                        "ratingValue": "5"
+                    }
+                },
+                {
+                    "@type": "Review",
+                    "reviewBody": "They're thorough, trustworthy, and use products that don't irritate my allergies.",
+                    "author": {
+                        "@type": "Person",
+                        "name": "Ama B."
+                    },
+                    "reviewRating": {
+                        "@type": "Rating",
+                        "ratingValue": "5"
+                    }
+                }
+            ]
+        }
+    }
+    </script>
+
+    <style>
+        /* ========================================
+           TESTIMONIALS PAGE ENHANCEMENTS
+           ======================================== */
+        
+        .testimonials-hero {
+            min-height: 50vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 120px 20px 80px;
+            position: relative;
+            overflow: hidden;
+            color: var(--white);
+        }
+        
+        .testimonials-hero__video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            transform: translateX(-50%) translateY(-50%);
+            object-fit: cover;
+            z-index: 0;
+        }
+        
+        .testimonials-hero__overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(4, 42, 74, 0.65);
+            z-index: 1;
+        }
+        
+        .testimonials-hero--fallback {
+            background: linear-gradient(135deg, rgba(4, 73, 158, 0.85) 0%, rgba(0, 180, 216, 0.75) 100%), url('images/2.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .testimonials-hero__content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            animation: fadeInUp 1s ease;
+        }
+        
+        .testimonials-hero__title {
+            font-size: clamp(2.8rem, 5vw, 4rem);
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 20px;
+            text-shadow: 0 2px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .testimonials-hero__title span {
+            color: var(--accent-light);
+        }
+        
+        .testimonials-hero__subtitle {
+            font-size: clamp(1.1rem, 1.5vw, 1.3rem);
+            color: rgba(255, 255, 255, 0.92);
+            max-width: 650px;
+            margin: 0 auto;
+            text-shadow: 0 1px 15px rgba(0, 0, 0, 0.15);
+        }
+        
+        .testimonials-hero .hero-particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+        }
+        
+        .testimonials-hero .hero-particles span {
+            position: absolute;
+            display: block;
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 50%;
+            animation: floatParticles 15s linear infinite;
+            bottom: -150px;
+        }
+        
+        .testimonials-hero .hero-particles span:nth-child(1) { left: 10%; width: 25px; height: 25px; animation-delay: 0s; animation-duration: 18s; }
+        .testimonials-hero .hero-particles span:nth-child(2) { left: 20%; width: 15px; height: 15px; animation-delay: 2s; animation-duration: 22s; background: rgba(255, 215, 0, 0.08); }
+        .testimonials-hero .hero-particles span:nth-child(3) { left: 30%; width: 35px; height: 35px; animation-delay: 4s; animation-duration: 20s; }
+        .testimonials-hero .hero-particles span:nth-child(4) { left: 40%; width: 18px; height: 18px; animation-delay: 1s; animation-duration: 16s; background: rgba(255, 215, 0, 0.06); }
+        .testimonials-hero .hero-particles span:nth-child(5) { left: 50%; width: 28px; height: 28px; animation-delay: 3s; animation-duration: 19s; }
+        .testimonials-hero .hero-particles span:nth-child(6) { left: 60%; width: 12px; height: 12px; animation-delay: 5s; animation-duration: 24s; background: rgba(255, 215, 0, 0.07); }
+        .testimonials-hero .hero-particles span:nth-child(7) { left: 70%; width: 30px; height: 30px; animation-delay: 2s; animation-duration: 17s; }
+        .testimonials-hero .hero-particles span:nth-child(8) { left: 80%; width: 16px; height: 16px; animation-delay: 4s; animation-duration: 21s; background: rgba(255, 215, 0, 0.05); }
+        .testimonials-hero .hero-particles span:nth-child(9) { left: 90%; width: 22px; height: 22px; animation-delay: 1s; animation-duration: 23s; }
+        .testimonials-hero .hero-particles span:nth-child(10) { left: 95%; width: 10px; height: 10px; animation-delay: 3s; animation-duration: 20s; background: rgba(255, 215, 0, 0.08); }
+        
+        @keyframes floatParticles {
+            0% { transform: translateY(0) rotate(0deg) scale(1); opacity: 1; }
+            100% { transform: translateY(-110vh) rotate(720deg) scale(0); opacity: 0; }
+        }
+        
+        /* Testimonials Grid */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: var(--gutter);
+        }
+        
+        .testimonial-card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--light-gray);
+            transition: var(--transition-normal);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--primary-sea);
+        }
+        
+        .testimonial-card__stars {
+            color: var(--accent);
+            font-size: 0.9rem;
+            margin-bottom: 12px;
+        }
+        
+        .testimonial-card__text {
+            font-style: italic;
+            color: var(--dark-gray);
+            flex-grow: 1;
+            position: relative;
+            padding-left: 20px;
+        }
+        
+        .testimonial-card__text::before {
+            content: '"';
+            position: absolute;
+            left: 0;
+            top: -5px;
+            font-size: 2.5rem;
+            color: var(--primary-sea);
+            line-height: 1;
+        }
+        
+        .testimonial-card__author {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid var(--light-gray);
+        }
+        
+        .testimonial-card__author-info h4 {
+            font-size: 1rem;
+            margin-bottom: 2px;
+        }
+        
+        .testimonial-card__author-info span {
+            font-size: 0.85rem;
+            color: var(--gray);
+        }
+        
+        /* Platform Grid */
+        .platform-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        
+        .platform-card {
+            background: var(--white);
+            padding: 30px 20px;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            text-align: center;
+            transition: var(--transition-normal);
+            border: 1px solid var(--light-gray);
+            color: var(--secondary);
+            text-decoration: none;
+        }
+        
+        .platform-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--primary-sea);
+        }
+        
+        .platform-card i {
+            font-size: 2.5rem;
+            color: var(--primary-sea);
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+        
+        .platform-card h4 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+        
+        .platform-card .rating {
+            color: var(--accent);
+            font-size: 0.85rem;
+        }
+        
+        .platform-card p {
+            font-size: 0.9rem;
+            color: var(--gray);
+            margin-bottom: 0;
+        }
+        
+        /* ========================================
+           RESPONSIVE
+           ======================================== */
+        @media (max-width: 768px) {
+            .testimonials-hero {
+                min-height: 40vh;
+                padding: 100px 20px 60px;
+            }
+            .testimonials-hero__title {
+                font-size: 2.2rem;
+            }
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+            .platform-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .testimonials-hero__title {
+                font-size: 1.8rem;
+            }
+            .testimonials-hero__subtitle {
+                font-size: 1rem;
+            }
+            .platform-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .platform-card {
+                padding: 20px 15px;
+            }
+        }
+    </style>
 </head>
 <body>
     <a href="#main" class="skip-link">Skip to main content</a>
 
+    <!-- ===== HEADER ===== -->
     <header class="header" id="header" role="banner">
         <div class="container">
             <div class="header__inner">
@@ -50,14 +363,46 @@
         </div>
     </header>
 
+    <!-- ===== MAIN CONTENT ===== -->
     <main id="main">
-        <section class="page-hero">
-            <div class="container">
-                <h1>Client Testimonials</h1>
-                <p>Hear what our satisfied customers have to say</p>
+        <!-- ===== TESTIMONIALS HERO WITH VIDEO ===== -->
+        <section class="testimonials-hero" id="testimonialsHero">
+            <!-- Background Video - Happy customers, clean spaces -->
+            <video 
+                class="testimonials-hero__video" 
+                autoplay 
+                muted 
+                loop 
+                playsinline 
+                preload="metadata"
+                poster="images/2.jpg"
+                id="testimonialsHeroVideo"
+                aria-hidden="true">
+                <!-- Primary: Happy customers, clean spaces -->
+                <source src="https://videos.pexels.com/video-files/3141203/3141203-uhd_2560_1440_30fps.mp4" type="video/mp4">
+                <!-- Fallback 1 -->
+                <source src="https://videos.pexels.com/video-files/3255071/3255071-uhd_2560_1440_30fps.mp4" type="video/mp4">
+                <!-- Fallback 2 -->
+                <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4">
+            </video>
+            
+            <!-- Dark Overlay -->
+            <div class="testimonials-hero__overlay"></div>
+            
+            <!-- Floating Particles -->
+            <div class="hero-particles">
+                <span></span><span></span><span></span><span></span><span></span>
+                <span></span><span></span><span></span><span></span><span></span>
+            </div>
+            
+            <!-- Hero Content -->
+            <div class="testimonials-hero__content">
+                <h1 class="testimonials-hero__title">Client <span>Testimonials</span></h1>
+                <p class="testimonials-hero__subtitle">Hear what our satisfied customers have to say</p>
             </div>
         </section>
 
+        <!-- ===== TESTIMONIALS SECTION ===== -->
         <section class="section">
             <div class="container">
                 <div class="section-title">
@@ -68,37 +413,68 @@
                     <div class="testimonial-card reveal">
                         <div class="testimonial-card__stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
                         <p class="testimonial-card__text">"I've been using Becks Cleaning Service for over a year now, and I couldn't be happier. My home has never been so consistently clean."</p>
-                        <div class="testimonial-card__author"><div class="testimonial-card__author-info"><h4>Sarah K.</h4><span>Residential Client</span></div></div>
+                        <div class="testimonial-card__author">
+                            <div class="testimonial-card__author-info">
+                                <h4>Sarah K.</h4>
+                                <span>Residential Client</span>
+                            </div>
+                        </div>
                     </div>
                     <div class="testimonial-card reveal" data-delay="150">
                         <div class="testimonial-card__stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
                         <p class="testimonial-card__text">"Becks team comes every two weeks and does an amazing job. They're reliable and pay attention to all the details."</p>
-                        <div class="testimonial-card__author"><div class="testimonial-card__author-info"><h4>Kwame A.</h4><span>Regular Client</span></div></div>
+                        <div class="testimonial-card__author">
+                            <div class="testimonial-card__author-info">
+                                <h4>Kwame A.</h4>
+                                <span>Regular Client</span>
+                            </div>
+                        </div>
                     </div>
                     <div class="testimonial-card reveal" data-delay="300">
                         <div class="testimonial-card__stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
                         <p class="testimonial-card__text">"Our workspace is always immaculate the next morning. Our employees have noticed and appreciated the difference!"</p>
-                        <div class="testimonial-card__author"><div class="testimonial-card__author-info"><h4>Michael T.</h4><span>Business Owner</span></div></div>
+                        <div class="testimonial-card__author">
+                            <div class="testimonial-card__author-info">
+                                <h4>Michael T.</h4>
+                                <span>Business Owner</span>
+                            </div>
+                        </div>
                     </div>
                     <div class="testimonial-card reveal" data-delay="150">
                         <div class="testimonial-card__stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
                         <p class="testimonial-card__text">"They're simply the best — thorough, reliable, and use eco-friendly products that don't irritate my allergies."</p>
-                        <div class="testimonial-card__author"><div class="testimonial-card__author-info"><h4>Esi M.</h4><span>Residential Client</span></div></div>
+                        <div class="testimonial-card__author">
+                            <div class="testimonial-card__author-info">
+                                <h4>Esi M.</h4>
+                                <span>Residential Client</span>
+                            </div>
+                        </div>
                     </div>
                     <div class="testimonial-card reveal" data-delay="300">
                         <div class="testimonial-card__stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
                         <p class="testimonial-card__text">"The deep clean before our wedding was incredible! Becks team transformed our home for our special day."</p>
-                        <div class="testimonial-card__author"><div class="testimonial-card__author-info"><h4>David & Amina</h4><span>Event Clients</span></div></div>
+                        <div class="testimonial-card__author">
+                            <div class="testimonial-card__author-info">
+                                <h4>David & Amina</h4>
+                                <span>Event Clients</span>
+                            </div>
+                        </div>
                     </div>
                     <div class="testimonial-card reveal" data-delay="450">
                         <div class="testimonial-card__stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
                         <p class="testimonial-card__text">"They're professional, respectful of my space, and do an amazing job every time. My only regret is not hiring them sooner!"</p>
-                        <div class="testimonial-card__author"><div class="testimonial-card__author-info"><h4>Ama B.</h4><span>Regular Client</span></div></div>
+                        <div class="testimonial-card__author">
+                            <div class="testimonial-card__author-info">
+                                <h4>Ama B.</h4>
+                                <span>Regular Client</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
+        <!-- ===== PLATFORM REVIEWS ===== -->
         <section class="section section--light">
             <div class="container">
                 <div class="section-title">
@@ -110,13 +486,13 @@
                         <i class="fab fa-google"></i>
                         <h4>Google</h4>
                         <div class="rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i> <span>4.9</span></div>
-                        <p style="font-size: 0.9rem; color: var(--gray);">50+ reviews</p>
+                        <p>50+ reviews</p>
                     </a>
                     <a href="#" class="platform-card reveal" data-delay="150">
                         <i class="fab fa-facebook"></i>
                         <h4>Facebook</h4>
                         <div class="rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i> <span>5.0</span></div>
-                        <p style="font-size: 0.9rem; color: var(--gray);">Client recommendations</p>
+                        <p>Client recommendations</p>
                     </a>
                     <a href="#" class="platform-card reveal" data-delay="300">
                         <i class="fab fa-instagram"></i>
@@ -127,6 +503,7 @@
             </div>
         </section>
 
+        <!-- ===== CTA SECTION ===== -->
         <section class="cta">
             <div class="container">
                 <h2>Ready to Experience the <span style="color: var(--accent-light);">Difference</span>?</h2>
@@ -139,6 +516,7 @@
         </section>
     </main>
 
+    <!-- ===== FOOTER ===== -->
     <footer class="footer" role="contentinfo">
         <div class="container">
             <div class="footer__grid">
@@ -180,6 +558,20 @@
         </div>
     </footer>
 
+    <!-- ===== FLOATING BUTTONS ===== -->
+    <div class="floating-buttons">
+        <a href="https://wa.me/233542977602" target="_blank" class="floating-btn floating-btn--whatsapp" aria-label="Chat on WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+        <a href="contact.html#booking" class="floating-btn floating-btn--book" aria-label="Book Now">
+            <i class="fas fa-calendar-plus"></i>
+        </a>
+        <button class="floating-btn floating-btn--top" id="backToTop" aria-label="Back to top">
+            <i class="fas fa-arrow-up"></i>
+        </button>
+    </div>
+
+    <!-- ===== CHAT BOT ===== -->
     <div class="chat-bot" role="complementary" aria-label="Chat assistant">
         <button class="chat-bot__toggle" id="chatToggle" aria-label="Open chat">
             <i class="fas fa-comment-dots"></i>
@@ -199,7 +591,7 @@
         </div>
     </div>
 
-    <!-- Lightbox -->
+    <!-- ===== LIGHTBOX ===== -->
     <div class="lightbox" id="lightbox" role="dialog" aria-label="Image viewer">
         <button class="lightbox__close" id="lightboxClose" aria-label="Close lightbox">&times;</button>
         <button class="lightbox__nav lightbox__nav--prev" id="lightboxPrev" aria-label="Previous image">&#10094;</button>

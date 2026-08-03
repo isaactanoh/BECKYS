@@ -20,10 +20,383 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    
+    <!-- ===== STRUCTURED DATA ===== -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "serviceType": "Cleaning Service",
+        "provider": {
+            "@type": "LocalBusiness",
+            "name": "Becks Cleaning Service"
+        },
+        "areaServed": "Greater Accra, Ghana",
+        "availableChannel": {
+            "@type": "ServiceChannel",
+            "serviceUrl": "https://beckscleaningservice.com/contact.html"
+        }
+    }
+    </script>
+
+    <style>
+        /* ========================================
+           SERVICES PAGE ENHANCEMENTS
+           ======================================== */
+        
+        .services-hero {
+            min-height: 50vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 120px 20px 80px;
+            position: relative;
+            overflow: hidden;
+            color: var(--white);
+        }
+        
+        .services-hero__video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            transform: translateX(-50%) translateY(-50%);
+            object-fit: cover;
+            z-index: 0;
+        }
+        
+        .services-hero__overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(4, 42, 74, 0.65);
+            z-index: 1;
+        }
+        
+        .services-hero--fallback {
+            background: linear-gradient(135deg, rgba(4, 73, 158, 0.85) 0%, rgba(0, 180, 216, 0.75) 100%), url('images/2.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .services-hero--fallback .services-hero__video {
+            display: none;
+        }
+        
+        .services-hero__content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            animation: fadeInUp 1s ease;
+        }
+        
+        .services-hero__title {
+            font-size: clamp(2.8rem, 5vw, 4rem);
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 20px;
+            text-shadow: 0 2px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .services-hero__title span {
+            color: var(--accent-light);
+        }
+        
+        .services-hero__subtitle {
+            font-size: clamp(1.1rem, 1.5vw, 1.3rem);
+            color: rgba(255, 255, 255, 0.92);
+            max-width: 650px;
+            margin: 0 auto;
+            text-shadow: 0 1px 15px rgba(0, 0, 0, 0.15);
+        }
+        
+        .services-hero .hero-particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+        }
+        
+        .services-hero .hero-particles span {
+            position: absolute;
+            display: block;
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 50%;
+            animation: floatParticles 15s linear infinite;
+            bottom: -150px;
+        }
+        
+        .services-hero .hero-particles span:nth-child(1) { left: 10%; width: 25px; height: 25px; animation-delay: 0s; animation-duration: 18s; }
+        .services-hero .hero-particles span:nth-child(2) { left: 20%; width: 15px; height: 15px; animation-delay: 2s; animation-duration: 22s; background: rgba(255, 215, 0, 0.08); }
+        .services-hero .hero-particles span:nth-child(3) { left: 30%; width: 35px; height: 35px; animation-delay: 4s; animation-duration: 20s; }
+        .services-hero .hero-particles span:nth-child(4) { left: 40%; width: 18px; height: 18px; animation-delay: 1s; animation-duration: 16s; background: rgba(255, 215, 0, 0.06); }
+        .services-hero .hero-particles span:nth-child(5) { left: 50%; width: 28px; height: 28px; animation-delay: 3s; animation-duration: 19s; }
+        .services-hero .hero-particles span:nth-child(6) { left: 60%; width: 12px; height: 12px; animation-delay: 5s; animation-duration: 24s; background: rgba(255, 215, 0, 0.07); }
+        .services-hero .hero-particles span:nth-child(7) { left: 70%; width: 30px; height: 30px; animation-delay: 2s; animation-duration: 17s; }
+        .services-hero .hero-particles span:nth-child(8) { left: 80%; width: 16px; height: 16px; animation-delay: 4s; animation-duration: 21s; background: rgba(255, 215, 0, 0.05); }
+        .services-hero .hero-particles span:nth-child(9) { left: 90%; width: 22px; height: 22px; animation-delay: 1s; animation-duration: 23s; }
+        .services-hero .hero-particles span:nth-child(10) { left: 95%; width: 10px; height: 10px; animation-delay: 3s; animation-duration: 20s; background: rgba(255, 215, 0, 0.08); }
+        
+        @keyframes floatParticles {
+            0% { transform: translateY(0) rotate(0deg) scale(1); opacity: 1; }
+            100% { transform: translateY(-110vh) rotate(720deg) scale(0); opacity: 0; }
+        }
+        
+        .service-detail {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+            margin-bottom: 80px;
+            padding: 40px;
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--light-gray);
+            transition: var(--transition-normal);
+        }
+        
+        .service-detail:hover {
+            box-shadow: var(--shadow-hover);
+            border-color: var(--primary-sea);
+        }
+        
+        .service-detail--reverse .service-detail__image {
+            order: 2;
+        }
+        
+        .service-detail--reverse .service-detail__content {
+            order: 1;
+        }
+        
+        .service-detail__image {
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+        }
+        
+        .service-detail__image img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            transition: var(--transition-normal);
+        }
+        
+        .service-detail__image:hover img {
+            transform: scale(1.03);
+        }
+        
+        .service-detail__content h2 {
+            color: var(--primary-sea);
+            margin-bottom: 15px;
+            font-size: 1.8rem;
+        }
+        
+        .service-detail__content h2 i {
+            margin-right: 12px;
+            color: var(--primary-sea);
+        }
+        
+        .service-detail__content p {
+            color: var(--gray);
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+        
+        .service-detail__content h3 {
+            font-size: 1.1rem;
+            margin-top: 20px;
+            margin-bottom: 12px;
+            color: var(--secondary);
+        }
+        
+        .service-detail__features {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+        
+        .service-detail__features li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--light-gray);
+        }
+        
+        .service-detail__features li:last-child {
+            border-bottom: none;
+        }
+        
+        .service-detail__features i {
+            color: var(--primary-sea);
+            font-size: 1.1rem;
+            margin-top: 3px;
+            flex-shrink: 0;
+        }
+        
+        .service-detail__features li strong {
+            color: var(--secondary);
+        }
+        
+        .service-detail__features li span {
+            color: var(--gray);
+            font-size: 0.95rem;
+        }
+        
+        .service-badge {
+            display: inline-block;
+            padding: 6px 16px;
+            background: var(--primary-gradient);
+            color: var(--white);
+            border-radius: var(--radius-full);
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 15px;
+        }
+        
+        .service-actions {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        
+        .service-actions .btn {
+            flex: 1;
+            min-width: 140px;
+        }
+        
+        .addons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+        
+        .addon-card {
+            background: var(--white);
+            padding: 30px 20px;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            text-align: center;
+            transition: var(--transition-normal);
+            border: 1px solid var(--light-gray);
+        }
+        
+        .addon-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--primary-sea);
+        }
+        
+        .addon-card__icon {
+            font-size: 2.5rem;
+            color: var(--primary-sea);
+            margin-bottom: 15px;
+            display: inline-block;
+        }
+        
+        .addon-card h4 {
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+        }
+        
+        .addon-card p {
+            font-size: 0.9rem;
+            margin-bottom: 0;
+        }
+        
+        /* ========================================
+           RESPONSIVE
+           ======================================== */
+        @media (max-width: 1024px) {
+            .service-detail {
+                grid-template-columns: 1fr;
+                gap: 30px;
+                padding: 30px;
+            }
+            
+            .service-detail--reverse .service-detail__image {
+                order: 1;
+            }
+            
+            .service-detail--reverse .service-detail__content {
+                order: 2;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .services-hero {
+                min-height: 40vh;
+                padding: 100px 20px 60px;
+            }
+            .services-hero__title {
+                font-size: 2.2rem;
+            }
+            .service-detail {
+                padding: 25px 20px;
+                margin-bottom: 40px;
+            }
+            
+            .service-detail__image img {
+                height: 220px;
+            }
+            
+            .service-detail__content h2 {
+                font-size: 1.5rem;
+            }
+            
+            .service-actions {
+                flex-direction: column;
+            }
+            
+            .service-actions .btn {
+                width: 100%;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .services-hero__title {
+                font-size: 1.8rem;
+            }
+            .services-hero__subtitle {
+                font-size: 1rem;
+            }
+            .service-detail {
+                padding: 18px 14px;
+                margin-bottom: 30px;
+            }
+            
+            .service-detail__image img {
+                height: 180px;
+            }
+            
+            .service-detail__content h2 {
+                font-size: 1.3rem;
+            }
+            
+            .service-detail__content h3 {
+                font-size: 1rem;
+            }
+        }
+    </style>
 </head>
 <body>
     <a href="#main" class="skip-link">Skip to main content</a>
 
+    <!-- ===== HEADER ===== -->
     <header class="header" id="header" role="banner">
         <div class="container">
             <div class="header__inner">
@@ -50,14 +423,46 @@
         </div>
     </header>
 
+    <!-- ===== MAIN CONTENT ===== -->
     <main id="main">
-        <section class="page-hero">
-            <div class="container">
-                <h1>Our Cleaning Services</h1>
-                <p>Tailored solutions for every cleaning need</p>
+        <!-- ===== SERVICES HERO WITH VIDEO ===== -->
+        <section class="services-hero" id="servicesHero">
+            <!-- Background Video - Various cleaning services -->
+            <video 
+                class="services-hero__video" 
+                autoplay 
+                muted 
+                loop 
+                playsinline 
+                preload="metadata"
+                poster="images/2.jpg"
+                id="servicesHeroVideo"
+                aria-hidden="true">
+                <!-- Primary: Various cleaning services -->
+                <source src="https://videos.pexels.com/video-files/8373935/8373935-uhd_2560_1440_25fps.mp4" type="video/mp4">
+                <!-- Fallback 1 -->
+                <source src="https://videos.pexels.com/video-files/3255071/3255071-uhd_2560_1440_30fps.mp4" type="video/mp4">
+                <!-- Fallback 2 -->
+                <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4">
+            </video>
+            
+            <!-- Dark Overlay -->
+            <div class="services-hero__overlay"></div>
+            
+            <!-- Floating Particles -->
+            <div class="hero-particles">
+                <span></span><span></span><span></span><span></span><span></span>
+                <span></span><span></span><span></span><span></span><span></span>
+            </div>
+            
+            <!-- Hero Content -->
+            <div class="services-hero__content">
+                <h1 class="services-hero__title">Our <span>Services</span></h1>
+                <p class="services-hero__subtitle">Tailored solutions for every cleaning need</p>
             </div>
         </section>
 
+        <!-- ===== SERVICES SECTION ===== -->
         <section class="section">
             <div class="container">
                 <div class="section-title">
@@ -65,118 +470,209 @@
                     <p class="section-subtitle">Professional cleaning services designed to meet your specific needs</p>
                 </div>
 
+                <!-- ===== SERVICE 1: Residential ===== -->
                 <div class="service-detail" id="residential">
                     <div class="service-detail__image reveal">
-                        <img src="images/6.jpg" alt="Residential cleaning service" loading="lazy">
+                        <img src="images/6.jpeg" alt="Residential cleaning service" loading="lazy">
                     </div>
                     <div class="service-detail__content reveal" data-delay="200">
-                        <h2>Residential Cleaning</h2>
+                        <span class="service-badge"> Most Popular</span>
+                        <h2><i class="fas fa-home"></i> Residential Cleaning</h2>
                         <p>Our residential cleaning services are designed to give you back your time while ensuring your home is spotless, fresh, and healthy.</p>
                         <h3>What's Included:</h3>
                         <ul class="service-detail__features">
-                            <li><i class="fas fa-check"></i> Dusting of all surfaces, furniture, and decor</li>
-                            <li><i class="fas fa-check"></i> Vacuuming and mopping all floors</li>
-                            <li><i class="fas fa-check"></i> Kitchen cleaning (appliances, countertops, sinks)</li>
-                            <li><i class="fas fa-check"></i> Bathroom sanitization (toilets, showers, sinks, mirrors)</li>
+                            <li><i class="fas fa-check"></i> <div><strong>Dusting</strong> <span>All surfaces, furniture, and decor</span></div></li>
+                            <li><i class="fas fa-check"></i> <div><strong>Floor Care</strong> <span>Vacuuming and mopping all floors</span></div></li>
+                            <li><i class="fas fa-check"></i> <div><strong>Kitchen</strong> <span>Appliances, countertops, sinks</span></div></li>
+                            <li><i class="fas fa-check"></i> <div><strong>Bathroom</strong> <span>Toilets, showers, sinks, mirrors</span></div></li>
+                            <li><i class="fas fa-check"></i> <div><strong>Bed Making</strong> <span>Fresh linens and tidy bedrooms</span></div></li>
+                            <li><i class="fas fa-check"></i> <div><strong>Trash Removal</strong> <span>All waste properly disposed</span></div></li>
                         </ul>
-                        <div class="pricing-info">
-                            <h3>Get a Quote</h3>
-                            <p>Contact us for a free, no-obligation quote tailored to your home</p>
-                            <a href="contact.html" class="btn">Get a Custom Quote</a>
+                        <div class="service-actions">
+                            <a href="contact.html#booking" class="btn">Book Now</a>
+                            <a href="contact.html" class="btn btn--outline">Get Quote</a>
                         </div>
                     </div>
                 </div>
 
+                <!-- ===== SERVICE 2: Commercial ===== -->
                 <div class="service-detail service-detail--reverse" id="commercial">
                     <div class="service-detail__image reveal">
                         <img src="images/7.jpg" alt="Commercial cleaning service" loading="lazy">
                     </div>
                     <div class="service-detail__content reveal" data-delay="200">
-                        <h2>Commercial Cleaning</h2>
+                        <span class="service-badge"> Business</span>
+                        <h2><i class="fas fa-building"></i> Commercial Cleaning</h2>
                         <p>Create a healthier, more productive work environment with our professional commercial cleaning services.</p>
                         <h3>What's Included:</h3>
                         <ul class="service-detail__features">
-                            <li><i class="fas fa-check"></i> Daily, weekly, or monthly cleaning schedules</li>
-                            <li><i class="fas fa-check"></i> Office and workspace cleaning</li>
-                            <li><i class="fas fa-check"></i> Restroom sanitization and restocking</li>
-                            <li><i class="fas fa-check"></i> Floor care (vacuuming, mopping, buffing)</li>
+                            <li><i class="fas fa-check"></i> <div><strong>Daily/Weekly/Monthly</strong> <span>Flexible scheduling options</span></div></li>
+                            <li><i class="fas fa-check"></i> <div><strong>Office Workspace</strong> <span>Desks, computers, common areas</span></div></li>
+                            <li><i class="fas fa-check"></i> <div><strong>Restrooms</strong> <span>Sanitization and restocking</span></div></li>
+                            <li><i class="fas fa-check"></i> <div><strong>Floor Care</strong> <span>Vacuuming, mopping, buffing</span></div></li>
+                            <li><i class="fas fa-check"></i> <div><strong>Break Rooms</strong> <span>Kitchen and eating areas</span></div></li>
+                            <li><i class="fas fa-check"></i> <div><strong>Waste Management</strong> <span>Recycling and trash removal</span></div></li>
                         </ul>
-                        <div class="pricing-info">
-                            <h3>Get a Quote</h3>
-                            <p>Custom pricing based on square footage, frequency, and specific needs</p>
-                            <a href="contact.html" class="btn">Request a Business Quote</a>
+                        <div class="service-actions">
+                            <a href="contact.html#booking" class="btn">Book Now</a>
+                            <a href="contact.html" class="btn btn--outline">Get Quote</a>
                         </div>
                     </div>
                 </div>
 
+                <!-- ===== SERVICE 3: Deep Cleaning ===== -->
                 <div class="service-detail" id="deep">
                     <div class="service-detail__image reveal">
                         <img src="images/3.jpg" alt="Deep cleaning service" loading="lazy">
                     </div>
                     <div class="service-detail__content reveal" data-delay="200">
-                        <h2>Deep Cleaning</h2>
+                        <span class="service-badge"> Thorough</span>
+                        <h2><i class="fas fa-broom"></i> Deep Cleaning</h2>
                         <p>Our deep cleaning service goes beyond regular cleaning to tackle built-up dirt, grime, and hard-to-reach areas.</p>
                         <h3>What's Included:</h3>
                         <ul class="service-detail__features">
-                            <li><i class="fas fa-check"></i> Detailed cleaning of all standard areas</li>
-                            <li><i class="fas fa-check"></i> Inside appliance cleaning (oven, fridge, microwave)</li>
-                            <li><i class="fas fa-check"></i> Cabinet and drawer fronts</li>
-                            <li><i class="fas fa-check"></i> Grout and tile scrubbing</li>
+                            <li><i class="fas fa-check"></i> <div><strong>All Standard Areas</strong> <span>Everything in residential cleaning</span></div></li>
+                            <li><i class="fas fa-check"></i> <div><strong>Inside Appliances</strong> <span>Oven, fridge, microwave</span></div></li>
+                            <li><i class="fas fa-check"></i> <div><strong>Cabinet Fronts</strong> <span>Inside and outside</span></div></li>
+                            <li><i class="fas fa-check"></i> <div><strong>Grout & Tile</strong> <span>Deep scrubbing</span></div></li>
+                            <li><i class="fas fa-check"></i> <div><strong>Baseboards</strong> <span>Thorough dusting</span></div></li>
+                            <li><i class="fas fa-check"></i> <div><strong>Window Tracks</strong> <span>Detailed cleaning</span></div></li>
                         </ul>
-                        <div class="pricing-info">
-                            <h3>Get a Quote</h3>
-                            <p>Contact us for a quote based on your home size and condition</p>
-                            <a href="contact.html" class="btn">Schedule a Deep Clean</a>
+                        <div class="service-actions">
+                            <a href="contact.html#booking" class="btn">Book Now</a>
+                            <a href="contact.html" class="btn btn--outline">Get Quote</a>
                         </div>
                     </div>
                 </div>
 
+                <!-- ===== SERVICE 4: Sofa Cleaning ===== -->
                 <div class="service-detail service-detail--reverse" id="sofa">
                     <div class="service-detail__image reveal">
-                        <img src="images/5.jpg" alt="Sofa cleaning service" loading="lazy">
+                        <img src="images/sofa.jpeg" alt="Sofa cleaning service" loading="lazy">
                     </div>
                     <div class="service-detail__content reveal" data-delay="200">
-                        <h2>Sofa Cleaning</h2>
+                        <span class="service-badge"> Furniture Care</span>
+                        <h2><i class="fas fa-couch"></i> Sofa & Upholstery Cleaning</h2>
                         <p>Bring your furniture back to life with our professional sofa cleaning service. We use specialized equipment and eco-friendly products.</p>
                         <h3>What's Included:</h3>
                         <ul class="service-detail__features">
-                            <li><i class="fas fa-check"></i> Deep steam cleaning of all upholstery</li>
-                            <li><i class="fas fa-check"></i> Stain removal and treatment</li>
-                            <li><i class="fas fa-check"></i> Deodorizing and allergen removal</li>
-                            <li><i class="fas fa-check"></i> Fabric protection application (optional)</li>
+                            <li><i class="fas fa-check"></i> <div><strong>Deep Steam Cleaning</strong> <span>All upholstery</span></div></li>
+                            <li><i class="fas fa-check"></i> <div><strong>Stain Removal</strong> <span>Specialized treatment</span></div></li>
+                            <li><i class="fas fa-check"></i> <div><strong>Deodorizing</strong> <span>Fresh, clean scent</span></div></li>
+                            <li><i class="fas fa-check"></i> <div><strong>Allergen Removal</strong> <span>Safe for allergy sufferers</span></div></li>
+                            <li><i class="fas fa-check"></i> <div><strong>Fabric Protection</strong> <span>Optional treatment available</span></div></li>
+                            <li><i class="fas fa-check"></i> <div><strong>Quick Drying</strong> <span>Minimal downtime</span></div></li>
                         </ul>
-                        <div class="pricing-info">
-                            <h3>Get a Quote</h3>
-                            <p>Contact us for a free quote based on your furniture size and condition</p>
-                            <a href="contact.html" class="btn">Book Sofa Cleaning</a>
+                        <div class="service-actions">
+                            <a href="contact.html#booking" class="btn">Book Now</a>
+                            <a href="contact.html" class="btn btn--outline">Get Quote</a>
                         </div>
                     </div>
                 </div>
 
-                <div class="service-detail" id="special">
+                <!-- ===== SERVICE 5: Move In/Out ===== -->
+                <div class="service-detail" id="move">
                     <div class="service-detail__image reveal">
-                        <img src="images/2.jpg" alt="Specialty cleaning service" loading="lazy">
+                        <img src="images/8.jpeg" alt="Move in/out cleaning service" loading="lazy">
                     </div>
                     <div class="service-detail__content reveal" data-delay="200">
-                        <h2>Specialty Cleaning</h2>
+                        <span class="service-badge"> Moving</span>
+                        <h2><i class="fas fa-truck-moving"></i> Move In / Move Out Cleaning</h2>
+                        <p>Make your move stress-free with our comprehensive move-in and move-out cleaning services. We'll ensure your new home is spotless or your old place is ready for the next occupants.</p>
+                        <h3>What's Included:</h3>
+                        <ul class="service-detail__features">
+                            <li><i class="fas fa-check"></i> <div><strong>Full Home Deep Clean</strong> <span>Every room thoroughly cleaned</span></div></li>
+                            <li><i class="fas fa-check"></i> <div><strong>Inside Appliances</strong> <span>Oven, fridge, dishwasher</span></div></li>
+                            <li><i class="fas fa-check"></i> <div><strong>Inside Cabinets</strong> <span>Kitchen and bathroom</span></div></li>
+                            <li><i class="fas fa-check"></i> <div><strong>Window Cleaning</strong> <span>Inside and out</span></div></li>
+                            <li><i class="fas fa-check"></i> <div><strong>Floor Care</strong> <span>Vacuuming, mopping, polishing</span></div></li>
+                            <li><i class="fas fa-check"></i> <div><strong>Final Inspection</strong> <span>Quality check guaranteed</span></div></li>
+                        </ul>
+                        <div class="service-actions">
+                            <a href="contact.html#booking" class="btn">Book Now</a>
+                            <a href="contact.html" class="btn btn--outline">Get Quote</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== SERVICE 6: Carpet Cleaning ===== -->
+                <div class="service-detail service-detail--reverse" id="carpet">
+                    <div class="service-detail__image reveal">
+                        <img src="images/carpet.jpg" alt="Carpet cleaning service" loading="lazy">
+                    </div>
+                    <div class="service-detail__content reveal" data-delay="200">
+                        <span class="service-badge"> Deep Clean</span>
+                        <h2><i class="fas fa-carpet"></i> Carpet Cleaning</h2>
+                        <p>Professional carpet cleaning using advanced steam cleaning technology and eco-friendly products. Remove deep-seated dirt, stains, and allergens.</p>
+                        <h3>What's Included:</h3>
+                        <ul class="service-detail__features">
+                            <li><i class="fas fa-check"></i> <div><strong>Steam Cleaning</strong> <span>Deep penetration</span></div></li>
+                            <li><i class="fas fa-check"></i> <div><strong>Stain Treatment</strong> <span>Specialized removal</span></div></li>
+                            <li><i class="fas fa-check"></i> <div><strong>Deodorizing</strong> <span>Fresh, clean smell</span></div></li>
+                            <li><i class="fas fa-check"></i> <div><strong>Allergen Removal</strong> <span>Healthier environment</span></div></li>
+                            <li><i class="fas fa-check"></i> <div><strong>Quick Drying</strong> <span>Minimal disruption</span></div></li>
+                            <li><i class="fas fa-check"></i> <div><strong>Furniture Moving</strong> <span>We move it, we clean it</span></div></li>
+                        </ul>
+                        <div class="service-actions">
+                            <a href="contact.html#booking" class="btn">Book Now</a>
+                            <a href="contact.html" class="btn btn--outline">Get Quote</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== SERVICE 7: Window Cleaning ===== -->
+                <div class="service-detail" id="window">
+                    <div class="service-detail__image reveal">
+                        <img src="images/4.jpg" alt="Window cleaning service" loading="lazy">
+                    </div>
+                    <div class="service-detail__content reveal" data-delay="200">
+                        <span class="service-badge"> Crystal Clear</span>
+                        <h2><i class="fas fa-window-maximize"></i> Window Cleaning</h2>
+                        <p>Professional window cleaning that leaves your windows streak-free and sparkling. Inside and outside cleaning available.</p>
+                        <h3>What's Included:</h3>
+                        <ul class="service-detail__features">
+                            <li><i class="fas fa-check"></i> <div><strong>Inside Window Washing</strong> <span>Streak-free finish</span></div></li>
+                            <li><i class="fas fa-check"></i> <div><strong>Outside Window Washing</strong> <span>Available on request</span></div></li>
+                            <li><i class="fas fa-check"></i> <div><strong>Window Sills & Frames</strong> <span>Detailed cleaning</span></div></li>
+                            <li><i class="fas fa-check"></i> <div><strong>Screen Cleaning</strong> <span>Removal and washing</span></div></li>
+                            <li><i class="fas fa-check"></i> <div><strong>Glass Doors</strong> <span>Patio and sliding doors</span></div></li>
+                            <li><i class="fas fa-check"></i> <div><strong>Mirror Cleaning</strong> <span>Spotless reflection</span></div></li>
+                        </ul>
+                        <div class="service-actions">
+                            <a href="contact.html#booking" class="btn">Book Now</a>
+                            <a href="contact.html" class="btn btn--outline">Get Quote</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== SERVICE 8: Specialty ===== -->
+                <div class="service-detail service-detail--reverse" id="special">
+                    <div class="service-detail__image reveal">
+                        <img src="images/deepclean.jpg" alt="Specialty cleaning service" loading="lazy">
+                    </div>
+                    <div class="service-detail__content reveal" data-delay="200">
+                        <span class="service-badge"> Extra Services</span>
+                        <h2><i class="fas fa-star"></i> Specialty Cleaning</h2>
                         <p>We offer specialized cleaning services for unique needs, including post-construction cleaning, event cleanup, and more.</p>
                         <h3>Specialty Services:</h3>
                         <ul class="service-detail__features">
-                            <li><i class="fas fa-check"></i> Post-construction cleanup</li>
-                            <li><i class="fas fa-check"></i> Carpet cleaning</li>
-                            <li><i class="fas fa-check"></i> Window washing</li>
-                            <li><i class="fas fa-check"></i> Pressure washing (exterior)</li>
+                            <li><i class="fas fa-check"></i> <div><strong>Post-Construction</strong> <span>Dust and debris removal</span></div></li>
+                            <li><i class="fas fa-check"></i> <div><strong>Event Cleanup</strong> <span>After-party cleaning</span></div></li>
+                            <li><i class="fas fa-check"></i> <div><strong>Mattress Cleaning</strong> <span>Deep sanitization</span></div></li>
+                            <li><i class="fas fa-check"></i> <div><strong>Pressure Washing</strong> <span>Exterior surfaces</span></div></li>
+                            <li><i class="fas fa-check"></i> <div><strong>Odor Removal</strong> <span>Pet and smoke odors</span></div></li>
+                            <li><i class="fas fa-check"></i> <div><strong>Emergency Cleaning</strong> <span>24/7 availability</span></div></li>
                         </ul>
-                        <div class="pricing-info">
-                            <h3>Get a Quote</h3>
-                            <p>Contact us for details and a customized quote</p>
-                            <a href="contact.html" class="btn">Inquire About Specialty Services</a>
+                        <div class="service-actions">
+                            <a href="contact.html#booking" class="btn">Book Now</a>
+                            <a href="contact.html" class="btn btn--outline">Get Quote</a>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
+        <!-- ===== SERVICE ADD-ONS ===== -->
         <section class="section section--light">
             <div class="container">
                 <div class="section-title">
@@ -208,6 +704,7 @@
             </div>
         </section>
 
+        <!-- ===== CTA SECTION ===== -->
         <section class="cta">
             <div class="container">
                 <h2>Ready to Experience a <span style="color: var(--accent-light);">Cleaner</span> Space?</h2>
@@ -220,6 +717,7 @@
         </section>
     </main>
 
+    <!-- ===== FOOTER ===== -->
     <footer class="footer" role="contentinfo">
         <div class="container">
             <div class="footer__grid">
@@ -248,6 +746,9 @@
                     <a href="services.html#commercial">Commercial Cleaning</a>
                     <a href="services.html#deep">Deep Cleaning</a>
                     <a href="services.html#sofa">Sofa Cleaning</a>
+                    <a href="services.html#move">Move In/Out</a>
+                    <a href="services.html#carpet">Carpet Cleaning</a>
+                    <a href="services.html#window">Window Cleaning</a>
                     <a href="services.html#special">Specialty Cleaning</a>
                 </div>
                 <div class="footer__column">
@@ -261,6 +762,20 @@
         </div>
     </footer>
 
+    <!-- ===== FLOATING BUTTONS ===== -->
+    <div class="floating-buttons">
+        <a href="https://wa.me/233542977602" target="_blank" class="floating-btn floating-btn--whatsapp" aria-label="Chat on WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+        <a href="contact.html#booking" class="floating-btn floating-btn--book" aria-label="Book Now">
+            <i class="fas fa-calendar-plus"></i>
+        </a>
+        <button class="floating-btn floating-btn--top" id="backToTop" aria-label="Back to top">
+            <i class="fas fa-arrow-up"></i>
+        </button>
+    </div>
+
+    <!-- ===== CHAT BOT ===== -->
     <div class="chat-bot" role="complementary" aria-label="Chat assistant">
         <button class="chat-bot__toggle" id="chatToggle" aria-label="Open chat">
             <i class="fas fa-comment-dots"></i>
@@ -280,7 +795,7 @@
         </div>
     </div>
 
-    <!-- Lightbox -->
+    <!-- ===== LIGHTBOX ===== -->
     <div class="lightbox" id="lightbox" role="dialog" aria-label="Image viewer">
         <button class="lightbox__close" id="lightboxClose" aria-label="Close lightbox">&times;</button>
         <button class="lightbox__nav lightbox__nav--prev" id="lightboxPrev" aria-label="Previous image">&#10094;</button>
@@ -288,6 +803,32 @@
         <img class="lightbox__content" id="lightboxImg" alt="Gallery image" tabindex="0">
         <div class="lightbox__counter" id="lightboxCounter">1 / 1</div>
     </div>
+
+    <script>
+        // ========================================
+        // VIDEO FALLBACK
+        // ========================================
+        const servicesHeroVideo = document.getElementById('servicesHeroVideo');
+        const servicesHero = document.getElementById('servicesHero');
+        
+        if (servicesHeroVideo) {
+            servicesHeroVideo.addEventListener('error', function() {
+                console.log('Services video failed, using fallback image');
+                if (servicesHero) {
+                    servicesHero.classList.add('services-hero--fallback');
+                }
+            });
+            
+            setTimeout(function() {
+                if (servicesHeroVideo.readyState === 0) {
+                    console.log('Services video timed out, using fallback image');
+                    if (servicesHero) {
+                        servicesHero.classList.add('services-hero--fallback');
+                    }
+                }
+            }, 5000);
+        }
+    </script>
 
     <script src="script.js" defer></script>
 </body>

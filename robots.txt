@@ -1,0 +1,13 @@
+# ==============================================================================
+# BECKS CLEANING SERVICES - ROBOTS.TXT
+# ==============================================================================
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://beckscleaningservice.com/sitemap.xml
+
+# Disallow admin or private paths (if any)
+# Disallow: /admin/
+# Disallow: /private/

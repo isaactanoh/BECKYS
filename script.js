@@ -9,6 +9,7 @@
  * - Gallery lightbox
  * - Form submissions
  * - Scroll animations
+ * - Floating buttons
  * - Performance optimizations
  */
 
@@ -94,7 +95,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // ========================================
-    // CHAT BOT - FULLY FIXED
+    // CHAT BOT - FULLY FIXED & DRAGGABLE
     // ========================================
 
     const chatToggle = document.getElementById('chatToggle');
@@ -344,7 +345,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // ========================================
-    // DRAGGABLE CHAT BOT - WITH SMART POSITIONING
+    // DRAGGABLE CHAT BOT - FIXED
     // ========================================
 
     if (chatBot) {
@@ -635,6 +636,106 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // ========================================
+    // ANIMATED COUNTERS
+    // ========================================
+
+    function animateCounters() {
+        const counters = document.querySelectorAll('.hero__stat-number[data-count]');
+        
+        counters.forEach(function(counter) {
+            const target = parseFloat(counter.getAttribute('data-count'));
+            const isDecimal = target % 1 !== 0;
+            const duration = 2000;
+            const startTime = performance.now();
+            
+            function updateCounter(currentTime) {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                const eased = 1 - Math.pow(1 - progress, 3);
+                const current = eased * target;
+                
+                if (isDecimal) {
+                    counter.textContent = current.toFixed(1);
+                } else {
+                    counter.textContent = Math.floor(current);
+                }
+                
+                if (progress < 1) {
+                    requestAnimationFrame(updateCounter);
+                } else {
+                    if (isDecimal) {
+                        counter.textContent = target.toFixed(1);
+                    } else {
+                        counter.textContent = target;
+                    }
+                }
+            }
+            
+            // Use Intersection Observer to start animation when visible
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        requestAnimationFrame(updateCounter);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.3 });
+            
+            observer.observe(counter);
+        });
+    }
+
+    // ========================================
+    // BACK TO TOP BUTTON
+    // ========================================
+
+    const backToTopBtn = document.getElementById('backToTop');
+    
+    if (backToTopBtn) {
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 400) {
+                backToTopBtn.classList.add('floating-btn--top--visible');
+            } else {
+                backToTopBtn.classList.remove('floating-btn--top--visible');
+            }
+        }, { passive: true });
+        
+        backToTopBtn.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    }
+
+    // ========================================
+    // VIDEO FALLBACK
+    // ========================================
+
+    const heroVideo = document.getElementById('heroVideo');
+    const heroSection = document.getElementById('hero');
+    
+    if (heroVideo) {
+        // If video fails to load, show fallback
+        heroVideo.addEventListener('error', function() {
+            console.log('Video failed, using fallback image');
+            if (heroSection) {
+                heroSection.classList.add('hero--fallback');
+            }
+        });
+        
+        // Check if video is stuck loading
+        setTimeout(function() {
+            if (heroVideo.readyState === 0) {
+                console.log('Video timed out, using fallback image');
+                if (heroSection) {
+                    heroSection.classList.add('hero--fallback');
+                }
+            }
+        }, 5000);
+    }
+
+    // ========================================
     // FORMS
     // ========================================
 
@@ -793,10 +894,21 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
+    // ========================================
+    // INIT ANIMATED COUNTERS
+    // ========================================
+
+    animateCounters();
+
+    // ========================================
+    // CONSOLE LOG
+    // ========================================
+
     if (window.console && window.location.hostname === 'localhost') {
         console.log('🚀 Becks Cleaning Service - Website Loaded Successfully');
         console.log('🤖 Chatbot: Fixed and draggable');
         console.log('🖼️ Gallery: Lightbox with swipe support');
+        console.log('📱 Fully responsive on all devices');
     }
 
 });

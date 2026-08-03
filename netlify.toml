@@ -1,0 +1,108 @@
+# ==============================================================================
+# BECKS CLEANING SERVICES - NETLIFY CONFIGURATION
+# ==============================================================================
+
+[build]
+  publish = "."
+
+# Form Processing Configuration
+[build.processing]
+  skip_processing = false
+
+[build.processing.html]
+  pretty_urls = true
+
+[build.processing.css]
+  bundle = true
+  minify = true
+
+[build.processing.js]
+  bundle = true
+  minify = true
+
+[build.processing.images]
+  compress = true
+
+# ==============================================================================
+# HTTP HEADERS & SECURITY POLICIES
+# ==============================================================================
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+
+# ==============================================================================
+# ASSET CACHING RULES FOR PERFORMANCE
+# ==============================================================================
+
+[[headers]]
+  for = "/*.mp4"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.jpg"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000"
+
+[[headers]]
+  for = "/*.jpeg"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000"
+
+[[headers]]
+  for = "/*.png"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000"
+
+[[headers]]
+  for = "/*.svg"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000"
+
+[[headers]]
+  for = "/*.webp"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000"
+
+[[headers]]
+  for = "/*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=604800, must-revalidate"
+
+[[headers]]
+  for = "/*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=604800, must-revalidate"
+
+[[headers]]
+  for = "/*.woff2"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.ttf"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# ==============================================================================
+# REDIRECTS (if needed)
+# ==============================================================================
+
+# Redirect www to non-www
+# [[redirects]]
+#   from = "https://www.beckscleaningservice.com/*"
+#   to = "https://beckscleaningservice.com/:splat"
+#   status = 301
+#   force = true
+
+# Redirect old pages if any
+# [[redirects]]
+#   from = "/old-page"
+#   to = "/new-page"
+#   status = 301
