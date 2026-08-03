@@ -21,7 +21,6 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" href="images/favicon.ico" type="image/x-icon">
     
-    <!-- ===== STRUCTURED DATA ===== -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -40,10 +39,6 @@
     </script>
 
     <style>
-        /* ========================================
-           SERVICES PAGE ENHANCEMENTS
-           ======================================== */
-        
         .services-hero {
             min-height: 50vh;
             display: flex;
@@ -55,7 +50,6 @@
             overflow: hidden;
             color: var(--white);
         }
-        
         .services-hero__video {
             position: absolute;
             top: 50%;
@@ -68,7 +62,6 @@
             object-fit: cover;
             z-index: 0;
         }
-        
         .services-hero__overlay {
             position: absolute;
             top: 0;
@@ -78,24 +71,18 @@
             background: rgba(4, 42, 74, 0.65);
             z-index: 1;
         }
-        
         .services-hero--fallback {
             background: linear-gradient(135deg, rgba(4, 73, 158, 0.85) 0%, rgba(0, 180, 216, 0.75) 100%), url('images/2.jpg');
             background-size: cover;
             background-position: center;
         }
-        
-        .services-hero--fallback .services-hero__video {
-            display: none;
-        }
-        
+        .services-hero--fallback .services-hero__video { display: none; }
         .services-hero__content {
             position: relative;
             z-index: 2;
             max-width: 800px;
             animation: fadeInUp 1s ease;
         }
-        
         .services-hero__title {
             font-size: clamp(2.8rem, 5vw, 4rem);
             font-weight: 700;
@@ -103,11 +90,7 @@
             margin-bottom: 20px;
             text-shadow: 0 2px 30px rgba(0, 0, 0, 0.2);
         }
-        
-        .services-hero__title span {
-            color: var(--accent-light);
-        }
-        
+        .services-hero__title span { color: var(--accent-light); }
         .services-hero__subtitle {
             font-size: clamp(1.1rem, 1.5vw, 1.3rem);
             color: rgba(255, 255, 255, 0.92);
@@ -115,7 +98,6 @@
             margin: 0 auto;
             text-shadow: 0 1px 15px rgba(0, 0, 0, 0.15);
         }
-        
         .services-hero .hero-particles {
             position: absolute;
             top: 0;
@@ -125,7 +107,6 @@
             overflow: hidden;
             z-index: 0;
         }
-        
         .services-hero .hero-particles span {
             position: absolute;
             display: block;
@@ -136,7 +117,6 @@
             animation: floatParticles 15s linear infinite;
             bottom: -150px;
         }
-        
         .services-hero .hero-particles span:nth-child(1) { left: 10%; width: 25px; height: 25px; animation-delay: 0s; animation-duration: 18s; }
         .services-hero .hero-particles span:nth-child(2) { left: 20%; width: 15px; height: 15px; animation-delay: 2s; animation-duration: 22s; background: rgba(255, 215, 0, 0.08); }
         .services-hero .hero-particles span:nth-child(3) { left: 30%; width: 35px; height: 35px; animation-delay: 4s; animation-duration: 20s; }
@@ -147,12 +127,10 @@
         .services-hero .hero-particles span:nth-child(8) { left: 80%; width: 16px; height: 16px; animation-delay: 4s; animation-duration: 21s; background: rgba(255, 215, 0, 0.05); }
         .services-hero .hero-particles span:nth-child(9) { left: 90%; width: 22px; height: 22px; animation-delay: 1s; animation-duration: 23s; }
         .services-hero .hero-particles span:nth-child(10) { left: 95%; width: 10px; height: 10px; animation-delay: 3s; animation-duration: 20s; background: rgba(255, 215, 0, 0.08); }
-        
         @keyframes floatParticles {
             0% { transform: translateY(0) rotate(0deg) scale(1); opacity: 1; }
             100% { transform: translateY(-110vh) rotate(720deg) scale(0); opacity: 0; }
         }
-        
         .service-detail {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -166,66 +144,48 @@
             border: 1px solid var(--light-gray);
             transition: var(--transition-normal);
         }
-        
         .service-detail:hover {
             box-shadow: var(--shadow-hover);
             border-color: var(--primary-sea);
         }
-        
-        .service-detail--reverse .service-detail__image {
-            order: 2;
-        }
-        
-        .service-detail--reverse .service-detail__content {
-            order: 1;
-        }
-        
+        .service-detail--reverse .service-detail__image { order: 2; }
+        .service-detail--reverse .service-detail__content { order: 1; }
         .service-detail__image {
             border-radius: var(--radius-md);
             overflow: hidden;
             box-shadow: var(--shadow-md);
         }
-        
         .service-detail__image img {
             width: 100%;
             height: 300px;
             object-fit: cover;
             transition: var(--transition-normal);
         }
-        
-        .service-detail__image:hover img {
-            transform: scale(1.03);
-        }
-        
+        .service-detail__image:hover img { transform: scale(1.03); }
         .service-detail__content h2 {
             color: var(--primary-sea);
             margin-bottom: 15px;
             font-size: 1.8rem;
         }
-        
         .service-detail__content h2 i {
             margin-right: 12px;
             color: var(--primary-sea);
         }
-        
         .service-detail__content p {
             color: var(--gray);
             margin-bottom: 20px;
             line-height: 1.8;
         }
-        
         .service-detail__content h3 {
             font-size: 1.1rem;
             margin-top: 20px;
             margin-bottom: 12px;
             color: var(--secondary);
         }
-        
         .service-detail__features {
             list-style: none;
             margin-bottom: 25px;
         }
-        
         .service-detail__features li {
             display: flex;
             align-items: flex-start;
@@ -233,27 +193,18 @@
             padding: 8px 0;
             border-bottom: 1px solid var(--light-gray);
         }
-        
-        .service-detail__features li:last-child {
-            border-bottom: none;
-        }
-        
+        .service-detail__features li:last-child { border-bottom: none; }
         .service-detail__features i {
             color: var(--primary-sea);
             font-size: 1.1rem;
             margin-top: 3px;
             flex-shrink: 0;
         }
-        
-        .service-detail__features li strong {
-            color: var(--secondary);
-        }
-        
+        .service-detail__features li strong { color: var(--secondary); }
         .service-detail__features li span {
             color: var(--gray);
             font-size: 0.95rem;
         }
-        
         .service-badge {
             display: inline-block;
             padding: 6px 16px;
@@ -266,25 +217,21 @@
             letter-spacing: 0.5px;
             margin-bottom: 15px;
         }
-        
         .service-actions {
             display: flex;
             gap: 15px;
             flex-wrap: wrap;
             margin-top: 20px;
         }
-        
         .service-actions .btn {
             flex: 1;
             min-width: 140px;
         }
-        
         .addons-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 20px;
         }
-        
         .addon-card {
             background: var(--white);
             padding: 30px 20px;
@@ -294,109 +241,52 @@
             transition: var(--transition-normal);
             border: 1px solid var(--light-gray);
         }
-        
         .addon-card:hover {
             transform: translateY(-5px);
             box-shadow: var(--shadow-md);
             border-color: var(--primary-sea);
         }
-        
         .addon-card__icon {
             font-size: 2.5rem;
             color: var(--primary-sea);
             margin-bottom: 15px;
             display: inline-block;
         }
-        
         .addon-card h4 {
             font-size: 1.1rem;
             margin-bottom: 8px;
         }
-        
         .addon-card p {
             font-size: 0.9rem;
             margin-bottom: 0;
         }
-        
-        /* ========================================
-           RESPONSIVE
-           ======================================== */
         @media (max-width: 1024px) {
-            .service-detail {
-                grid-template-columns: 1fr;
-                gap: 30px;
-                padding: 30px;
-            }
-            
-            .service-detail--reverse .service-detail__image {
-                order: 1;
-            }
-            
-            .service-detail--reverse .service-detail__content {
-                order: 2;
-            }
+            .service-detail { grid-template-columns: 1fr; gap: 30px; padding: 30px; }
+            .service-detail--reverse .service-detail__image { order: 1; }
+            .service-detail--reverse .service-detail__content { order: 2; }
         }
-        
         @media (max-width: 768px) {
-            .services-hero {
-                min-height: 40vh;
-                padding: 100px 20px 60px;
-            }
-            .services-hero__title {
-                font-size: 2.2rem;
-            }
-            .service-detail {
-                padding: 25px 20px;
-                margin-bottom: 40px;
-            }
-            
-            .service-detail__image img {
-                height: 220px;
-            }
-            
-            .service-detail__content h2 {
-                font-size: 1.5rem;
-            }
-            
-            .service-actions {
-                flex-direction: column;
-            }
-            
-            .service-actions .btn {
-                width: 100%;
-            }
+            .services-hero { min-height: 40vh; padding: 100px 20px 60px; }
+            .services-hero__title { font-size: 2.2rem; }
+            .service-detail { padding: 25px 20px; margin-bottom: 40px; }
+            .service-detail__image img { height: 220px; }
+            .service-detail__content h2 { font-size: 1.5rem; }
+            .service-actions { flex-direction: column; }
+            .service-actions .btn { width: 100%; }
         }
-        
         @media (max-width: 480px) {
-            .services-hero__title {
-                font-size: 1.8rem;
-            }
-            .services-hero__subtitle {
-                font-size: 1rem;
-            }
-            .service-detail {
-                padding: 18px 14px;
-                margin-bottom: 30px;
-            }
-            
-            .service-detail__image img {
-                height: 180px;
-            }
-            
-            .service-detail__content h2 {
-                font-size: 1.3rem;
-            }
-            
-            .service-detail__content h3 {
-                font-size: 1rem;
-            }
+            .services-hero__title { font-size: 1.8rem; }
+            .services-hero__subtitle { font-size: 1rem; }
+            .service-detail { padding: 18px 14px; margin-bottom: 30px; }
+            .service-detail__image img { height: 180px; }
+            .service-detail__content h2 { font-size: 1.3rem; }
+            .service-detail__content h3 { font-size: 1rem; }
         }
     </style>
 </head>
 <body>
     <a href="#main" class="skip-link">Skip to main content</a>
 
-    <!-- ===== HEADER ===== -->
     <header class="header" id="header" role="banner">
         <div class="container">
             <div class="header__inner">
@@ -423,11 +313,9 @@
         </div>
     </header>
 
-    <!-- ===== MAIN CONTENT ===== -->
     <main id="main">
         <!-- ===== SERVICES HERO WITH VIDEO ===== -->
         <section class="services-hero" id="servicesHero">
-            <!-- Background Video - Various cleaning services -->
             <video 
                 class="services-hero__video" 
                 autoplay 
@@ -438,31 +326,21 @@
                 poster="images/2.jpg"
                 id="servicesHeroVideo"
                 aria-hidden="true">
-                <!-- Primary: Various cleaning services -->
+                <!-- Various cleaning services -->
                 <source src="https://videos.pexels.com/video-files/8373935/8373935-uhd_2560_1440_25fps.mp4" type="video/mp4">
-                <!-- Fallback 1 -->
-                <source src="https://videos.pexels.com/video-files/3255071/3255071-uhd_2560_1440_30fps.mp4" type="video/mp4">
-                <!-- Fallback 2 -->
                 <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4">
             </video>
-            
-            <!-- Dark Overlay -->
             <div class="services-hero__overlay"></div>
-            
-            <!-- Floating Particles -->
             <div class="hero-particles">
                 <span></span><span></span><span></span><span></span><span></span>
                 <span></span><span></span><span></span><span></span><span></span>
             </div>
-            
-            <!-- Hero Content -->
             <div class="services-hero__content">
                 <h1 class="services-hero__title">Our <span>Services</span></h1>
                 <p class="services-hero__subtitle">Tailored solutions for every cleaning need</p>
             </div>
         </section>
 
-        <!-- ===== SERVICES SECTION ===== -->
         <section class="section">
             <div class="container">
                 <div class="section-title">
@@ -470,13 +348,13 @@
                     <p class="section-subtitle">Professional cleaning services designed to meet your specific needs</p>
                 </div>
 
-                <!-- ===== SERVICE 1: Residential ===== -->
+                <!-- Residential -->
                 <div class="service-detail" id="residential">
                     <div class="service-detail__image reveal">
-                        <img src="images/6.jpeg" alt="Residential cleaning service" loading="lazy">
+                        <img src="images/6.jpg" alt="Residential cleaning service" loading="lazy">
                     </div>
                     <div class="service-detail__content reveal" data-delay="200">
-                        <span class="service-badge"> Most Popular</span>
+                        <span class="service-badge">⭐ Most Popular</span>
                         <h2><i class="fas fa-home"></i> Residential Cleaning</h2>
                         <p>Our residential cleaning services are designed to give you back your time while ensuring your home is spotless, fresh, and healthy.</p>
                         <h3>What's Included:</h3>
@@ -495,13 +373,13 @@
                     </div>
                 </div>
 
-                <!-- ===== SERVICE 2: Commercial ===== -->
+                <!-- Commercial -->
                 <div class="service-detail service-detail--reverse" id="commercial">
                     <div class="service-detail__image reveal">
                         <img src="images/7.jpg" alt="Commercial cleaning service" loading="lazy">
                     </div>
                     <div class="service-detail__content reveal" data-delay="200">
-                        <span class="service-badge"> Business</span>
+                        <span class="service-badge">🏢 Business</span>
                         <h2><i class="fas fa-building"></i> Commercial Cleaning</h2>
                         <p>Create a healthier, more productive work environment with our professional commercial cleaning services.</p>
                         <h3>What's Included:</h3>
@@ -520,13 +398,13 @@
                     </div>
                 </div>
 
-                <!-- ===== SERVICE 3: Deep Cleaning ===== -->
+                <!-- Deep Cleaning -->
                 <div class="service-detail" id="deep">
                     <div class="service-detail__image reveal">
                         <img src="images/3.jpg" alt="Deep cleaning service" loading="lazy">
                     </div>
                     <div class="service-detail__content reveal" data-delay="200">
-                        <span class="service-badge"> Thorough</span>
+                        <span class="service-badge">🔍 Thorough</span>
                         <h2><i class="fas fa-broom"></i> Deep Cleaning</h2>
                         <p>Our deep cleaning service goes beyond regular cleaning to tackle built-up dirt, grime, and hard-to-reach areas.</p>
                         <h3>What's Included:</h3>
@@ -545,13 +423,13 @@
                     </div>
                 </div>
 
-                <!-- ===== SERVICE 4: Sofa Cleaning ===== -->
+                <!-- Sofa Cleaning -->
                 <div class="service-detail service-detail--reverse" id="sofa">
                     <div class="service-detail__image reveal">
-                        <img src="images/sofa.jpeg" alt="Sofa cleaning service" loading="lazy">
+                        <img src="images/5.jpg" alt="Sofa cleaning service" loading="lazy">
                     </div>
                     <div class="service-detail__content reveal" data-delay="200">
-                        <span class="service-badge"> Furniture Care</span>
+                        <span class="service-badge">🛋️ Furniture Care</span>
                         <h2><i class="fas fa-couch"></i> Sofa & Upholstery Cleaning</h2>
                         <p>Bring your furniture back to life with our professional sofa cleaning service. We use specialized equipment and eco-friendly products.</p>
                         <h3>What's Included:</h3>
@@ -570,13 +448,13 @@
                     </div>
                 </div>
 
-                <!-- ===== SERVICE 5: Move In/Out ===== -->
+                <!-- Move In/Out -->
                 <div class="service-detail" id="move">
                     <div class="service-detail__image reveal">
-                        <img src="images/8.jpeg" alt="Move in/out cleaning service" loading="lazy">
+                        <img src="images/4.jpg" alt="Move in/out cleaning service" loading="lazy">
                     </div>
                     <div class="service-detail__content reveal" data-delay="200">
-                        <span class="service-badge"> Moving</span>
+                        <span class="service-badge">📦 Moving</span>
                         <h2><i class="fas fa-truck-moving"></i> Move In / Move Out Cleaning</h2>
                         <p>Make your move stress-free with our comprehensive move-in and move-out cleaning services. We'll ensure your new home is spotless or your old place is ready for the next occupants.</p>
                         <h3>What's Included:</h3>
@@ -595,13 +473,13 @@
                     </div>
                 </div>
 
-                <!-- ===== SERVICE 6: Carpet Cleaning ===== -->
+                <!-- Carpet Cleaning -->
                 <div class="service-detail service-detail--reverse" id="carpet">
                     <div class="service-detail__image reveal">
-                        <img src="images/carpet.jpg" alt="Carpet cleaning service" loading="lazy">
+                        <img src="images/9.jpeg" alt="Carpet cleaning service" loading="lazy">
                     </div>
                     <div class="service-detail__content reveal" data-delay="200">
-                        <span class="service-badge"> Deep Clean</span>
+                        <span class="service-badge">🧹 Deep Clean</span>
                         <h2><i class="fas fa-carpet"></i> Carpet Cleaning</h2>
                         <p>Professional carpet cleaning using advanced steam cleaning technology and eco-friendly products. Remove deep-seated dirt, stains, and allergens.</p>
                         <h3>What's Included:</h3>
@@ -620,13 +498,13 @@
                     </div>
                 </div>
 
-                <!-- ===== SERVICE 7: Window Cleaning ===== -->
+                <!-- Window Cleaning -->
                 <div class="service-detail" id="window">
                     <div class="service-detail__image reveal">
-                        <img src="images/4.jpg" alt="Window cleaning service" loading="lazy">
+                        <img src="images/8.jpeg" alt="Window cleaning service" loading="lazy">
                     </div>
                     <div class="service-detail__content reveal" data-delay="200">
-                        <span class="service-badge"> Crystal Clear</span>
+                        <span class="service-badge">🪟 Crystal Clear</span>
                         <h2><i class="fas fa-window-maximize"></i> Window Cleaning</h2>
                         <p>Professional window cleaning that leaves your windows streak-free and sparkling. Inside and outside cleaning available.</p>
                         <h3>What's Included:</h3>
@@ -645,13 +523,13 @@
                     </div>
                 </div>
 
-                <!-- ===== SERVICE 8: Specialty ===== -->
+                <!-- Specialty -->
                 <div class="service-detail service-detail--reverse" id="special">
                     <div class="service-detail__image reveal">
-                        <img src="images/deepclean.jpg" alt="Specialty cleaning service" loading="lazy">
+                        <img src="images/2.jpg" alt="Specialty cleaning service" loading="lazy">
                     </div>
                     <div class="service-detail__content reveal" data-delay="200">
-                        <span class="service-badge"> Extra Services</span>
+                        <span class="service-badge">⭐ Extra Services</span>
                         <h2><i class="fas fa-star"></i> Specialty Cleaning</h2>
                         <p>We offer specialized cleaning services for unique needs, including post-construction cleaning, event cleanup, and more.</p>
                         <h3>Specialty Services:</h3>
@@ -672,7 +550,6 @@
             </div>
         </section>
 
-        <!-- ===== SERVICE ADD-ONS ===== -->
         <section class="section section--light">
             <div class="container">
                 <div class="section-title">
@@ -704,7 +581,6 @@
             </div>
         </section>
 
-        <!-- ===== CTA SECTION ===== -->
         <section class="cta">
             <div class="container">
                 <h2>Ready to Experience a <span style="color: var(--accent-light);">Cleaner</span> Space?</h2>
@@ -717,7 +593,6 @@
         </section>
     </main>
 
-    <!-- ===== FOOTER ===== -->
     <footer class="footer" role="contentinfo">
         <div class="container">
             <div class="footer__grid">
@@ -762,7 +637,6 @@
         </div>
     </footer>
 
-    <!-- ===== FLOATING BUTTONS ===== -->
     <div class="floating-buttons">
         <a href="https://wa.me/233542977602" target="_blank" class="floating-btn floating-btn--whatsapp" aria-label="Chat on WhatsApp">
             <i class="fab fa-whatsapp"></i>
@@ -775,7 +649,6 @@
         </button>
     </div>
 
-    <!-- ===== CHAT BOT ===== -->
     <div class="chat-bot" role="complementary" aria-label="Chat assistant">
         <button class="chat-bot__toggle" id="chatToggle" aria-label="Open chat">
             <i class="fas fa-comment-dots"></i>
@@ -795,7 +668,7 @@
         </div>
     </div>
 
-    <!-- ===== LIGHTBOX ===== -->
+    <!-- Lightbox -->
     <div class="lightbox" id="lightbox" role="dialog" aria-label="Image viewer">
         <button class="lightbox__close" id="lightboxClose" aria-label="Close lightbox">&times;</button>
         <button class="lightbox__nav lightbox__nav--prev" id="lightboxPrev" aria-label="Previous image">&#10094;</button>
@@ -805,31 +678,19 @@
     </div>
 
     <script>
-        // ========================================
-        // VIDEO FALLBACK
-        // ========================================
         const servicesHeroVideo = document.getElementById('servicesHeroVideo');
         const servicesHero = document.getElementById('servicesHero');
-        
         if (servicesHeroVideo) {
             servicesHeroVideo.addEventListener('error', function() {
-                console.log('Services video failed, using fallback image');
-                if (servicesHero) {
-                    servicesHero.classList.add('services-hero--fallback');
-                }
+                if (servicesHero) { servicesHero.classList.add('services-hero--fallback'); }
             });
-            
             setTimeout(function() {
                 if (servicesHeroVideo.readyState === 0) {
-                    console.log('Services video timed out, using fallback image');
-                    if (servicesHero) {
-                        servicesHero.classList.add('services-hero--fallback');
-                    }
+                    if (servicesHero) { servicesHero.classList.add('services-hero--fallback'); }
                 }
             }, 5000);
         }
     </script>
-
     <script src="script.js" defer></script>
 </body>
 </html>

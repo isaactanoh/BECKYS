@@ -1,30 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-
-<url>
-<loc>https://beckscleaningservices.com/</loc>
-<priority>1.0</priority>
-</url>
-
-<url>
-<loc>https://beckscleaningservices.com/about</loc>
-<priority>0.9</priority>
-</url>
-
-<url>
-<loc>https://beckscleaningservices.com/services</loc>
-<priority>0.9</priority>
-</url>
-
-<url>
-<loc>https://beckscleaningservices.com/gallery</loc>
-<priority>0.8</priority>
-</url>
-
-<url>
-<loc>https://beckscleaningservices.com/contact</loc>
-<priority>0.8</priority>
-</url>
-
+    
+    <!-- Homepage -->
+    <url>
+        <loc>https://beckscleaningservice.com/</loc>
+        <lastmod>2026-08-03</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+    </url>
+    
+    <!-- About Page -->
+    <url>
+        <loc>https://beckscleaningservice.com/about.html</loc>
+        <lastmod>2026-08-03</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <!-- Services Page -->
+    <url>
+        <loc>https://beckscleaningservice.com/services.html</loc>
+        <lastmod>2026-08-03</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    
+    <!-- Testimonials Page -->
+    <url>
+        <loc>https://beckscleaningservice.com/testimonials.html</loc>
+        <lastmod>2026-08-03</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    
+    <!-- FAQ Page -->
+    <url>
+        <loc>https://beckscleaningservice.com/faq.html</loc>
+        <lastmod>2026-08-03</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    
+    <!-- Contact Page -->
+    <url>
+        <loc>https://beckscleaningservice.com/contact.html</loc>
+        <lastmod>2026-08-03</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    
+    <!-- Thank You Page (noindex, but included for completion) -->
+    <url>
+        <loc>https://beckscleaningservice.com/thankyou.html</loc>
+        <lastmod>2026-08-03</lastmod>
+        <changefreq>never</changefreq>
+        <priority>0.1</priority>
+    </url>
+    
 </urlset>

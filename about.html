@@ -21,13 +21,26 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" href="images/favicon.ico" type="image/x-icon">
     
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "AboutPage",
+        "name": "About Becks Cleaning Service",
+        "description": "Learn about our mission, values, and commitment to exceptional cleaning services.",
+        "url": "https://beckscleaningservice.com/about.html",
+        "mainEntity": {
+            "@type": "Organization",
+            "name": "Becks Cleaning Service",
+            "description": "Professional cleaning services for homes and offices in Greater Accra.",
+            "foundingDate": "2018",
+            "founder": { "@type": "Person", "name": "Miss Rebecca" }
+        }
+    }
+    </script>
+
     <style>
-        /* ========================================
-           ABOUT PAGE ENHANCEMENTS
-           ======================================== */
-        
         .about-hero {
-            min-height: 60vh;
+            min-height: 50vh;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -37,7 +50,6 @@
             overflow: hidden;
             color: var(--white);
         }
-        
         .about-hero__video {
             position: absolute;
             top: 50%;
@@ -50,7 +62,6 @@
             object-fit: cover;
             z-index: 0;
         }
-        
         .about-hero__overlay {
             position: absolute;
             top: 0;
@@ -60,20 +71,18 @@
             background: rgba(4, 42, 74, 0.65);
             z-index: 1;
         }
-        
         .about-hero--fallback {
             background: linear-gradient(135deg, rgba(4, 73, 158, 0.85) 0%, rgba(0, 180, 216, 0.75) 100%), url('images/2.jpg');
             background-size: cover;
             background-position: center;
         }
-        
+        .about-hero--fallback .about-hero__video { display: none; }
         .about-hero__content {
             position: relative;
             z-index: 2;
             max-width: 800px;
             animation: fadeInUp 1s ease;
         }
-        
         .about-hero__title {
             font-size: clamp(2.8rem, 5vw, 4rem);
             font-weight: 700;
@@ -81,11 +90,7 @@
             margin-bottom: 20px;
             text-shadow: 0 2px 30px rgba(0, 0, 0, 0.2);
         }
-        
-        .about-hero__title span {
-            color: var(--accent-light);
-        }
-        
+        .about-hero__title span { color: var(--accent-light); }
         .about-hero__subtitle {
             font-size: clamp(1.1rem, 1.5vw, 1.3rem);
             color: rgba(255, 255, 255, 0.92);
@@ -93,7 +98,6 @@
             margin: 0 auto;
             text-shadow: 0 1px 15px rgba(0, 0, 0, 0.15);
         }
-        
         .about-hero .hero-particles {
             position: absolute;
             top: 0;
@@ -103,7 +107,6 @@
             overflow: hidden;
             z-index: 0;
         }
-        
         .about-hero .hero-particles span {
             position: absolute;
             display: block;
@@ -114,7 +117,6 @@
             animation: floatParticles 15s linear infinite;
             bottom: -150px;
         }
-        
         .about-hero .hero-particles span:nth-child(1) { left: 10%; width: 25px; height: 25px; animation-delay: 0s; animation-duration: 18s; }
         .about-hero .hero-particles span:nth-child(2) { left: 20%; width: 15px; height: 15px; animation-delay: 2s; animation-duration: 22s; background: rgba(255, 215, 0, 0.08); }
         .about-hero .hero-particles span:nth-child(3) { left: 30%; width: 35px; height: 35px; animation-delay: 4s; animation-duration: 20s; }
@@ -125,54 +127,41 @@
         .about-hero .hero-particles span:nth-child(8) { left: 80%; width: 16px; height: 16px; animation-delay: 4s; animation-duration: 21s; background: rgba(255, 215, 0, 0.05); }
         .about-hero .hero-particles span:nth-child(9) { left: 90%; width: 22px; height: 22px; animation-delay: 1s; animation-duration: 23s; }
         .about-hero .hero-particles span:nth-child(10) { left: 95%; width: 10px; height: 10px; animation-delay: 3s; animation-duration: 20s; background: rgba(255, 215, 0, 0.08); }
-        
         @keyframes floatParticles {
             0% { transform: translateY(0) rotate(0deg) scale(1); opacity: 1; }
             100% { transform: translateY(-110vh) rotate(720deg) scale(0); opacity: 0; }
         }
-        
-        /* Split Section */
         .split-section {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 50px;
             align-items: center;
         }
-        
         .split-section__image {
             border-radius: var(--radius-md);
             overflow: hidden;
             box-shadow: var(--shadow-md);
         }
-        
         .split-section__image img {
             width: 100%;
             height: 400px;
             object-fit: cover;
             transition: var(--transition-normal);
         }
-        
-        .split-section__image:hover img {
-            transform: scale(1.03);
-        }
-        
+        .split-section__image:hover img { transform: scale(1.03); }
         .split-section__content h2 {
             color: var(--primary-sea);
             margin-bottom: 15px;
         }
-        
         .split-section__content .lead {
             font-size: 1.1rem;
             color: var(--dark-gray);
         }
-        
-        /* Values Grid */
         .values-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: var(--gutter);
         }
-        
         .value-card {
             background: var(--white);
             padding: 35px 25px;
@@ -182,38 +171,31 @@
             transition: var(--transition-normal);
             border: 1px solid var(--light-gray);
         }
-        
         .value-card:hover {
             transform: translateY(-8px);
             box-shadow: var(--shadow-hover);
             border-color: var(--primary-sea);
         }
-        
         .value-card__icon {
             font-size: 2.8rem;
             color: var(--primary-sea);
             margin-bottom: 15px;
             display: inline-block;
         }
-        
         .value-card h3 {
             font-size: 1.2rem;
             margin-bottom: 10px;
         }
-        
         .value-card p {
             font-size: 0.95rem;
             margin-bottom: 0;
         }
-        
-        /* Stats Section */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 30px;
             text-align: center;
         }
-        
         .stat-item {
             padding: 30px 20px;
             background: var(--white);
@@ -222,13 +204,11 @@
             border: 1px solid var(--light-gray);
             transition: var(--transition-normal);
         }
-        
         .stat-item:hover {
             transform: translateY(-5px);
             box-shadow: var(--shadow-md);
             border-color: var(--primary-sea);
         }
-        
         .stat-item__number {
             font-size: 2.8rem;
             font-weight: 700;
@@ -236,20 +216,16 @@
             display: block;
             font-family: var(--font-secondary);
         }
-        
         .stat-item__label {
             font-size: 0.95rem;
             color: var(--gray);
             font-weight: 500;
         }
-        
-        /* Gallery */
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 25px;
         }
-        
         .gallery-grid__item {
             position: relative;
             border-radius: var(--radius-md);
@@ -259,23 +235,17 @@
             box-shadow: var(--shadow-sm);
             transition: var(--transition-normal);
         }
-        
         .gallery-grid__item:hover {
             transform: translateY(-5px);
             box-shadow: var(--shadow-hover);
         }
-        
         .gallery-grid__item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             transition: var(--transition-normal);
         }
-        
-        .gallery-grid__item:hover img {
-            transform: scale(1.08);
-        }
-        
+        .gallery-grid__item:hover img { transform: scale(1.08); }
         .gallery-grid__item::after {
             content: '\f00e';
             font-family: 'Font Awesome 6 Free';
@@ -295,79 +265,35 @@
             justify-content: center;
             transition: var(--transition-normal);
         }
-        
         .gallery-grid__item:hover::after {
             transform: translate(-50%, -50%) scale(1);
         }
-        
-        /* ========================================
-           RESPONSIVE
-           ======================================== */
         @media (max-width: 1024px) {
-            .split-section {
-                grid-template-columns: 1fr;
-                gap: 30px;
-            }
-            .split-section__image img {
-                height: 300px;
-            }
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
+            .split-section { grid-template-columns: 1fr; gap: 30px; }
+            .split-section__image img { height: 300px; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
         }
-        
         @media (max-width: 768px) {
-            .about-hero {
-                min-height: 50vh;
-                padding: 100px 20px 60px;
-            }
-            .about-hero__title {
-                font-size: 2.2rem;
-            }
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 15px;
-            }
-            .stat-item__number {
-                font-size: 2rem;
-            }
-            .gallery-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 12px;
-            }
+            .about-hero { min-height: 40vh; padding: 100px 20px 60px; }
+            .about-hero__title { font-size: 2.2rem; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 15px; }
+            .stat-item__number { font-size: 2rem; }
+            .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
         }
-        
         @media (max-width: 480px) {
-            .about-hero__title {
-                font-size: 1.8rem;
-            }
-            .about-hero__subtitle {
-                font-size: 1rem;
-            }
-            .stats-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 10px;
-            }
-            .stat-item {
-                padding: 20px 15px;
-            }
-            .stat-item__number {
-                font-size: 1.6rem;
-            }
-            .gallery-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 10px;
-            }
-            .split-section__image img {
-                height: 220px;
-            }
+            .about-hero__title { font-size: 1.8rem; }
+            .about-hero__subtitle { font-size: 1rem; }
+            .stats-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+            .stat-item { padding: 20px 15px; }
+            .stat-item__number { font-size: 1.6rem; }
+            .gallery-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+            .split-section__image img { height: 220px; }
         }
     </style>
 </head>
 <body>
     <a href="#main" class="skip-link">Skip to main content</a>
 
-    <!-- ===== HEADER ===== -->
     <header class="header" id="header" role="banner">
         <div class="container">
             <div class="header__inner">
@@ -394,11 +320,9 @@
         </div>
     </header>
 
-    <!-- ===== MAIN CONTENT ===== -->
     <main id="main">
         <!-- ===== ABOUT HERO WITH VIDEO ===== -->
         <section class="about-hero" id="aboutHero">
-            <!-- Background Video - Team Cleaning Together -->
             <video 
                 class="about-hero__video" 
                 autoplay 
@@ -409,41 +333,32 @@
                 poster="images/2.jpg"
                 id="aboutHeroVideo"
                 aria-hidden="true">
-                <!-- Primary: Team cleaning together -->
+                <!-- Team cleaning together -->
                 <source src="https://videos.pexels.com/video-files/4505928/4505928-uhd_2732_1440_30fps.mp4" type="video/mp4">
-                <!-- Fallback 1 -->
-                <source src="https://videos.pexels.com/video-files/3255071/3255071-uhd_2560_1440_30fps.mp4" type="video/mp4">
-                <!-- Fallback 2 -->
                 <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4">
             </video>
-            
-            <!-- Dark Overlay -->
             <div class="about-hero__overlay"></div>
-            
-            <!-- Floating Particles -->
             <div class="hero-particles">
                 <span></span><span></span><span></span><span></span><span></span>
                 <span></span><span></span><span></span><span></span><span></span>
             </div>
-            
-            <!-- Hero Content -->
             <div class="about-hero__content">
                 <h1 class="about-hero__title">About <span>Becks Cleaning</span></h1>
                 <p class="about-hero__subtitle">Your trusted partner for all cleaning needs since 2018</p>
             </div>
         </section>
 
-        <!-- ===== STORY SECTION ===== -->
+        <!-- ===== STORY ===== -->
         <section class="section">
             <div class="container">
                 <div class="split-section">
                     <div class="split-section__image reveal">
-                        <img src="images/leader.jpeg" alt="Becky, founder of Becks Cleaning Service" loading="lazy">
+                        <img src="images/leader.jpg" alt="Becky, founder of Becks Cleaning Service" loading="lazy">
                     </div>
                     <div class="split-section__content reveal" data-delay="200">
                         <h2>Our <span class="text-primary">Story</span></h2>
                         <p class="lead">Becks Cleaning Service was founded in 2018 with a simple mission: to provide exceptional cleaning services that make a real difference in people's lives.</p>
-                        <p>What started as a one woman operation has grown into a trusted team of cleaning professionals serving homes and businesses throughout the Greater Accra Region.</p>
+                        <p>What started as a one-woman operation has grown into a trusted team of cleaning professionals serving homes and businesses throughout the Greater Accra Region.</p>
                         <p>Miss Rebecca, our founder, began her cleaning career while working part-time to support her education. She quickly realized her passion for transforming spaces and creating clean, healthy environments for families and businesses.</p>
                         <p>Today, we're proud to have expanded our team while maintaining the personal touch and high standards that set us apart from the beginning.</p>
                         <a href="contact.html" class="btn">Get a Free Quote</a>
@@ -452,8 +367,35 @@
             </div>
         </section>
 
-        
-        <!-- ===== VALUES SECTION ===== -->
+        <!-- ===== STATS ===== -->
+        <section class="section section--light">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Our <span>Impact</span></h2>
+                    <p class="section-subtitle">Numbers that speak for themselves</p>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-item reveal">
+                        <span class="stat-item__number" data-count="500">0</span>
+                        <span class="stat-item__label">Happy Clients</span>
+                    </div>
+                    <div class="stat-item reveal" data-delay="150">
+                        <span class="stat-item__number" data-count="98">0</span>
+                        <span class="stat-item__label">Satisfaction Rate %</span>
+                    </div>
+                    <div class="stat-item reveal" data-delay="300">
+                        <span class="stat-item__number" data-count="7">0</span>
+                        <span class="stat-item__label">Years Experience</span>
+                    </div>
+                    <div class="stat-item reveal" data-delay="450">
+                        <span class="stat-item__number" data-count="100">0</span>
+                        <span class="stat-item__label">% Trusted Professionals</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== VALUES ===== -->
         <section class="section">
             <div class="container">
                 <div class="section-title">
@@ -495,7 +437,7 @@
             </div>
         </section>
 
-        <!-- ===== GALLERY SECTION ===== -->
+        <!-- ===== GALLERY ===== -->
         <section class="section section--light">
             <div class="container">
                 <div class="section-title">
@@ -521,23 +463,11 @@
                     <div class="gallery-grid__item reveal" data-delay="450" tabindex="0" role="button">
                         <img src="images/flyer 1.jpeg" alt="Clean and organized living room" loading="lazy">
                     </div>
-                    <div class="gallery-grid__item reveal" data-delay="450" tabindex="0" role="button">
-                        <img src="images/9.jpeg" alt="Clean and organized living room" loading="lazy">
-                    </div>
-                    <div class="gallery-grid__item reveal" data-delay="450" tabindex="0" role="button">
-                        <img src="images/8.jpeg" alt="Clean and organized living room" loading="lazy">
-                    </div>
-                    <div class="gallery-grid__item reveal" data-delay="450" tabindex="0" role="button">
-                        <img src="images/flyer 3.jpeg" alt="Clean and organized living room" loading="lazy">
-                    </div>
-                    <div class="gallery-grid__item reveal" data-delay="450" tabindex="0" role="button">
-                        <img src="images/4.jpg" alt="Clean and organized living room" loading="lazy">
-                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- ===== CTA SECTION ===== -->
+        <!-- ===== CTA ===== -->
         <section class="cta">
             <div class="container">
                 <h2>Experience the <span style="color: var(--accent-light);">Becks</span> Difference</h2>
@@ -550,7 +480,6 @@
         </section>
     </main>
 
-    <!-- ===== FOOTER ===== -->
     <footer class="footer" role="contentinfo">
         <div class="container">
             <div class="footer__grid">
@@ -592,7 +521,6 @@
         </div>
     </footer>
 
-    <!-- ===== FLOATING BUTTONS ===== -->
     <div class="floating-buttons">
         <a href="https://wa.me/233542977602" target="_blank" class="floating-btn floating-btn--whatsapp" aria-label="Chat on WhatsApp">
             <i class="fab fa-whatsapp"></i>
@@ -605,7 +533,6 @@
         </button>
     </div>
 
-    <!-- ===== CHAT BOT ===== -->
     <div class="chat-bot" role="complementary" aria-label="Chat assistant">
         <button class="chat-bot__toggle" id="chatToggle" aria-label="Open chat">
             <i class="fas fa-comment-dots"></i>
@@ -625,7 +552,6 @@
         </div>
     </div>
 
-    <!-- ===== LIGHTBOX ===== -->
     <div class="lightbox" id="lightbox" role="dialog" aria-label="Image viewer">
         <button class="lightbox__close" id="lightboxClose" aria-label="Close lightbox">&times;</button>
         <button class="lightbox__nav lightbox__nav--prev" id="lightboxPrev" aria-label="Previous image">&#10094;</button>
@@ -634,6 +560,20 @@
         <div class="lightbox__counter" id="lightboxCounter">1 / 1</div>
     </div>
 
+    <script>
+        const aboutHeroVideo = document.getElementById('aboutHeroVideo');
+        const aboutHero = document.getElementById('aboutHero');
+        if (aboutHeroVideo) {
+            aboutHeroVideo.addEventListener('error', function() {
+                if (aboutHero) { aboutHero.classList.add('about-hero--fallback'); }
+            });
+            setTimeout(function() {
+                if (aboutHeroVideo.readyState === 0) {
+                    if (aboutHero) { aboutHero.classList.add('about-hero--fallback'); }
+                }
+            }, 5000);
+        }
+    </script>
     <script src="script.js" defer></script>
 </body>
 </html>

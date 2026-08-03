@@ -21,7 +21,6 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" href="images/favicon.ico" type="image/x-icon">
     
-    <!-- ===== STRUCTURED DATA ===== -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -45,10 +44,6 @@
     </script>
 
     <style>
-        /* ========================================
-           CONTACT PAGE ENHANCEMENTS
-           ======================================== */
-        
         .contact-hero {
             min-height: 50vh;
             display: flex;
@@ -60,7 +55,6 @@
             overflow: hidden;
             color: var(--white);
         }
-        
         .contact-hero__video {
             position: absolute;
             top: 50%;
@@ -73,7 +67,6 @@
             object-fit: cover;
             z-index: 0;
         }
-        
         .contact-hero__overlay {
             position: absolute;
             top: 0;
@@ -83,20 +76,18 @@
             background: rgba(4, 42, 74, 0.65);
             z-index: 1;
         }
-        
         .contact-hero--fallback {
             background: linear-gradient(135deg, rgba(4, 73, 158, 0.85) 0%, rgba(0, 180, 216, 0.75) 100%), url('images/2.jpg');
             background-size: cover;
             background-position: center;
         }
-        
+        .contact-hero--fallback .contact-hero__video { display: none; }
         .contact-hero__content {
             position: relative;
             z-index: 2;
             max-width: 800px;
             animation: fadeInUp 1s ease;
         }
-        
         .contact-hero__title {
             font-size: clamp(2.8rem, 5vw, 4rem);
             font-weight: 700;
@@ -104,11 +95,7 @@
             margin-bottom: 20px;
             text-shadow: 0 2px 30px rgba(0, 0, 0, 0.2);
         }
-        
-        .contact-hero__title span {
-            color: var(--accent-light);
-        }
-        
+        .contact-hero__title span { color: var(--accent-light); }
         .contact-hero__subtitle {
             font-size: clamp(1.1rem, 1.5vw, 1.3rem);
             color: rgba(255, 255, 255, 0.92);
@@ -116,7 +103,6 @@
             margin: 0 auto;
             text-shadow: 0 1px 15px rgba(0, 0, 0, 0.15);
         }
-        
         .contact-hero .hero-particles {
             position: absolute;
             top: 0;
@@ -126,7 +112,6 @@
             overflow: hidden;
             z-index: 0;
         }
-        
         .contact-hero .hero-particles span {
             position: absolute;
             display: block;
@@ -137,7 +122,6 @@
             animation: floatParticles 15s linear infinite;
             bottom: -150px;
         }
-        
         .contact-hero .hero-particles span:nth-child(1) { left: 10%; width: 25px; height: 25px; animation-delay: 0s; animation-duration: 18s; }
         .contact-hero .hero-particles span:nth-child(2) { left: 20%; width: 15px; height: 15px; animation-delay: 2s; animation-duration: 22s; background: rgba(255, 215, 0, 0.08); }
         .contact-hero .hero-particles span:nth-child(3) { left: 30%; width: 35px; height: 35px; animation-delay: 4s; animation-duration: 20s; }
@@ -148,19 +132,17 @@
         .contact-hero .hero-particles span:nth-child(8) { left: 80%; width: 16px; height: 16px; animation-delay: 4s; animation-duration: 21s; background: rgba(255, 215, 0, 0.05); }
         .contact-hero .hero-particles span:nth-child(9) { left: 90%; width: 22px; height: 22px; animation-delay: 1s; animation-duration: 23s; }
         .contact-hero .hero-particles span:nth-child(10) { left: 95%; width: 10px; height: 10px; animation-delay: 3s; animation-duration: 20s; background: rgba(255, 215, 0, 0.08); }
-        
         @keyframes floatParticles {
             0% { transform: translateY(0) rotate(0deg) scale(1); opacity: 1; }
             100% { transform: translateY(-110vh) rotate(720deg) scale(0); opacity: 0; }
         }
-        
+
         .contact-grid {
             display: grid;
             grid-template-columns: 1fr 1.5fr;
             gap: 40px;
             align-items: start;
         }
-        
         .contact-info {
             background: var(--white);
             padding: 35px;
@@ -168,21 +150,18 @@
             box-shadow: var(--shadow-sm);
             border: 1px solid var(--light-gray);
         }
-        
         .contact-info h3 {
             color: var(--primary-sea);
             margin-bottom: 25px;
             padding-bottom: 15px;
             border-bottom: 2px solid var(--light-gray);
         }
-        
         .contact-method {
             display: flex;
             align-items: flex-start;
             gap: 15px;
             margin-bottom: 20px;
         }
-        
         .contact-method__icon {
             width: 45px;
             height: 45px;
@@ -195,23 +174,17 @@
             justify-content: center;
             font-size: 1.1rem;
         }
-        
         .contact-method__content h4 {
             font-size: 1rem;
             margin-bottom: 2px;
         }
-        
         .contact-method__content p,
         .contact-method__content a {
             color: var(--gray);
             font-size: 0.95rem;
             word-break: break-word;
         }
-        
-        .contact-method__content a:hover {
-            color: var(--primary-sea);
-        }
-        
+        .contact-method__content a:hover { color: var(--primary-sea); }
         .map-container {
             margin-top: 25px;
             border-radius: var(--radius-sm);
@@ -220,13 +193,11 @@
             background: var(--light-gray);
             position: relative;
         }
-        
         .map-container iframe {
             width: 100%;
             height: 100%;
             border: 0;
         }
-        
         .hours-card {
             background: linear-gradient(135deg, rgba(8, 99, 201, 0.05), rgba(0, 180, 216, 0.08));
             padding: 20px 25px;
@@ -234,13 +205,11 @@
             border: 1px solid rgba(0, 180, 216, 0.1);
             margin-top: 20px;
         }
-        
         .hours-card h4 {
             color: var(--primary-sea);
             margin-bottom: 10px;
             font-size: 1rem;
         }
-        
         .hours-card .hours-row {
             display: flex;
             justify-content: space-between;
@@ -248,19 +217,16 @@
             font-size: 0.9rem;
             color: var(--gray);
         }
-        
         .hours-card .hours-row span:first-child {
             font-weight: 500;
             color: var(--secondary);
         }
-        
         .contact-social {
             display: flex;
             gap: 10px;
             margin-top: 15px;
             flex-wrap: wrap;
         }
-        
         .contact-social a {
             display: flex;
             align-items: center;
@@ -273,13 +239,12 @@
             font-size: 1.1rem;
             transition: var(--transition-normal);
         }
-        
         .contact-social a:hover {
             background: var(--primary-gradient);
             color: var(--white);
             transform: translateY(-3px);
         }
-        
+
         .contact-form {
             background: var(--white);
             padding: 35px;
@@ -287,18 +252,13 @@
             box-shadow: var(--shadow-sm);
             border: 1px solid var(--light-gray);
         }
-        
         .contact-form h3 {
             color: var(--primary-sea);
             margin-bottom: 25px;
             padding-bottom: 15px;
             border-bottom: 2px solid var(--light-gray);
         }
-        
-        .form-group {
-            margin-bottom: 20px;
-        }
-        
+        .form-group { margin-bottom: 20px; }
         .form-group label {
             display: block;
             font-weight: 600;
@@ -306,11 +266,7 @@
             color: var(--secondary);
             margin-bottom: 6px;
         }
-        
-        .form-group label .required {
-            color: var(--error);
-        }
-        
+        .form-group label .required { color: var(--error); }
         .form-control {
             width: 100%;
             padding: 12px 16px;
@@ -324,13 +280,11 @@
             -webkit-appearance: none;
             appearance: none;
         }
-        
         .form-control:focus {
             border-color: var(--primary-sea);
             outline: none;
             box-shadow: 0 0 0 4px rgba(0, 180, 216, 0.1);
         }
-        
         select.form-control {
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
             background-repeat: no-repeat;
@@ -338,45 +292,11 @@
             background-size: 16px;
             padding-right: 40px;
         }
-        
         textarea.form-control {
             min-height: 130px;
             resize: vertical;
         }
-        
-        .spinner {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(255,255,255,0.3);
-            border-radius: 50%;
-            border-top-color: var(--white);
-            animation: spin 0.8s ease-in-out infinite;
-        }
-        
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-        
-        .btn--loading {
-            pointer-events: none;
-            opacity: 0.7;
-        }
-        
-        .btn--loading .btn-text {
-            visibility: hidden;
-        }
-        
-        .btn--loading .spinner {
-            position: absolute;
-            visibility: visible;
-        }
-        
-        .btn .spinner {
-            visibility: hidden;
-        }
-        
-               /* Success/Error Messages - FIXED */
+
         .form-message {
             display: none;
             align-items: center;
@@ -386,42 +306,26 @@
             margin-top: 20px;
             animation: fadeIn 0.4s ease;
         }
-        
-        .form-message--visible {
-            display: flex;
-        }
-        
+        .form-message--visible { display: flex; }
         .form-message--success {
             background: #d4edda;
             color: #155724;
             border: 1px solid #c3e6cb;
         }
-        
         .form-message--error {
             background: #f8d7da;
             color: #721c24;
             border: 1px solid #f5c6cb;
         }
-        
-        .form-message i {
-            font-size: 1.5rem;
-            flex-shrink: 0;
-        }
-        
-        .form-message--success i {
-            color: var(--success);
-        }
-        
-        .form-message--error i {
-            color: var(--error);
-        }
-        
+        .form-message i { font-size: 1.5rem; flex-shrink: 0; }
+        .form-message--success i { color: var(--success); }
+        .form-message--error i { color: var(--error); }
+
         .faq-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 20px;
         }
-        
         .faq-card {
             background: var(--white);
             padding: 25px 20px;
@@ -430,146 +334,62 @@
             border: 1px solid var(--light-gray);
             transition: var(--transition-normal);
         }
-        
         .faq-card:hover {
             transform: translateY(-5px);
             box-shadow: var(--shadow-md);
             border-color: var(--primary-sea);
         }
-        
         .faq-card h3 {
             color: var(--primary-sea);
             font-size: 1.05rem;
             margin-bottom: 10px;
         }
-        
         .faq-card p {
             color: var(--gray);
             font-size: 0.9rem;
             margin-bottom: 0;
         }
-        
-        .faq-card p a {
-            color: var(--primary-sea);
-            text-decoration: none;
-        }
-        
-        .faq-card p a:hover {
-            text-decoration: underline;
-        }
-        
-        /* ========================================
-           RESPONSIVE
-           ======================================== */
+        .faq-card p a { color: var(--primary-sea); text-decoration: none; }
+        .faq-card p a:hover { text-decoration: underline; }
+
         @media (max-width: 1024px) {
-            .contact-grid {
-                grid-template-columns: 1fr;
-                gap: 30px;
-            }
+            .contact-grid { grid-template-columns: 1fr; gap: 30px; }
             .contact-info { order: 2; }
             .contact-form { order: 1; }
         }
-        
         @media (max-width: 768px) {
-            .contact-hero {
-                min-height: 40vh;
-                padding: 100px 20px 60px;
-            }
-            .contact-hero__title {
-                font-size: 2.2rem;
-            }
-            .contact-info,
-            .contact-form {
-                padding: 25px 20px;
-            }
-            .contact-method {
-                gap: 12px;
-            }
-            .contact-method__icon {
-                width: 40px;
-                height: 40px;
-                min-width: 40px;
-                font-size: 0.9rem;
-            }
-            .map-container {
-                height: 150px;
-            }
-            .faq-grid {
-                grid-template-columns: 1fr;
-                gap: 15px;
-            }
-            .faq-card {
-                padding: 20px;
-            }
-            .faq-card h3 {
-                font-size: 1rem;
-            }
+            .contact-hero { min-height: 40vh; padding: 100px 20px 60px; }
+            .contact-hero__title { font-size: 2.2rem; }
+            .contact-info, .contact-form { padding: 25px 20px; }
+            .contact-method { gap: 12px; }
+            .contact-method__icon { width: 40px; height: 40px; min-width: 40px; font-size: 0.9rem; }
+            .map-container { height: 150px; }
+            .faq-grid { grid-template-columns: 1fr; gap: 15px; }
+            .faq-card { padding: 20px; }
+            .faq-card h3 { font-size: 1rem; }
         }
-        
         @media (max-width: 480px) {
-            .contact-hero__title {
-                font-size: 1.8rem;
-            }
-            .contact-hero__subtitle {
-                font-size: 1rem;
-            }
-            .contact-info,
-            .contact-form {
-                padding: 18px 14px;
-            }
-            .contact-method {
-                gap: 10px;
-                margin-bottom: 15px;
-            }
-            .contact-method__icon {
-                width: 35px;
-                height: 35px;
-                min-width: 35px;
-                font-size: 0.8rem;
-            }
-            .contact-method__content h4 {
-                font-size: 0.85rem;
-            }
-            .contact-method__content p,
-            .contact-method__content a {
-                font-size: 0.8rem;
-            }
-            .form-group {
-                margin-bottom: 14px;
-            }
-            .form-group label {
-                font-size: 0.8rem;
-            }
-            .form-control {
-                padding: 8px 12px;
-                font-size: 0.9rem;
-            }
-            .btn {
-                padding: 12px 20px;
-                font-size: 0.85rem;
-                width: 100%;
-            }
-            .contact-form h3,
-            .contact-info h3 {
-                font-size: 1.2rem;
-                margin-bottom: 18px;
-            }
-            .map-container {
-                height: 120px;
-            }
-            .hours-card {
-                padding: 15px 18px;
-            }
-            .hours-card .hours-row {
-                font-size: 0.8rem;
-            }
+            .contact-hero__title { font-size: 1.8rem; }
+            .contact-hero__subtitle { font-size: 1rem; }
+            .contact-info, .contact-form { padding: 18px 14px; }
+            .contact-method { gap: 10px; margin-bottom: 15px; }
+            .contact-method__icon { width: 35px; height: 35px; min-width: 35px; font-size: 0.8rem; }
+            .contact-method__content h4 { font-size: 0.85rem; }
+            .contact-method__content p, .contact-method__content a { font-size: 0.8rem; }
+            .form-group { margin-bottom: 14px; }
+            .form-group label { font-size: 0.8rem; }
+            .form-control { padding: 8px 12px; font-size: 0.9rem; }
+            .btn { padding: 12px 20px; font-size: 0.85rem; width: 100%; }
+            .contact-form h3, .contact-info h3 { font-size: 1.2rem; margin-bottom: 18px; }
+            .map-container { height: 120px; }
+            .hours-card { padding: 15px 18px; }
+            .hours-card .hours-row { font-size: 0.8rem; }
         }
     </style>
 </head>
 <body>
     <a href="#main" class="skip-link">Skip to main content</a>
 
-    <!-- ===== HEADER ===== -->
     <header class="header" id="header" role="banner">
         <div class="container">
             <div class="header__inner">
@@ -596,11 +416,9 @@
         </div>
     </header>
 
-    <!-- ===== MAIN CONTENT ===== -->
     <main id="main">
         <!-- ===== CONTACT HERO WITH VIDEO ===== -->
         <section class="contact-hero" id="contactHero">
-            <!-- Background Video - Clean, fresh space -->
             <video 
                 class="contact-hero__video" 
                 autoplay 
@@ -611,28 +429,21 @@
                 poster="images/2.jpg"
                 id="contactHeroVideo"
                 aria-hidden="true">
+                <!-- Clean, fresh space -->
                 <source src="https://videos.pexels.com/video-files/5896448/5896448-uhd_2732_1440_30fps.mp4" type="video/mp4">
-                <source src="https://videos.pexels.com/video-files/3255071/3255071-uhd_2560_1440_30fps.mp4" type="video/mp4">
                 <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4">
             </video>
-            
-            <!-- Dark Overlay -->
             <div class="contact-hero__overlay"></div>
-            
-            <!-- Floating Particles -->
             <div class="hero-particles">
                 <span></span><span></span><span></span><span></span><span></span>
                 <span></span><span></span><span></span><span></span><span></span>
             </div>
-            
-            <!-- Hero Content -->
             <div class="contact-hero__content">
                 <h1 class="contact-hero__title">Contact <span>Us</span></h1>
                 <p class="contact-hero__subtitle">We'd love to hear from you</p>
             </div>
         </section>
 
-        <!-- ===== CONTACT SECTION ===== -->
         <section class="section">
             <div class="container">
                 <div class="section-title">
@@ -641,10 +452,8 @@
                 </div>
                 
                 <div class="contact-grid">
-                    <!-- Contact Info -->
                     <div class="contact-info reveal">
                         <h3>Contact Information</h3>
-                        
                         <div class="contact-method">
                             <span class="contact-method__icon"><i class="fas fa-phone-alt"></i></span>
                             <div class="contact-method__content">
@@ -652,7 +461,6 @@
                                 <a href="tel:0542977602">054 297 7602</a>
                             </div>
                         </div>
-                        
                         <div class="contact-method">
                             <span class="contact-method__icon"><i class="fas fa-envelope"></i></span>
                             <div class="contact-method__content">
@@ -660,7 +468,6 @@
                                 <a href="mailto:thebeckscleaningservices@gmail.com">thebeckscleaningservices@gmail.com</a>
                             </div>
                         </div>
-                        
                         <div class="contact-method">
                             <span class="contact-method__icon"><i class="fab fa-whatsapp"></i></span>
                             <div class="contact-method__content">
@@ -668,7 +475,6 @@
                                 <a href="https://wa.me/233542977602" target="_blank">Chat with us on WhatsApp</a>
                             </div>
                         </div>
-                        
                         <div class="contact-method">
                             <span class="contact-method__icon"><i class="fas fa-map-marker-alt"></i></span>
                             <div class="contact-method__content">
@@ -676,21 +482,11 @@
                                 <p>Greater Accra Region and surrounding areas</p>
                             </div>
                         </div>
-                        
-                        <!-- Business Hours -->
                         <div class="hours-card">
                             <h4><i class="fas fa-clock"></i> Business Hours</h4>
-                            <div class="hours-row">
-                                <span>Monday - Sunday</span>
-                                <span>7:00 AM - 8:00 PM</span>
-                            </div>
-                            <div class="hours-row">
-                                <span>Public Holidays</span>
-                                <span>Available (book early)</span>
-                            </div>
+                            <div class="hours-row"><span>Monday - Sunday</span><span>7:00 AM - 8:00 PM</span></div>
+                            <div class="hours-row"><span>Public Holidays</span><span>Available (book early)</span></div>
                         </div>
-                        
-                        <!-- Social Media -->
                         <div style="margin-top: 25px;">
                             <h4 style="font-size: 0.95rem; margin-bottom: 10px; color: var(--secondary);">Follow Us</h4>
                             <div class="contact-social">
@@ -700,8 +496,6 @@
                                 <a href="#" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
                             </div>
                         </div>
-                        
-                        <!-- Google Map -->
                         <div class="map-container">
                             <iframe 
                                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126911.63072225814!2d-0.20000000000000018!3d5.6000000000000005!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xfdf9084b2b7a773%3A0xbed14c8659f6e4f4!2sAccra%2C%20Ghana!5e0!3m2!1sen!2sus!4v1700000000000" 
@@ -714,11 +508,8 @@
                         </div>
                     </div>
                     
-                    <!-- Contact Form with Netlify -->
                     <div class="contact-form reveal" data-delay="200" id="booking">
                         <h3>📋 Request a Quote / Booking</h3>
-                        
-                        <!-- NETLIFY FORM -->
                         <form 
                             id="contactForm" 
                             name="booking" 
@@ -727,57 +518,44 @@
                             netlify-honeypot="bot-field"
                             action="/thankyou.html"
                             autocomplete="on">
-                            
-                            <!-- Hidden fields required by Netlify -->
                             <input type="hidden" name="form-name" value="booking">
                             <input type="hidden" name="booking-id" id="bookingId">
                             <input type="hidden" name="submitted-at" id="submittedAt">
-                            
-                            <!-- Honeypot for spam protection -->
                             <div style="position: absolute; left: -9999px; top: -9999px;">
                                 <label for="bot-field">Don't fill this out if you're human</label>
                                 <input type="text" id="bot-field" name="bot-field">
                             </div>
                             
-                            <!-- Name -->
                             <div class="form-group">
                                 <label for="name">Your Name <span class="required">*</span></label>
                                 <input type="text" id="name" name="name" class="form-control" placeholder="Enter your full name" required>
                             </div>
-                            
-                            <!-- Email -->
                             <div class="form-group">
                                 <label for="email">Email Address <span class="required">*</span></label>
                                 <input type="email" id="email" name="email" class="form-control" placeholder="Enter your email address" required>
                             </div>
-                            
-                            <!-- Phone -->
                             <div class="form-group">
                                 <label for="phone">Phone Number <span class="required">*</span></label>
                                 <input type="tel" id="phone" name="phone" class="form-control" placeholder="Enter your phone number" required>
                             </div>
-                            
-                            <!-- Service Type -->
                             <div class="form-group">
                                 <label for="service">Service Type <span class="required">*</span></label>
                                 <select id="service" name="service" class="form-control" required>
                                     <option value="">Select a service</option>
-                                    <option value="Residential Cleaning"> Residential Cleaning</option>
-                                    <option value="Commercial Cleaning"> Commercial Cleaning</option>
-                                    <option value="Office Cleaning"> Office Cleaning</option>
-                                    <option value="Deep Cleaning"> Deep Cleaning</option>
-                                    <option value="Move-In Cleaning"> Move-In Cleaning</option>
-                                    <option value="Move-Out Cleaning"> Move-Out Cleaning</option>
-                                    <option value="Sofa Cleaning"> Sofa Cleaning</option>
-                                    <option value="Mattress Cleaning"> Mattress Cleaning</option>
-                                    <option value="Carpet Cleaning"> Carpet Cleaning</option>
-                                    <option value="Window Cleaning"> Window Cleaning</option>
-                                    <option value="Post Construction Cleaning"> Post Construction Cleaning</option>
-                                    <option value="General House Cleaning"> General House Cleaning</option>
+                                    <option value="Residential Cleaning">🏠 Residential Cleaning</option>
+                                    <option value="Commercial Cleaning">🏢 Commercial Cleaning</option>
+                                    <option value="Office Cleaning">💼 Office Cleaning</option>
+                                    <option value="Deep Cleaning">🔍 Deep Cleaning</option>
+                                    <option value="Move-In Cleaning">📦 Move-In Cleaning</option>
+                                    <option value="Move-Out Cleaning">📦 Move-Out Cleaning</option>
+                                    <option value="Sofa Cleaning">🛋️ Sofa Cleaning</option>
+                                    <option value="Mattress Cleaning">🛏️ Mattress Cleaning</option>
+                                    <option value="Carpet Cleaning">🧹 Carpet Cleaning</option>
+                                    <option value="Window Cleaning">🪟 Window Cleaning</option>
+                                    <option value="Post Construction Cleaning">🔨 Post Construction Cleaning</option>
+                                    <option value="General House Cleaning">🧺 General House Cleaning</option>
                                 </select>
                             </div>
-                            
-                            <!-- Property Type -->
                             <div class="form-group">
                                 <label for="property-type">Property Type <span class="required">*</span></label>
                                 <select id="property-type" name="property-type" class="form-control" required>
@@ -789,8 +567,6 @@
                                     <option value="Other">Other</option>
                                 </select>
                             </div>
-                            
-                            <!-- Number of Rooms -->
                             <div class="form-group">
                                 <label for="rooms">Number of Rooms</label>
                                 <select id="rooms" name="rooms" class="form-control">
@@ -818,64 +594,45 @@
                                     <option value="20+">20+ Rooms</option>
                                 </select>
                             </div>
-                            
-                            <!-- Address -->
                             <div class="form-group">
                                 <label for="address">Service Address <span class="required">*</span></label>
                                 <textarea id="address" name="address" class="form-control" rows="2" placeholder="Enter your full address" required></textarea>
                             </div>
-                            
-                            <!-- Preferred Date -->
                             <div class="form-group">
                                 <label for="date">Preferred Date <span class="required">*</span></label>
                                 <input type="date" id="date" name="date" class="form-control" required>
                             </div>
-                            
-                            <!-- Preferred Time -->
                             <div class="form-group">
                                 <label for="time">Preferred Time <span class="required">*</span></label>
                                 <select id="time" name="time" class="form-control" required>
                                     <option value="">Select a time</option>
-                                    <option value="Morning (7am - 12pm)"> Morning (7am - 12pm)</option>
-                                    <option value="Afternoon (12pm - 5pm)"> Afternoon (12pm - 5pm)</option>
-                                    <option value="Evening (5pm - 8pm)"> Evening (5pm - 8pm)</option>
+                                    <option value="Morning (7am - 12pm)">🌅 Morning (7am - 12pm)</option>
+                                    <option value="Afternoon (12pm - 5pm)">☀️ Afternoon (12pm - 5pm)</option>
+                                    <option value="Evening (5pm - 8pm)">🌙 Evening (5pm - 8pm)</option>
                                 </select>
                             </div>
-                            
-                            <!-- Additional Notes -->
                             <div class="form-group">
                                 <label for="notes">Additional Notes</label>
                                 <textarea id="notes" name="notes" class="form-control" rows="3" placeholder="Any special requests or instructions..."></textarea>
                             </div>
-                            
-                            <!-- Submit Button -->
                             <button type="submit" class="btn btn--large" id="submitBtn" style="width: 100%; position: relative;">
                                 <span class="btn-text"><i class="fas fa-paper-plane"></i> Send Request</span>
                                 <span class="spinner"></span>
                             </button>
                         </form>
-                        
-                        <!-- Success Message -->
                         <div id="formSuccess" class="form-message form-message--success">
                             <i class="fas fa-check-circle"></i>
-                            <div>
-                                <strong>Thank you!</strong> Your booking has been received successfully. Our team will contact you shortly.
-                            </div>
+                            <div><strong>Thank you!</strong> Your booking has been received successfully. Our team will contact you shortly.</div>
                         </div>
-                        
-                        <!-- Error Message -->
                         <div id="formError" class="form-message form-message--error">
                             <i class="fas fa-exclamation-circle"></i>
-                            <div>
-                                <strong>Oops!</strong> Something went wrong. Please try again or call us directly at <a href="tel:0542977602" style="color: #721c24; font-weight: 600;">054 297 7602</a>.
-                            </div>
+                            <div><strong>Oops!</strong> Something went wrong. Please try again or call us directly at <a href="tel:0542977602" style="color: #721c24; font-weight: 600;">054 297 7602</a>.</div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- ===== FAQ SECTION ===== -->
         <section class="section section--light">
             <div class="container">
                 <div class="section-title">
@@ -906,7 +663,6 @@
             </div>
         </section>
 
-        <!-- ===== CTA SECTION ===== -->
         <section class="cta">
             <div class="container">
                 <h2>Ready for a <span style="color: var(--accent-light);">Spotless</span> Space?</h2>
@@ -919,7 +675,6 @@
         </section>
     </main>
 
-    <!-- ===== FOOTER ===== -->
     <footer class="footer" role="contentinfo">
         <div class="container">
             <div class="footer__grid">
@@ -961,7 +716,6 @@
         </div>
     </footer>
 
-    <!-- ===== FLOATING BUTTONS ===== -->
     <div class="floating-buttons">
         <a href="https://wa.me/233542977602" target="_blank" class="floating-btn floating-btn--whatsapp" aria-label="Chat on WhatsApp">
             <i class="fab fa-whatsapp"></i>
@@ -974,7 +728,6 @@
         </button>
     </div>
 
-    <!-- ===== CHAT BOT ===== -->
     <div class="chat-bot" role="complementary" aria-label="Chat assistant">
         <button class="chat-bot__toggle" id="chatToggle" aria-label="Open chat">
             <i class="fas fa-comment-dots"></i>
@@ -994,7 +747,6 @@
         </div>
     </div>
 
-    <!-- ===== LIGHTBOX ===== -->
     <div class="lightbox" id="lightbox" role="dialog" aria-label="Image viewer">
         <button class="lightbox__close" id="lightboxClose" aria-label="Close lightbox">&times;</button>
         <button class="lightbox__nav lightbox__nav--prev" id="lightboxPrev" aria-label="Previous image">&#10094;</button>
@@ -1003,57 +755,35 @@
         <div class="lightbox__counter" id="lightboxCounter">1 / 1</div>
     </div>
 
-    <!-- ======================================== -->
-    <!-- NETLIFY FORM HANDLER - ONLY ONE SCRIPT   -->
-    <!-- ======================================== -->
     <script>
-        (function() {
-            'use strict';
-
-            // Generate Booking ID
-            function generateBookingId() {
-                const prefix = 'BCS';
-                const timestamp = Date.now().toString().slice(-6);
-                const random = Math.floor(Math.random() * 1000).toString().padStart(3, '0');
-                return `${prefix}-${timestamp}-${random}`;
-            }
-
-            // Set booking ID and timestamp on page load
-            document.addEventListener('DOMContentLoaded', function() {
-                const bookingIdField = document.getElementById('bookingId');
-                const submittedAtField = document.getElementById('submittedAt');
-                
-                if (bookingIdField) {
-                    bookingIdField.value = generateBookingId();
-                }
-                if (submittedAtField) {
-                    submittedAtField.value = new Date().toISOString();
-                }
+        const contactHeroVideo = document.getElementById('contactHeroVideo');
+        const contactHero = document.getElementById('contactHero');
+        if (contactHeroVideo) {
+            contactHeroVideo.addEventListener('error', function() {
+                if (contactHero) { contactHero.classList.add('contact-hero--fallback'); }
             });
+            setTimeout(function() {
+                if (contactHeroVideo.readyState === 0) {
+                    if (contactHero) { contactHero.classList.add('contact-hero--fallback'); }
+                }
+            }, 5000);
+        }
 
-            // Form submission handler
-            const form = document.getElementById('contactForm');
-            const submitBtn = document.getElementById('submitBtn');
-            const successMsg = document.getElementById('formSuccess');
-            const errorMsg = document.getElementById('formError');
+        // Generate Booking ID
+        function generateBookingId() {
+            const prefix = 'BCS';
+            const timestamp = Date.now().toString().slice(-6);
+            const random = Math.floor(Math.random() * 1000).toString().padStart(3, '0');
+            return `${prefix}-${timestamp}-${random}`;
+        }
 
-            if (form) {
-                form.addEventListener('submit', function(e) {
-                    // Let Netlify handle the submission naturally
-                    // We just show loading state
-                    
-                    const btn = this.querySelector('button[type="submit"]');
-                    btn.classList.add('btn--loading');
-                    btn.disabled = true;
-                    
-                    // The form will submit normally to Netlify
-                    // Netlify will redirect to /thankyou.html on success
-                });
-            }
-
-        })();
+        document.addEventListener('DOMContentLoaded', function() {
+            const bookingIdField = document.getElementById('bookingId');
+            const submittedAtField = document.getElementById('submittedAt');
+            if (bookingIdField) { bookingIdField.value = generateBookingId(); }
+            if (submittedAtField) { submittedAtField.value = new Date().toISOString(); }
+        });
     </script>
-
     <script src="script.js" defer></script>
 </body>
 </html>
