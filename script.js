@@ -9,7 +9,6 @@
  * - Gallery lightbox
  * - Form submissions
  * - Scroll animations
- * - Floating buttons
  * - Performance optimizations
  */
 
@@ -22,39 +21,85 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const mobileToggle = document.getElementById('mobileToggle');
     const navMenu = document.getElementById('navMenu');
+    const navClose = document.getElementById('navClose');
     const header = document.getElementById('header');
+    const menuOverlay = document.createElement('div');
+    menuOverlay.className = 'menu-overlay';
+    document.body.appendChild(menuOverlay);
+
+    function toggleMenu(isOpen) {
+        if (!navMenu) return;
+        
+        if (isOpen) {
+            navMenu.classList.add('nav--open');
+            menuOverlay.classList.add('menu-overlay--active');
+            document.body.style.overflow = 'hidden';
+            if (mobileToggle) {
+                mobileToggle.setAttribute('aria-expanded', 'true');
+                mobileToggle.innerHTML = '<i class="fas fa-times"></i>';
+            }
+        } else {
+            navMenu.classList.remove('nav--open');
+            menuOverlay.classList.remove('menu-overlay--active');
+            document.body.style.overflow = '';
+            if (mobileToggle) {
+                mobileToggle.setAttribute('aria-expanded', 'false');
+                mobileToggle.innerHTML = '<i class="fas fa-bars"></i>';
+            }
+        }
+    }
 
     // Mobile menu toggle
     if (mobileToggle && navMenu) {
-        mobileToggle.addEventListener('click', function() {
-            const isOpen = navMenu.classList.toggle('nav--open');
-            this.setAttribute('aria-expanded', isOpen);
-            this.innerHTML = isOpen ?
-                '<i class="fas fa-times"></i>' :
-                '<i class="fas fa-bars"></i>';
-            document.body.style.overflow = isOpen ? 'hidden' : '';
+        mobileToggle.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const isOpen = navMenu.classList.contains('nav--open');
+            toggleMenu(!isOpen);
         });
+
+        // Close menu with dedicated close button
+        if (navClose) {
+            navClose.addEventListener('click', function(e) {
+                e.stopPropagation();
+                toggleMenu(false);
+            });
+        }
 
         // Close menu on link click
         navMenu.querySelectorAll('.nav__link').forEach(function(link) {
             link.addEventListener('click', function() {
-                navMenu.classList.remove('nav--open');
-                mobileToggle.setAttribute('aria-expanded', 'false');
-                mobileToggle.innerHTML = '<i class="fas fa-bars"></i>';
-                document.body.style.overflow = '';
+                toggleMenu(false);
             });
+        });
+
+        // Close menu when clicking on overlay
+        menuOverlay.addEventListener('click', function() {
+            toggleMenu(false);
+        });
+
+        // Close menu on Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && navMenu.classList.contains('nav--open')) {
+                toggleMenu(false);
+            }
         });
     }
 
-    // Header scroll effect
+    // Header scroll effect with debounce
+    let scrollTimeout;
     window.addEventListener('scroll', function() {
-        if (header) {
-            if (window.scrollY > 50) {
-                header.classList.add('header--scrolled');
-            } else {
-                header.classList.remove('header--scrolled');
-            }
+        if (scrollTimeout) {
+            window.cancelAnimationFrame(scrollTimeout);
         }
+        scrollTimeout = window.requestAnimationFrame(function() {
+            if (header) {
+                if (window.scrollY > 50) {
+                    header.classList.add('header--scrolled');
+                } else {
+                    header.classList.remove('header--scrolled');
+                }
+            }
+        });
     }, { passive: true });
 
     // ========================================
@@ -68,6 +113,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 const answer = this.nextElementSibling;
                 const isActive = this.classList.contains('active');
 
+                // Close all other FAQs
                 faqQuestions.forEach(function(q) {
                     if (q !== question) {
                         q.classList.remove('active');
@@ -75,6 +121,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 });
 
+                // Toggle current FAQ
                 if (!isActive) {
                     this.classList.add('active');
                     answer.style.maxHeight = answer.scrollHeight + 'px';
@@ -85,17 +132,20 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
 
+        // Auto-open FAQ if hash matches
         if (window.location.hash) {
             const targetId = window.location.hash.replace('#', '');
             const targetQuestion = document.querySelector(`[data-faq="${targetId}"]`);
             if (targetQuestion) {
-                targetQuestion.click();
+                setTimeout(function() {
+                    targetQuestion.click();
+                }, 500);
             }
         }
     }
 
     // ========================================
-    // CHAT BOT - FULLY FIXED & DRAGGABLE
+    // CHAT BOT
     // ========================================
 
     const chatToggle = document.getElementById('chatToggle');
@@ -106,7 +156,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const chatSend = document.getElementById('chatSend');
     const chatBot = document.querySelector('.chat-bot');
 
-    // Enhanced bot responses
+    // Enhanced bot responses with more business information
     const botResponses = {
         'hello': 'Hello! 👋 Welcome to Becks Cleaning Service. How can I assist you today?',
         'hi': 'Hi there! 👋 I\'m Becky, your cleaning assistant. What can I help you with?',
@@ -123,82 +173,84 @@ document.addEventListener('DOMContentLoaded', function() {
         'team': 'Our team consists of thoroughly vetted, professionally trained, and insured cleaning professionals.',
         'years': 'We\'ve been serving the Greater Accra Region since 2018, with over 7 years of experience.',
         'experience': 'With over 7 years of experience, we\'ve completed thousands of cleaning jobs and have built a reputation for excellence.',
-        'services': 'We offer a comprehensive range of cleaning services including:\n• Residential Cleaning\n• Commercial Cleaning\n• Deep Cleaning\n• Sofa Cleaning\n• Specialty Cleaning',
-        'service': 'We offer residential, commercial, deep cleaning, sofa cleaning, and specialty services. Which one are you interested in?',
-        'residential': 'Our residential cleaning service covers dusting, vacuuming, mopping, kitchen cleaning, bathroom sanitization, bed making, and trash removal.',
-        'commercial': 'Our commercial cleaning service keeps your office or business space spotless. We offer flexible scheduling including daily, weekly, or monthly cleanings.',
-        'deep cleaning': 'Deep cleaning is our most thorough service! It includes everything in standard cleaning plus inside appliances, cabinet fronts, grout and tile scrubbing.',
-        'sofa': 'Our sofa cleaning service uses specialized steam cleaning equipment to remove stains, dirt, and allergens.',
-        'specialty': 'Our specialty services include post-construction cleanup, carpet cleaning, window washing, pressure washing, and more.',
-        'carpet': 'We offer professional carpet cleaning using eco-friendly products and advanced equipment.',
-        'window': 'Our window washing service leaves your windows streak-free and sparkling.',
-        'post construction': 'Post-construction cleaning is our specialty! We handle all the dust, debris, and mess after renovation.',
-        'move in': 'Our move-in/move-out cleaning service ensures your new home is spotless before you arrive.',
-        'move out': 'Yes, we offer move-out cleaning! We\'ll make sure your old place is spotless.',
-        'price': 'Our pricing depends on the size of your space, type of cleaning, and frequency. Contact us for a free quote!',
-        'cost': 'Pricing varies based on the service type, property size, and cleaning frequency. Contact us for a free quote!',
-        'quote': 'You can get a free quote by visiting our Contact page, calling us at 054 297 7602, or messaging us on WhatsApp.',
-        'pricing': 'Our pricing is transparent and competitive. Contact us for a free quote!',
-        'discount': 'Yes, we offer discounted rates for recurring services! Weekly and bi-weekly cleanings come with special reduced rates.',
-        'package': 'Yes, we offer special monthly packages! Contact us for more details!',
-        'payment': 'We accept mobile money (MTN, Vodafone, AirtelTigo), bank transfers, and cash.',
-        'pay': 'We accept MTN Mobile Money, Vodafone Cash, AirtelTigo Money, bank transfers, and cash.',
-        'schedule': 'You can schedule a cleaning by calling 054 297 7602, using our online booking form, or messaging us on WhatsApp.',
-        'book': 'Visit our Contact page and fill out the booking form, or call us directly at 054 297 7602.',
-        'booking': 'To book a service, fill out our booking form on the Contact page, or call us at 054 297 7602.',
-        'availability': 'We\'re available Monday through Sunday, 7:00 AM to 8:00 PM.',
-        'time': 'We\'re open from 7:00 AM to 8:00 PM, seven days a week.',
-        'hours': 'Our business hours are Monday to Sunday, 7:00 AM to 8:00 PM.',
-        'when': 'We operate 7 days a week, from 7:00 AM to 8:00 PM.',
-        'holiday': 'Yes, we work on public holidays! Availability may be limited, so book early.',
-        'weekend': 'Yes, we\'re available on weekends!',
-        'area': 'We serve the Greater Accra Region and surrounding areas.',
-        'location': 'We proudly serve the Greater Accra Region of Ghana.',
-        'serving': 'We serve homes and businesses throughout the Greater Accra Region, including Accra, Tema, and surrounding areas.',
-        'accra': 'Yes, we serve Accra and the entire Greater Accra Region!',
-        'products': 'We use eco-friendly, non-toxic cleaning products that are safe for your family, pets, and the environment.',
-        'eco': 'Yes, we prioritize eco-friendly cleaning! Our products are non-toxic, biodegradable, and safe for children and pets.',
-        'safe': 'Absolutely! Our cleaning products are child-safe and pet-friendly.',
-        'equipment': 'We bring all necessary equipment including high-quality vacuums, steam cleaners, mops, and microfiber cloths.',
-        'supply': 'No, you don\'t need to provide any supplies! We bring everything needed.',
-        'trust': 'All our cleaners are thoroughly vetted, background-checked, and professionally trained.',
-        'insurance': 'Yes, we are fully insured and bonded.',
-        'vetted': 'Every team member undergoes thorough background checks and extensive training.',
-        'trained': 'All our cleaning professionals receive comprehensive training in cleaning techniques and safety protocols.',
-        'satisfaction': 'Your satisfaction is our priority! If you\'re not happy, contact us within 24 hours and we\'ll re-clean at no charge.',
-        'guarantee': 'We offer a 100% Satisfaction Guarantee! If you\'re not completely satisfied, we\'ll make it right.',
-        'happy': 'We strive for 100% customer satisfaction.',
-        'not satisfied': 'If you\'re not satisfied, contact us within 24 hours. We\'ll return and re-clean at no extra cost.',
-        'tips': 'Here are some cleaning tips: Regularly wipe down surfaces, vacuum high-traffic areas twice a week, clean your kitchen and bathroom weekly, and schedule a deep clean every 3-6 months.',
-        'cleaning tips': 'Some helpful tips: Always dust before you vacuum, use microfiber cloths for streak-free cleaning, and don\'t forget to clean your cleaning tools!',
-        'how often': 'For most homes, we recommend weekly regular cleaning with a deep clean every 3-6 months.',
-        'frequency': 'We offer one-time, daily, weekly, bi-weekly, and monthly cleaning schedules.',
-        'what to expect': 'When you book with us, you can expect: punctual arrival, professional service, thorough cleaning, eco-friendly products, and 100% satisfaction.',
-        'first time': 'For first-time clients, we recommend starting with a deep cleaning to get your space to a pristine baseline.',
-        'contact': 'You can reach us by phone at 054 297 7602, email at thebeckscleaningservices@gmail.com, or through our Contact page.',
-        'phone': 'Our phone number is 054 297 7602. Feel free to call or WhatsApp us!',
-        'email': 'You can email us at thebeckscleaningservices@gmail.com.',
-        'whatsapp': 'You can reach us on WhatsApp at 054 297 7602.',
-        'instagram': 'Follow us on Instagram @becks_cleaningservices',
-        'tiktok': 'Check us out on TikTok @beckscleaning_services',
-        'social': 'We\'re active on Instagram (@becks_cleaningservices), TikTok (@beckscleaning_services), and WhatsApp.',
-        'address': 'We\'re based in Accra, serving the Greater Accra Region.',
-        'business hours': 'We\'re open Monday through Sunday, 7:00 AM to 8:00 PM.',
-        'help': 'I\'m here to help! You can ask me about:\n• Our cleaning services\n• Pricing and quotes\n• Scheduling and booking\n• Service areas\n• Products and safety\n• Company information\n• FAQs',
-        'questions': 'Feel free to ask me anything about our cleaning services, pricing, scheduling, products, or company.',
-        'support': 'I\'m your virtual support assistant. I can help with questions about our services, booking, pricing, and more.',
-        'default': 'I\'m not sure I understand that question. You can always call us at 054 297 7602 or visit our Contact page for more help.'
+        'services': 'We offer a comprehensive range of cleaning services including:\n• Residential Cleaning\n• Commercial Cleaning\n• Deep Cleaning\n• Sofa Cleaning\n• Move In/Out Cleaning\n• Carpet Cleaning\n• Window Cleaning\n• Specialty Cleaning',
+        'service': 'We offer residential, commercial, deep cleaning, sofa cleaning, move in/out, carpet, window, and specialty services. Which one are you interested in?',
+        'residential': 'Our residential cleaning service covers dusting, vacuuming, mopping, kitchen cleaning, bathroom sanitization, bed making, and trash removal. We offer one-time, weekly, bi-weekly, and monthly schedules.',
+        'commercial': 'Our commercial cleaning service keeps your office or business space spotless. We offer flexible scheduling including daily, weekly, or monthly cleanings. Perfect for offices, shops, and businesses.',
+        'deep cleaning': 'Deep cleaning is our most thorough service! It includes everything in standard cleaning plus inside appliances, cabinet fronts, grout and tile scrubbing, baseboards, window tracks, and more. Recommended every 3-6 months.',
+        'sofa': 'Our sofa cleaning service uses specialized steam cleaning equipment to remove stains, dirt, and allergens. We also offer upholstery and mattress cleaning.',
+        'move in': 'Our move-in/move-out cleaning service ensures your new home is spotless before you arrive or your old place is ready for the next occupants. Includes full deep clean, inside appliances, cabinets, and windows.',
+        'move out': 'Yes, we offer move-out cleaning! We\'ll make sure your old place is spotless. Includes full deep clean of all rooms, appliances, and fixtures.',
+        'carpet': 'We offer professional carpet cleaning using eco-friendly products and advanced steam cleaning equipment. Removes deep-seated dirt, stains, and allergens.',
+        'window': 'Our window washing service leaves your windows streak-free and sparkling. Includes inside and outside cleaning, sills, frames, and screens.',
+        'specialty': 'Our specialty services include post-construction cleanup, event cleaning, mattress cleaning, pressure washing, odor removal, and emergency cleaning.',
+        'post construction': 'Post-construction cleaning is our specialty! We handle all the dust, debris, and mess after renovation or construction projects.',
+        'price': 'Our pricing depends on the size of your space, type of cleaning, and frequency. Contact us for a free quote! We offer competitive rates and discounts for recurring services.',
+        'cost': 'Pricing varies based on the service type, property size, and cleaning frequency. Contact us for a free quote! We\'re transparent about our pricing.',
+        'quote': 'You can get a free quote by visiting our Contact page, calling us at 054 297 7602, or messaging us on WhatsApp. We\'ll provide a no-obligation estimate.',
+        'pricing': 'Our pricing is transparent and competitive. We offer:\n• One-time cleanings\n• Weekly/bi-weekly/monthly recurring services with discounts\n• Deep cleaning packages\n• Custom quotes for large spaces\nContact us for your free quote!',
+        'discount': 'Yes, we offer discounted rates for recurring services! Weekly and bi-weekly cleanings come with special reduced rates. Monthly packages are also available.',
+        'package': 'Yes, we offer special monthly packages! Contact us for more details about our recurring service discounts.',
+        'payment': 'We accept mobile money (MTN, Vodafone, AirtelTigo), bank transfers, and cash. Payment is due after service completion.',
+        'pay': 'We accept MTN Mobile Money, Vodafone Cash, AirtelTigo Money, bank transfers, and cash. All payment methods are secure and convenient.',
+        'schedule': 'You can schedule a cleaning by calling 054 297 7602, using our online booking form on the Contact page, or messaging us on WhatsApp. We\'re available 7 days a week!',
+        'book': 'Visit our Contact page and fill out the booking form, or call us directly at 054 297 7602. We\'ll confirm your appointment within 24 hours.',
+        'booking': 'To book a service, fill out our booking form on the Contact page, call us at 054 297 7602, or message us on WhatsApp. We\'ll get back to you within 24 hours.',
+        'availability': 'We\'re available Monday through Sunday, 7:00 AM to 8:00 PM. We also work on public holidays with early booking recommended.',
+        'time': 'We\'re open from 7:00 AM to 8:00 PM, seven days a week. We\'re flexible and can accommodate your preferred schedule.',
+        'hours': 'Our business hours are Monday to Sunday, 7:00 AM to 8:00 PM. We\'re available for bookings throughout the week.',
+        'when': 'We operate 7 days a week, from 7:00 AM to 8:00 PM. Contact us to find a time that works for you!',
+        'holiday': 'Yes, we work on public holidays! Availability may be limited, so we recommend booking early for holiday cleanings.',
+        'weekend': 'Yes, we\'re available on weekends! We operate 7 days a week to accommodate your schedule.',
+        'area': 'We serve the Greater Accra Region and surrounding areas, including Accra, Tema, and neighboring communities.',
+        'location': 'We proudly serve the Greater Accra Region of Ghana. Contact us to check if we cover your specific area.',
+        'serving': 'We serve homes and businesses throughout the Greater Accra Region, including Accra, Tema, and surrounding areas in Ghana.',
+        'accra': 'Yes, we serve Accra and the entire Greater Accra Region! We cover all major areas in and around Accra.',
+        'products': 'We use eco-friendly, non-toxic cleaning products that are safe for your family, pets, and the environment. Our products are biodegradable and free from harsh chemicals.',
+        'eco': 'Yes, we prioritize eco-friendly cleaning! Our products are non-toxic, biodegradable, and safe for children and pets. We also use microfiber cloths to reduce waste.',
+        'safe': 'Absolutely! Our cleaning products are child-safe and pet-friendly. We also offer fragrance-free options for sensitive individuals.',
+        'equipment': 'We bring all necessary equipment including high-quality vacuums, steam cleaners, mops, and microfiber cloths. You don\'t need to provide anything.',
+        'supply': 'No, you don\'t need to provide any supplies! We bring everything needed for a complete cleaning service.',
+        'trust': 'All our cleaners are thoroughly vetted, background-checked, and professionally trained. Your safety and security are our top priorities.',
+        'insurance': 'Yes, we are fully insured and bonded. You can have peace of mind knowing our services are protected.',
+        'vetted': 'Every team member undergoes thorough background checks and extensive training. We only hire the most trustworthy and skilled professionals.',
+        'trained': 'All our cleaning professionals receive comprehensive training in cleaning techniques, safety protocols, and customer service.',
+        'satisfaction': 'Your satisfaction is our priority! If you\'re not happy, contact us within 24 hours and we\'ll re-clean at no charge. We stand behind our work.',
+        'guarantee': 'We offer a 100% Satisfaction Guarantee! If you\'re not completely satisfied, we\'ll make it right. Our goal is to exceed your expectations.',
+        'happy': 'We strive for 100% customer satisfaction. Our 4.9-star rating speaks to our commitment to excellence.',
+        'not satisfied': 'If you\'re not satisfied, contact us within 24 hours. We\'ll return and re-clean at no extra cost. Your satisfaction is guaranteed!',
+        'tips': 'Here are some cleaning tips:\n• Regularly wipe down surfaces\n• Vacuum high-traffic areas twice a week\n• Clean your kitchen and bathroom weekly\n• Schedule a deep clean every 3-6 months\n• Use microfiber cloths for streak-free cleaning',
+        'cleaning tips': 'Some helpful tips:\n• Always dust before you vacuum\n• Use microfiber cloths for streak-free cleaning\n• Don\'t forget to clean your cleaning tools\n• Open windows for ventilation when cleaning\n• Let us handle the heavy cleaning!',
+        'how often': 'For most homes, we recommend weekly regular cleaning with a deep clean every 3-6 months. For offices, we recommend weekly or bi-weekly maintenance.',
+        'frequency': 'We offer one-time, daily, weekly, bi-weekly, and monthly cleaning schedules. Choose what works best for your lifestyle and budget.',
+        'what to expect': 'When you book with us, you can expect:\n• Punctual arrival\n• Professional service\n• Thorough cleaning\n• Eco-friendly products\n• 100% satisfaction guarantee\n• Friendly, trustworthy team',
+        'first time': 'For first-time clients, we recommend starting with a deep cleaning to get your space to a pristine baseline. Then we can maintain it with regular cleanings.',
+        'contact': 'You can reach us by:\n• Phone: 054 297 7602\n• Email: thebeckscleaningservices@gmail.com\n• WhatsApp: 054 297 7602\n• Contact page on our website\n• Instagram: @becks_cleaningservices',
+        'phone': 'Our phone number is 054 297 7602. Feel free to call or WhatsApp us! We\'re available 7 days a week.',
+        'email': 'You can email us at thebeckscleaningservices@gmail.com. We\'ll respond within 24 hours.',
+        'whatsapp': 'You can reach us on WhatsApp at 054 297 7602. We respond quickly to messages!',
+        'instagram': 'Follow us on Instagram @becks_cleaningservices for cleaning tips, special offers, and before/after photos!',
+        'tiktok': 'Check us out on TikTok @beckscleaning_services for satisfying cleaning videos and transformations!',
+        'social': 'We\'re active on:\n• Instagram: @becks_cleaningservices\n• TikTok: @beckscleaning_services\n• WhatsApp: 054 297 7602\nFollow us for updates and tips!',
+        'address': 'We\'re based in Accra, serving the Greater Accra Region. We come to your location for all our cleaning services.',
+        'business hours': 'We\'re open Monday through Sunday, 7:00 AM to 8:00 PM. We\'re flexible to accommodate your schedule.',
+        'help': 'I\'m here to help! You can ask me about:\n• Our cleaning services\n• Pricing and quotes\n• Scheduling and booking\n• Service areas\n• Products and safety\n• Company information\n• FAQs\n• Contact details',
+        'questions': 'Feel free to ask me anything about our cleaning services, pricing, scheduling, products, or company. I\'m here to help!',
+        'support': 'I\'m your virtual support assistant. I can help with questions about our services, booking, pricing, company info, and more.',
+        'default': 'I\'m not sure I understand that question. You can always call us at 054 297 7602, email us at thebeckscleaningservices@gmail.com, or visit our Contact page for more help. What would you like to know about our cleaning services?'
     };
 
     function getBotResponse(message) {
         const msg = message.toLowerCase().trim();
         
+        // Check for exact matches first
         for (const [key, response] of Object.entries(botResponses)) {
-            if (msg.includes(key)) {
+            if (msg === key || msg.startsWith(key + ' ') || msg.includes(' ' + key + ' ')) {
                 return response;
             }
         }
         
+        // Check for keyword matches
         const keywords = {
             'service': 'services',
             'cleaning': 'services',
@@ -206,6 +258,7 @@ document.addEventListener('DOMContentLoaded', function() {
             'cost': 'cost',
             'quote': 'quote',
             'book': 'book',
+            'booking': 'book',
             'schedule': 'schedule',
             'contact': 'contact',
             'phone': 'phone',
@@ -216,6 +269,7 @@ document.addEventListener('DOMContentLoaded', function() {
             'safety': 'safe',
             'eco': 'eco',
             'products': 'products',
+            'supplies': 'supply',
             'team': 'team',
             'company': 'company',
             'about': 'about',
@@ -224,7 +278,7 @@ document.addEventListener('DOMContentLoaded', function() {
             'area': 'area',
             'location': 'location',
             'accra': 'accra',
-            'pay': 'pay',
+            'pay': 'payment',
             'payment': 'payment',
             'discount': 'discount',
             'guarantee': 'guarantee',
@@ -238,7 +292,11 @@ document.addEventListener('DOMContentLoaded', function() {
             'deep': 'deep cleaning',
             'sofa': 'sofa',
             'residential': 'residential',
-            'commercial': 'commercial'
+            'commercial': 'commercial',
+            'office': 'commercial',
+            'home': 'residential',
+            'house': 'residential',
+            'apartment': 'residential'
         };
 
         for (const [word, key] of Object.entries(keywords)) {
@@ -345,7 +403,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // ========================================
-    // DRAGGABLE CHAT BOT - FIXED
+    // DRAGGABLE CHAT BOT
     // ========================================
 
     if (chatBot) {
@@ -495,31 +553,34 @@ document.addEventListener('DOMContentLoaded', function() {
     let galleryImages = [];
     let touchStartX = 0;
 
-    galleryItems.forEach(function(item, index) {
-        const img = item.querySelector('img');
-        if (img) {
-            galleryImages.push({
-                src: img.src,
-                alt: img.alt || 'Gallery image'
-            });
-        }
-        item.addEventListener('click', function() {
-            currentIndex = index;
-            openLightbox(currentIndex);
-        });
-        item.setAttribute('tabindex', '0');
-        item.setAttribute('role', 'button');
-        item.addEventListener('keydown', function(e) {
-            if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
+    // Only initialize if there are gallery items
+    if (galleryItems.length > 0) {
+        galleryItems.forEach(function(item, index) {
+            const img = item.querySelector('img');
+            if (img) {
+                galleryImages.push({
+                    src: img.src,
+                    alt: img.alt || 'Gallery image'
+                });
+            }
+            item.addEventListener('click', function() {
                 currentIndex = index;
                 openLightbox(currentIndex);
-            }
+            });
+            item.setAttribute('tabindex', '0');
+            item.setAttribute('role', 'button');
+            item.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    currentIndex = index;
+                    openLightbox(currentIndex);
+                }
+            });
         });
-    });
+    }
 
     function openLightbox(index) {
-        if (!lightbox || !lightboxImg) return;
+        if (!lightbox || !lightboxImg || galleryImages.length === 0) return;
         const image = galleryImages[index];
         if (!image) return;
         lightboxImg.src = image.src;
@@ -615,10 +676,11 @@ document.addEventListener('DOMContentLoaded', function() {
             entries.forEach(function(entry) {
                 if (entry.isIntersecting) {
                     const target = entry.target;
-                    const delay = target.dataset.delay || 0;
+                    const delay = parseInt(target.dataset.delay) || 0;
                     setTimeout(function() {
                         target.classList.add('reveal--visible');
                     }, delay);
+                    revealObserver.unobserve(target);
                 }
             });
         }, {
@@ -636,208 +698,108 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // ========================================
-    // ANIMATED COUNTERS
-    // ========================================
-
-    function animateCounters() {
-        const counters = document.querySelectorAll('.hero__stat-number[data-count]');
-        
-        counters.forEach(function(counter) {
-            const target = parseFloat(counter.getAttribute('data-count'));
-            const isDecimal = target % 1 !== 0;
-            const duration = 2000;
-            const startTime = performance.now();
-            
-            function updateCounter(currentTime) {
-                const elapsed = currentTime - startTime;
-                const progress = Math.min(elapsed / duration, 1);
-                const eased = 1 - Math.pow(1 - progress, 3);
-                const current = eased * target;
-                
-                if (isDecimal) {
-                    counter.textContent = current.toFixed(1);
-                } else {
-                    counter.textContent = Math.floor(current);
-                }
-                
-                if (progress < 1) {
-                    requestAnimationFrame(updateCounter);
-                } else {
-                    if (isDecimal) {
-                        counter.textContent = target.toFixed(1);
-                    } else {
-                        counter.textContent = target;
-                    }
-                }
-            }
-            
-            // Use Intersection Observer to start animation when visible
-            const observer = new IntersectionObserver(function(entries) {
-                entries.forEach(function(entry) {
-                    if (entry.isIntersecting) {
-                        requestAnimationFrame(updateCounter);
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.3 });
-            
-            observer.observe(counter);
-        });
-    }
-
-    // ========================================
-    // BACK TO TOP BUTTON
-    // ========================================
-
-    const backToTopBtn = document.getElementById('backToTop');
-    
-    if (backToTopBtn) {
-        window.addEventListener('scroll', function() {
-            if (window.scrollY > 400) {
-                backToTopBtn.classList.add('floating-btn--top--visible');
-            } else {
-                backToTopBtn.classList.remove('floating-btn--top--visible');
-            }
-        }, { passive: true });
-        
-        backToTopBtn.addEventListener('click', function() {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-    }
-
-    // ========================================
-    // VIDEO FALLBACK
-    // ========================================
-
-    const heroVideo = document.getElementById('heroVideo');
-    const heroSection = document.getElementById('hero');
-    
-    if (heroVideo) {
-        // If video fails to load, show fallback
-        heroVideo.addEventListener('error', function() {
-            console.log('Video failed, using fallback image');
-            if (heroSection) {
-                heroSection.classList.add('hero--fallback');
-            }
-        });
-        
-        // Check if video is stuck loading
-        setTimeout(function() {
-            if (heroVideo.readyState === 0) {
-                console.log('Video timed out, using fallback image');
-                if (heroSection) {
-                    heroSection.classList.add('hero--fallback');
-                }
-            }
-        }, 5000);
-    }
-
-    // ========================================
     // FORMS
     // ========================================
 
     const contactForm = document.getElementById('contactForm');
     const formSuccess = document.getElementById('formSuccess');
+    const formError = document.getElementById('formError');
 
-    if (contactForm && formSuccess) {
+    // Prevent selecting a past date in the booking date picker
+    const dateInput = document.getElementById('date');
+    if (dateInput) {
+        const today = new Date();
+        const yyyy = today.getFullYear();
+        const mm = String(today.getMonth() + 1).padStart(2, '0');
+        const dd = String(today.getDate()).padStart(2, '0');
+        dateInput.setAttribute('min', yyyy + '-' + mm + '-' + dd);
+    }
+
+    if (contactForm) {
         contactForm.addEventListener('submit', function(e) {
             e.preventDefault();
 
             const name = document.getElementById('name');
             const email = document.getElementById('email');
             const phone = document.getElementById('phone');
-            const message = document.getElementById('message');
+            const service = document.getElementById('service');
+            const address = document.getElementById('address');
+            const date = document.getElementById('date');
+            const time = document.getElementById('time');
 
+            // Basic validation
             let isValid = true;
-            [name, email, phone, message].forEach(function(field) {
+            const requiredFields = [name, email, phone, service, address, date, time];
+            
+            requiredFields.forEach(function(field) {
                 if (field && !field.value.trim()) {
                     isValid = false;
-                    field.style.borderColor = '#b91c1c';
+                    field.classList.add('error');
                 } else if (field) {
-                    field.style.borderColor = '';
+                    field.classList.remove('error');
                 }
             });
 
             if (!isValid) {
-                alert('Please fill in all required fields.');
+                if (formError) {
+                    formError.classList.add('form-message--visible');
+                    setTimeout(function() {
+                        formError.classList.remove('form-message--visible');
+                    }, 5000);
+                }
                 return;
             }
 
             if (email && !email.value.includes('@')) {
                 alert('Please enter a valid email address.');
-                email.style.borderColor = '#b91c1c';
+                email.classList.add('error');
                 return;
             }
 
+            if (date && date.value) {
+                const todayStr = new Date().toISOString().split('T')[0];
+                if (date.value < todayStr) {
+                    alert('Please choose today or a future date.');
+                    date.classList.add('error');
+                    return;
+                }
+            }
+
+            // Show loading state
             const submitBtn = contactForm.querySelector('button[type="submit"]');
-            const originalText = submitBtn.textContent;
-            submitBtn.textContent = 'Sending...';
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<span class="spinner"></span> Sending...';
+            submitBtn.disabled = true;
 
-            setTimeout(function() {
+            // Submit to Netlify
+            const formData = new FormData(contactForm);
+            
+            fetch('/', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: new URLSearchParams(formData).toString()
+            })
+            .then(function() {
+                // Success
                 contactForm.style.display = 'none';
-                formSuccess.classList.add('success-message--visible');
-                submitBtn.textContent = originalText;
-
+                if (formSuccess) {
+                    formSuccess.classList.add('form-message--visible');
+                }
                 setTimeout(function() {
                     window.location.href = 'thankyou.html';
                 }, 2000);
-            }, 1200);
-        });
-    }
-
-    const bookingForm = document.getElementById('bookingForm');
-    const bookingSuccess = document.getElementById('bookingSuccess');
-
-    if (bookingForm && bookingSuccess) {
-        bookingForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-
-            const requiredFields = bookingForm.querySelectorAll('[required]');
-            let isValid = true;
-
-            requiredFields.forEach(function(field) {
-                if (!field.value.trim()) {
-                    isValid = false;
-                    field.style.borderColor = '#b91c1c';
-                    const existingError = field.parentElement.querySelector('.error-message');
-                    if (!existingError) {
-                        const errorMsg = document.createElement('div');
-                        errorMsg.className = 'error-message';
-                        errorMsg.textContent = 'This field is required';
-                        errorMsg.style.color = '#b91c1c';
-                        errorMsg.style.fontSize = '0.8rem';
-                        errorMsg.style.marginTop = '4px';
-                        field.parentElement.appendChild(errorMsg);
-                    }
-                } else {
-                    field.style.borderColor = '';
-                    const errorMsg = field.parentElement.querySelector('.error-message');
-                    if (errorMsg) {
-                        errorMsg.remove();
-                    }
+            })
+            .catch(function(error) {
+                console.error('Form submission error:', error);
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+                if (formError) {
+                    formError.classList.add('form-message--visible');
+                    setTimeout(function() {
+                        formError.classList.remove('form-message--visible');
+                    }, 5000);
                 }
             });
-
-            if (!isValid) {
-                return;
-            }
-
-            const submitBtn = bookingForm.querySelector('button[type="submit"]');
-            const originalText = submitBtn.textContent;
-            submitBtn.textContent = 'Booking...';
-
-            setTimeout(function() {
-                bookingForm.style.display = 'none';
-                bookingSuccess.classList.add('success-message--visible');
-                submitBtn.textContent = originalText;
-
-                setTimeout(function() {
-                    window.location.href = 'thankyou.html';
-                }, 2000);
-            }, 1200);
         });
     }
 
@@ -895,20 +857,42 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // ========================================
-    // INIT ANIMATED COUNTERS
+    // BACK TO TOP BUTTON
     // ========================================
+    
+    const backToTopBtn = document.getElementById('backToTop');
+    if (backToTopBtn) {
+        let scrollTimeout;
+        window.addEventListener('scroll', function() {
+            if (scrollTimeout) {
+                window.cancelAnimationFrame(scrollTimeout);
+            }
+            scrollTimeout = window.requestAnimationFrame(function() {
+                if (window.scrollY > 400) {
+                    backToTopBtn.classList.add('floating-btn--top--visible');
+                } else {
+                    backToTopBtn.classList.remove('floating-btn--top--visible');
+                }
+            });
+        }, { passive: true });
 
-    animateCounters();
+        backToTopBtn.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    }
 
     // ========================================
-    // CONSOLE LOG
+    // DEVELOPMENT LOGS
     // ========================================
 
     if (window.console && window.location.hostname === 'localhost') {
         console.log('🚀 Becks Cleaning Service - Website Loaded Successfully');
-        console.log('🤖 Chatbot: Fixed and draggable');
+        console.log('🤖 Chatbot: Enhanced with more responses and draggable');
         console.log('🖼️ Gallery: Lightbox with swipe support');
-        console.log('📱 Fully responsive on all devices');
+        console.log('📱 Mobile Menu: Fully responsive with social icons');
     }
 
 });

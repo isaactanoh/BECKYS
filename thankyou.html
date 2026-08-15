@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thank You | Becks Cleaning Service</title>
-    <meta name="description" content="Thank you for booking with Becks Cleaning Service. We'll confirm your appointment within 24 hours.">
+    <title>Thank You | Becks Cleaning Services</title>
+    <meta name="description" content="Thank you for booking with Becks Cleaning Services. We'll confirm your appointment within 24 hours.">
     <meta name="robots" content="noindex, follow">
-    <meta property="og:title" content="Thank You | Becks Cleaning Service">
-    <meta property="og:description" content="Thank you for booking with Becks Cleaning Service.">
+    <meta property="og:title" content="Thank You | Becks Cleaning Services">
+    <meta property="og:description" content="Thank you for booking with Becks Cleaning Services.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://beckscleaningservice.com/thankyou.html">
     <link rel="canonical" href="https://beckscleaningservice.com/thankyou.html">
     <meta name="theme-color" content="#0a2a4a">
-    <meta name="author" content="Becks Cleaning Service">
+    <meta name="author" content="Becks Cleaning Services">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
@@ -144,7 +144,6 @@
             box-shadow: 0 4px 20px rgba(10, 42, 74, 0.3);
             border-color: transparent;
         }
-
         @media (max-width: 768px) {
             .thank-you-card { padding: 35px 25px; }
             .thank-you-card__icon { font-size: 3.5rem; }
@@ -165,8 +164,11 @@
         <div class="container">
             <div class="header__inner">
                 <a href="index.html" class="logo">
-                    <img src="images/new logo.jpeg" alt="Becks Cleaning Service Logo" class="logo__img" width="48" height="48">
-                    <span class="logo__text">Becks <span>Cleaning</span></span>
+                    <img src="images/new logo.jpeg" alt="Becks Cleaning Services Logo" class="logo__img" width="48" height="48">
+                    <div class="logo__text-wrapper">
+                        <span class="logo__text logo__text--main">Becks <span>Cleaning</span></span>
+                        <span class="logo__text logo__text--sub">Services</span>
+                    </div>
                 </a>
             </div>
         </div>
@@ -177,9 +179,8 @@
             <div class="container">
                 <div class="thank-you-card reveal">
                     <span class="thank-you-card__icon"><i class="fas fa-check-circle"></i></span>
-                    <h1>Thank You for Choosing <span>Becks Cleaning Service</span>!</h1>
+                    <h1>Thank You for Choosing <span>Becks Cleaning Services</span>!</h1>
                     <p>We've received your booking request and will contact you within 24 hours to confirm your appointment details.</p>
-                    
                     <div class="next-steps-box">
                         <h3>What happens next?</h3>
                         <ul>
@@ -188,11 +189,9 @@
                             <li><i class="fas fa-star"></i> <span>Our professional team will arrive on time and deliver exceptional service</span></li>
                         </ul>
                     </div>
-                    
                     <div class="contact-urgent">
                         <p>If you have any urgent questions, please call us directly at <a href="tel:0542977602">054 297 7602</a></p>
                     </div>
-                    
                     <div class="btn-group">
                         <a href="index.html" class="btn"><i class="fas fa-home"></i> Return to Homepage</a>
                         <a href="services.html" class="btn btn--outline"><i class="fas fa-broom"></i> View Our Services</a>
@@ -205,19 +204,38 @@
     <footer class="footer" role="contentinfo">
         <div class="container">
             <div class="footer__bottom">
-                <p>&copy; <span id="year"></span> Becks Cleaning Service. All Rights Reserved.</p>
+                <p>&copy; <span id="year"></span> Becks Cleaning Services. All Rights Reserved.</p>
             </div>
         </div>
     </footer>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const yearElement = document.getElementById('year');
-            if (yearElement) {
-                yearElement.textContent = new Date().getFullYear();
-            }
-        });
-    </script>
+    <div class="chat-bot" role="complementary" aria-label="Chat assistant">
+        <button class="chat-bot__toggle" id="chatToggle" aria-label="Open chat">
+            <i class="fas fa-comment-dots"></i>
+        </button>
+        <div class="chat-bot__container" id="chatContainer" role="dialog" aria-label="Chat window">
+            <div class="chat-bot__header">
+                <h4>Becks Cleaning Services</h4>
+                <button class="chat-bot__close" id="chatClose" aria-label="Close chat"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="chat-bot__messages" id="chatMessages" role="log" aria-live="polite">
+                <div class="chat-bot__message chat-bot__message--bot"><p>Hello! 👋 I'm Becky, your cleaning assistant. How can I help you today?</p></div>
+            </div>
+            <div class="chat-bot__input">
+                <input type="text" id="chatInput" placeholder="Type your message..." aria-label="Type your message">
+                <button id="chatSend" aria-label="Send message"><i class="fas fa-paper-plane"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox" role="dialog" aria-label="Image viewer">
+        <button class="lightbox__close" id="lightboxClose" aria-label="Close lightbox">&times;</button>
+        <button class="lightbox__nav lightbox__nav--prev" id="lightboxPrev" aria-label="Previous image">&#10094;</button>
+        <button class="lightbox__nav lightbox__nav--next" id="lightboxNext" aria-label="Next image">&#10095;</button>
+        <img class="lightbox__content" id="lightboxImg" alt="Gallery image" tabindex="0">
+        <div class="lightbox__counter" id="lightboxCounter">1 / 1</div>
+    </div>
 
     <script src="script.js" defer></script>
 </body>
